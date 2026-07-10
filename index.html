@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="LAYL Kozmetik - عناية، جمال، وعطور مختارة بعناية">
+  <title>LAYL Kozmetik</title>
+  <style>
+    :root{
+      --bg:#080808;--panel:#121212;--panel2:#191919;--gold:#d4af37;
+      --gold2:#f2d675;--text:#f7f3e8;--muted:#bdb6a8;--line:#3a321f;
+      --green:#25d366;--shadow:0 18px 60px rgba(0,0,0,.45)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;font-family:Arial,Tahoma,sans-serif;color:var(--text);
+      background:
+        radial-gradient(circle at top,rgba(212,175,55,.15),transparent 28%),
+        linear-gradient(180deg,#111,#050505 45%,#090909);
+    }
+    a{text-decoration:none}
+    .container{width:min(1120px,calc(100% - 28px));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+      background:rgba(8,8,8,.82);border-bottom:1px solid rgba(212,175,55,.18)
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;color:var(--gold2);font-weight:900;letter-spacing:1px}
+    .brand img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid var(--gold)}
+    .nav-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .lang-btn,.ghost-btn{
+      border:1px solid rgba(212,175,55,.48);background:transparent;color:var(--gold2);
+      border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer
+    }
+    .lang-btn.active{background:var(--gold);color:#0a0a0a}
+    .hero{
+      min-height:78vh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;
+      gap:32px;padding:58px 0 38px
+    }
+    .hero-copy{padding:16px}
+    .eyebrow{color:var(--gold2);font-size:14px;font-weight:900;letter-spacing:2px;text-transform:uppercase}
+    h1{font-size:clamp(42px,7vw,78px);line-height:1.02;margin:14px 0;color:var(--gold2)}
+    .hero p{font-size:18px;line-height:1.9;color:#ded7ca;max-width:680px}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:999px;font-weight:900}
+    .btn-wa{background:var(--green);color:#08150c}
+    .btn-ig{border:1px solid var(--gold);color:var(--gold2);background:rgba(212,175,55,.04)}
+    .hero-card{
+      position:relative;min-height:480px;border:1px solid rgba(212,175,55,.28);
+      border-radius:34px;overflow:hidden;background:
+      radial-gradient(circle at 50% 20%,rgba(212,175,55,.25),transparent 34%),
+      linear-gradient(145deg,#171717,#080808);box-shadow:var(--shadow);
+      display:flex;align-items:center;justify-content:center;padding:28px
+    }
+    .hero-card:before,.hero-card:after{
+      content:"";position:absolute;border-radius:50%;border:1px solid rgba(212,175,55,.35)
+    }
+    .hero-card:before{width:360px;height:360px}
+    .hero-card:after{width:470px;height:470px}
+    .hero-card img{
+      position:relative;z-index:2;width:min(78%,360px);aspect-ratio:1;border-radius:50%;
+      object-fit:cover;border:2px solid var(--gold);box-shadow:0 0 48px rgba(212,175,55,.28)
+    }
+    section{padding:38px 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:20px}
+    .section-head h2{margin:0;color:var(--gold2);font-size:32px}
+    .section-head p{margin:0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .cat-card,.product-card{
+      background:linear-gradient(180deg,var(--panel2),var(--panel));
+      border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.2)
+    }
+    .cat-card{padding:24px;min-height:165px;transition:.22s}
+    .cat-card:hover,.product-card:hover{transform:translateY(-4px);border-color:#6d5a29}
+    .cat-icon{font-size:30px}
+    .cat-card h3,.product-card h3{color:var(--gold2);margin:14px 0 8px}
+    .cat-card p,.product-card p{color:var(--muted);line-height:1.7;margin:0}
+    .product-image{
+      height:230px;background:
+      linear-gradient(135deg,rgba(212,175,55,.15),rgba(255,255,255,.02)),
+      #131313;display:flex;align-items:center;justify-content:center;color:var(--gold2);
+      font-weight:900;letter-spacing:.5px
+    }
+    .product-info{padding:18px}
+    .price{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px}
+    .price strong{color:var(--gold2);font-size:20px}
+    .mini-wa{background:var(--green);color:#06120a;padding:10px 13px;border-radius:999px;font-weight:900;font-size:13px}
+    .banner{
+      border:1px solid rgba(212,175,55,.28);border-radius:26px;padding:28px;
+      background:
+        linear-gradient(90deg,rgba(212,175,55,.16),rgba(255,255,255,.02)),
+        #101010;display:flex;align-items:center;justify-content:space-between;gap:18px
+    }
+    .banner h3{margin:0 0 8px;color:var(--gold2);font-size:28px}
+    .banner p{margin:0;color:var(--muted)}
+    footer{border-top:1px solid rgba(212,175,55,.18);margin-top:35px}
+    .footer{padding:28px 0;color:#958e82;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}.hero-card{min-height:390px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:560px){
+      .nav{align-items:flex-start}.brand span{display:none}
+      .hero{padding-top:32px}.hero-copy{padding:0}
+      .grid{grid-template-columns:1fr}
+      .section-head{align-items:flex-start;flex-direction:column}
+      .banner{align-items:flex-start;flex-direction:column}
+      .hero-card{min-height:320px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home">
+        <img src="logo.jpeg" alt="LAYL Kozmetik">
+        <span>LAYL KOZMETİK</span>
+      </a>
+      <div class="nav-actions">
+        <button id="arBtn" class="lang-btn active" onclick="setLang('ar')">العربية</button>
+        <button id="trBtn" class="lang-btn" onclick="setLang('tr')">Türkçe</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <div class="container hero">
+      <div class="hero-copy">
+        <div class="eyebrow" id="eyebrow">جمال • عناية • أناقة</div>
+        <h1 id="heroTitle">ليل لمستحضرات التجميل</h1>
+        <p id="heroText">منتجات عناية وجمال مختارة بعناية، بتقديم أنيق وطلب سريع عبر واتساب. اكتشفوا تشكيلتنا من العطور، الشامبو، الكريمات والماسكات.</p>
+        <div class="cta">
+          <a class="btn btn-wa" id="waMain" href="https://wa.me/963991890234" target="_blank">اطلب عبر واتساب</a>
+          <a class="btn btn-ig" id="igMain" href="https://instagram.com/LAYL_kozmetik" target="_blank">تابعنا على إنستغرام</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="logo.jpeg" alt="LAYL Kozmetik logo">
+      </div>
+    </div>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="catTitle">الأقسام</h2>
+            <p id="catSub">اختاري القسم المناسب واكتشفي المنتجات.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="cat-card"><div class="cat-icon">🌸</div><h3 id="c1t">العطور</h3><p id="c1d">روائح أنيقة للاستخدام اليومي والمناسبات.</p></article>
+          <article class="cat-card"><div class="cat-icon">🧴</div><h3 id="c2t">الشامبو</h3><p id="c2d">منتجات مختارة للعناية اليومية بالشعر.</p></article>
+          <article class="cat-card"><div class="cat-icon">💆</div><h3 id="c3t">الماسكات</h3><p id="c3d">ماسكات للشعر والبشرة ضمن تشكيلتنا.</p></article>
+          <article class="cat-card"><div class="cat-icon">✨</div><h3 id="c4t">الكريمات</h3><p id="c4d">كريمات عناية وترطيب للاستخدام اليومي.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 id="prodTitle">منتجات مميزة</h2>
+            <p id="prodSub">سنضيف الصور والأسعار من لوحة الإدارة لاحقًا.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="product-card">
+            <div class="product-image" id="p1img">صورة المنتج</div>
+            <div class="product-info"><h3 id="p1t">منتج جديد</h3><p id="p1d">وصف قصير للمنتج سيظهر هنا.</p><div class="price"><strong id="p1price">السعر قريبًا</strong><a class="mini-wa" id="p1wa" href="https://wa.me/963991890234" target="_blank">واتساب</a></div></div>
+          </article>
+          <article class="product-card">
+            <div class="product-image" id="p2img">صورة المنتج</div>
+            <div class="product-info"><h3 id="p2t">منتج جديد</h3><p id="p2d">وصف قصير للمنتج سيظهر هنا.</p><div class="price"><strong id="p2price">السعر قريبًا</strong><a class="mini-wa" id="p2wa" href="https://wa.me/963991890234" target="_blank">واتساب</a></div></div>
+          </article>
+          <article class="product-card">
+            <div class="product-image" id="p3img">صورة المنتج</div>
+            <div class="product-info"><h3 id="p3t">منتج جديد</h3><p id="p3d">وصف قصير للمنتج سيظهر هنا.</p><div class="price"><strong id="p3price">السعر قريبًا</strong><a class="mini-wa" id="p3wa" href="https://wa.me/963991890234" target="_blank">واتساب</a></div></div>
+          </article>
+          <article class="product-card">
+            <div class="product-image" id="p4img">صورة المنتج</div>
+            <div class="product-info"><h3 id="p4t">منتج جديد</h3><p id="p4d">وصف قصير للمنتج سيظهر هنا.</p><div class="price"><strong id="p4price">السعر قريبًا</strong><a class="mini-wa" id="p4wa" href="https://wa.me/963991890234" target="_blank">واتساب</a></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container banner">
+        <div>
+          <h3 id="bannerTitle">اطلب بسهولة عبر واتساب</h3>
+          <p id="bannerText">أرسل صورة المنتج أو اسمه وسنساعدك في الطلب.</p>
+        </div>
+        <a class="btn btn-wa" id="bannerBtn" href="https://wa.me/963991890234" target="_blank">ابدأ الطلب</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer">
+      <span>© 2026 LAYL Kozmetik</span>
+      <span id="footerText">الجمال يبدأ من التفاصيل.</span>
+    </div>
+  </footer>
+
+  <script>
+    const translations={
+      ar:{
+        dir:"rtl",eyebrow:"جمال • عناية • أناقة",heroTitle:"ليل لمستحضرات التجميل",
+        heroText:"منتجات عناية وجمال مختارة بعناية، بتقديم أنيق وطلب سريع عبر واتساب. اكتشفوا تشكيلتنا من العطور، الشامبو، الكريمات والماسكات.",
+        waMain:"اطلب عبر واتساب",igMain:"تابعنا على إنستغرام",catTitle:"الأقسام",catSub:"اختاري القسم المناسب واكتشفي المنتجات.",
+        cats:[["العطور","روائح أنيقة للاستخدام اليومي والمناسبات."],["الشامبو","منتجات مختارة للعناية اليومية بالشعر."],["الماسكات","ماسكات للشعر والبشرة ضمن تشكيلتنا."],["الكريمات","كريمات عناية وترطيب للاستخدام اليومي."]],
+        prodTitle:"منتجات مميزة",prodSub:"سنضيف الصور والأسعار من لوحة الإدارة لاحقًا.",pic:"صورة المنتج",name:"منتج جديد",desc:"وصف قصير للمنتج سيظهر هنا.",price:"السعر قريبًا",wa:"واتساب",
+        bannerTitle:"اطلب بسهولة عبر واتساب",bannerText:"أرسل صورة المنتج أو اسمه وسنساعدك في الطلب.",bannerBtn:"ابدأ الطلب",footer:"الجمال يبدأ من التفاصيل."
+      },
+      tr:{
+        dir:"ltr",eyebrow:"Güzellik • Bakım • Şıklık",heroTitle:"LAYL Kozmetik",
+        heroText:"Özenle seçilmiş bakım ve güzellik ürünleri, şık sunum ve WhatsApp üzerinden hızlı sipariş. Parfüm, şampuan, krem ve maske koleksiyonumuzu keşfedin.",
+        waMain:"WhatsApp'tan Sipariş Ver",igMain:"Instagram'da Takip Et",catTitle:"Kategoriler",catSub:"İhtiyacına uygun kategoriyi seç ve ürünleri keşfet.",
+        cats:[["Parfümler","Günlük kullanım ve özel günler için şık kokular."],["Şampuanlar","Günlük saç bakımı için seçilmiş ürünler."],["Maskeler","Saç ve cilt bakım maskeleri."],["Kremler","Günlük bakım ve nemlendirme kremleri."]],
+        prodTitle:"Öne Çıkan Ürünler",prodSub:"Fotoğraf ve fiyatları daha sonra yönetim panelinden ekleyeceğiz.",pic:"Ürün Fotoğrafı",name:"Yeni Ürün",desc:"Kısa ürün açıklaması burada görünecek.",price:"Fiyat yakında",wa:"WhatsApp",
+        bannerTitle:"WhatsApp ile kolayca sipariş ver",bannerText:"Ürünün fotoğrafını veya adını gönder, siparişinde yardımcı olalım.",bannerBtn:"Siparişi Başlat",footer:"Güzellik ayrıntılarda başlar."
+      }
+    };
+
+    function setLang(lang){
+      const t=translations[lang];
+      document.documentElement.lang=lang;
+      document.documentElement.dir=t.dir;
+      document.getElementById("eyebrow").textContent=t.eyebrow;
+      document.getElementById("heroTitle").textContent=t.heroTitle;
+      document.getElementById("heroText").textContent=t.heroText;
+      document.getElementById("waMain").textContent=t.waMain;
+      document.getElementById("igMain").textContent=t.igMain;
+      document.getElementById("catTitle").textContent=t.catTitle;
+      document.getElementById("catSub").textContent=t.catSub;
+      for(let i=1;i<=4;i++){
+        document.getElementById(`c${i}t`).textContent=t.cats[i-1][0];
+        document.getElementById(`c${i}d`).textContent=t.cats[i-1][1];
+      }
+      document.getElementById("prodTitle").textContent=t.prodTitle;
+      document.getElementById("prodSub").textContent=t.prodSub;
+      for(let i=1;i<=4;i++){
+        document.getElementById(`p${i}img`).textContent=t.pic;
+        document.getElementById(`p${i}t`).textContent=t.name;
+        document.getElementById(`p${i}d`).textContent=t.desc;
+        document.getElementById(`p${i}price`).textContent=t.price;
+        document.getElementById(`p${i}wa`).textContent=t.wa;
+      }
+      document.getElementById("bannerTitle").textContent=t.bannerTitle;
+      document.getElementById("bannerText").textContent=t.bannerText;
+      document.getElementById("bannerBtn").textContent=t.bannerBtn;
+      document.getElementById("footerText").textContent=t.footer;
+      document.getElementById("arBtn").classList.toggle("active",lang==="ar");
+      document.getElementById("trBtn").classList.toggle("active",lang==="tr");
+    }
+  </script>
+</body>
+</html>
