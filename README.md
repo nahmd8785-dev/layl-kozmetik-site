@@ -28,3 +28,9 @@ Not: Fotoğraflar tarayıcıda küçültülüp Firestore belgesine kaydedilir. �
 - Editörün seçimi yatay slider
 - Stok rozeti desteği
 - Türkçe/Arapça uyumlu yeni metinler
+
+
+## V4 Stok Yönetimi
+- Admin panelinde Stokta / Tükendi seçimi
+- Stok durumu ürünle birlikte Firebase'e kaydedilir
+- Ana sitede rozet ve sipariş butonu otomatik güncellenir
