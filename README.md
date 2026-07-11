@@ -51,3 +51,10 @@ Not: Fotoğraflar tarayıcıda küçültülüp Firestore belgesine kaydedilir. �
 - 3 dil ve 4 para birimi
 - Favoriler, arama, stok, WhatsApp
 - Google Maps ve ödeme seçenekleri bölümü
+
+
+## Düzeltilen sürüm
+- Admin ürün düzenleme butonu düzeltildi.
+- İngilizce ürün alanları eklendi.
+- En fazla 4 ürün fotoğrafı ve fotoğraf önizlemesi eklendi.
+- Video bağlantısı alanı eklendi.
