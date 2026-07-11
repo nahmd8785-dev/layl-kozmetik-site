@@ -15,28 +15,28 @@ section{padding:28px 0}.section-head{display:flex;justify-content:space-between;
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.brand span{display:none}.grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.admin-grid{grid-template-columns:1fr}.admin-item{grid-template-columns:60px 1fr}.admin-item img{width:60px;height:60px}.admin-item .btn{grid-column:1/-1}}
 </style></head>
 <body>
-<header class="topbar"><div class="container nav"><a class="brand" href="index.html"><img src="logo.jpeg"><span>LAYL ADMIN</span></a><a class="pill" href="index.html">Siteye Dön</a></div></header>
+<header class="topbar"><div class="container nav"><a class="brand" href="index.html"><img src="logo.jpeg"><span>LAYL ADMIN</span></a><div class="actions"><button id="adminTrBtn" class="pill active">Türkçe</button><button id="adminArBtn" class="pill">العربية</button><a id="backSite" class="pill" href="index.html">Siteye Dön</a></div></div></header>
 <main class="container">
-<section id="loginBox" class="panel"><h2>Yönetici Girişi</h2><p style="color:var(--muted)">Firebase Authentication hesabınla giriş yap.</p>
-<div class="field"><label>E-posta</label><input id="email" type="email" autocomplete="email"></div>
-<div class="field"><label>Şifre</label><input id="password" type="password" autocomplete="current-password"></div>
-<button id="loginBtn" class="btn gold full">Giriş Yap</button><div id="loginMsg" class="notice hidden"></div></section>
+<section id="loginBox" class="panel"><h2 data-i18n="loginTitle">Yönetici Girişi</h2><p style="color:var(--muted)"><span data-i18n="loginSub">Firebase Authentication hesabınla giriş yap.</span></p>
+<div class="field"><label data-i18n="email">E-posta</label><input id="email" type="email" autocomplete="email"></div>
+<div class="field"><label data-i18n="password">Şifre</label><input id="password" type="password" autocomplete="current-password"></div>
+<button id="loginBtn" class="btn gold full" data-i18n="loginBtn">Giriş Yap</button><div id="loginMsg" class="notice hidden"></div></section>
 
-<section id="adminBox" class="panel hidden"><div class="row"><h2>Ürün Yönetimi</h2><button id="logoutBtn" class="btn">Çıkış</button></div>
+<section id="adminBox" class="panel hidden"><div class="row"><h2 data-i18n="manage">Ürün Yönetimi</h2><button id="logoutBtn" class="btn" data-i18n="logout">Çıkış</button></div>
 <form id="productForm">
 <input type="hidden" id="editId">
 <div class="admin-grid">
-<div class="field"><label>Türkçe ürün adı</label><input id="nameTr" required></div>
-<div class="field"><label>Arapça ürün adı</label><input id="nameAr" required dir="rtl"></div>
-<div class="field"><label>Fiyat</label><input id="price" placeholder="8 € veya 100.000 SYP" required></div>
-<div class="field"><label>Kategori</label><select id="category"><option value="perfume">Parfüm</option><option value="shampoo">Şampuan</option><option value="mask">Maske</option><option value="cream">Krem</option><option value="other">Diğer</option></select></div>
+<div class="field"><label data-i18n="nameTr">Türkçe ürün adı</label><input id="nameTr" required></div>
+<div class="field"><label data-i18n="nameAr">Arapça ürün adı</label><input id="nameAr" required dir="rtl"></div>
+<div class="field"><label data-i18n="price">Fiyat</label><input id="price" placeholder="8 € veya 100.000 SYP" required></div>
+<div class="field"><label data-i18n="category">Kategori</label><select id="category"><option value="perfume" data-cat="perfume">Parfüm</option><option value="shampoo" data-cat="shampoo">Şampuan</option><option value="mask" data-cat="mask">Maske</option><option value="cream" data-cat="cream">Krem</option><option value="other" data-cat="other">Diğer</option></select></div>
 </div>
 <div class="admin-grid">
-<div class="field"><label>Türkçe açıklama</label><textarea id="descTr"></textarea></div>
-<div class="field"><label>Arapça açıklama</label><textarea id="descAr" dir="rtl"></textarea></div>
+<div class="field"><label data-i18n="descTr">Türkçe açıklama</label><textarea id="descTr"></textarea></div>
+<div class="field"><label data-i18n="descAr">Arapça açıklama</label><textarea id="descAr" dir="rtl"></textarea></div>
 </div>
-<div class="field"><label>Ürün fotoğrafı</label><input id="imageFile" type="file" accept="image/*"><small style="color:var(--muted)">Fotoğraf telefonda küçültülüp Firebase'e kaydedilir. Çok büyük görsel seçme.</small></div>
-<div class="row"><button class="btn gold" type="submit" id="saveBtn">Ürünü Kaydet</button><button class="btn hidden" type="button" id="cancelEdit">Düzenlemeyi İptal Et</button></div>
+<div class="field"><label data-i18n="photo">Ürün fotoğrafı</label><input id="imageFile" type="file" accept="image/*"><small style="color:var(--muted)"><span data-i18n="photoHelp">Fotoğraf telefonda küçültülüp Firebase'e kaydedilir. Çok büyük görsel seçme.</span></small></div>
+<div class="row"><button class="btn gold" type="submit" id="saveBtn" data-i18n="save">Ürünü Kaydet</button><button class="btn hidden" type="button" id="cancelEdit" data-i18n="cancel">Düzenlemeyi İptal Et</button></div>
 <div id="formMsg" class="notice hidden"></div>
 </form>
 <div id="adminList" class="admin-list"></div>
@@ -59,16 +59,23 @@ const firebaseConfig = {
 };
 
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
-let productsCache=[];
-const show=(el,msg)=>{el.textContent=msg;el.classList.remove("hidden")};
+let productsCache=[];let adminLang=localStorage.getItem("laylAdminLang")||"tr";
+const adminT={
+ tr:{dir:"ltr",backSite:"Siteye Dön",loginTitle:"Yönetici Girişi",loginSub:"Firebase Authentication hesabınla giriş yap.",email:"E-posta",password:"Şifre",loginBtn:"Giriş Yap",manage:"Ürün Yönetimi",logout:"Çıkış",nameTr:"Türkçe ürün adı",nameAr:"Arapça ürün adı",price:"Fiyat",category:"Kategori",descTr:"Türkçe açıklama",descAr:"Arapça açıklama",photo:"Ürün fotoğrafı",photoHelp:"Fotoğraf telefonda küçültülüp Firebase'e kaydedilir. Çok büyük görsel seçme.",save:"Ürünü Kaydet",cancel:"Düzenlemeyi İptal Et",edit:"Düzenle",del:"Sil",empty:"Henüz ürün yok.",updated:"Ürün güncellendi.",added:"Ürün eklendi.",saveEdit:"Değişiklikleri Kaydet",confirm:"Bu ürünü silmek istediğine emin misin?",cats:{perfume:"Parfüm",shampoo:"Şampuan",mask:"Maske",cream:"Krem",other:"Diğer"}},
+ ar:{dir:"rtl",backSite:"العودة للموقع",loginTitle:"تسجيل دخول الإدارة",loginSub:"سجّل الدخول باستخدام حساب Firebase Authentication.",email:"البريد الإلكتروني",password:"كلمة المرور",loginBtn:"تسجيل الدخول",manage:"إدارة المنتجات",logout:"تسجيل الخروج",nameTr:"اسم المنتج بالتركية",nameAr:"اسم المنتج بالعربية",price:"السعر",category:"القسم",descTr:"الوصف بالتركية",descAr:"الوصف بالعربية",photo:"صورة المنتج",photoHelp:"يتم تصغير الصورة على الهاتف وحفظها في Firebase. لا تختَر صورة كبيرة جدًا.",save:"حفظ المنتج",cancel:"إلغاء التعديل",edit:"تعديل",del:"حذف",empty:"لا توجد منتجات بعد.",updated:"تم تحديث المنتج.",added:"تمت إضافة المنتج.",saveEdit:"حفظ التعديلات",confirm:"هل أنت متأكد أنك تريد حذف هذا المنتج؟",cats:{perfume:"العطور",shampoo:"الشامبو",mask:"الماسكات",cream:"الكريمات",other:"أخرى"}}
+};
+function setAdminLang(l){adminLang=l;document.documentElement.lang=l;document.documentElement.dir=adminT[l].dir;document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(adminT[l][k])el.textContent=adminT[l][k]});document.querySelectorAll("[data-cat]").forEach(el=>el.textContent=adminT[l].cats[el.dataset.cat]);backSite.textContent=adminT[l].backSite;adminTrBtn.classList.toggle("active",l==="tr");adminArBtn.classList.toggle("active",l==="ar");localStorage.setItem("laylAdminLang",l);if(productsCache.length)renderAdminList();}
+adminTrBtn.onclick=()=>setAdminLang("tr");adminArBtn.onclick=()=>setAdminLang("ar");
+const show=(el,msg)=>{el.textContent=msg;el.classList.remove("hidden")};setAdminLang(adminLang);
 loginBtn.onclick=async()=>{try{await signInWithEmailAndPassword(auth,email.value.trim(),password.value);}catch(e){show(loginMsg,e.message)}};
 logoutBtn.onclick=()=>signOut(auth);
 onAuthStateChanged(auth,u=>{loginBox.classList.toggle("hidden",!!u);adminBox.classList.toggle("hidden",!u);if(u)startList();});
 function compressImage(file){return new Promise((resolve,reject)=>{if(!file) return resolve("");const img=new Image(),reader=new FileReader();reader.onload=e=>img.src=e.target.result;reader.onerror=reject;img.onload=()=>{let w=img.width,h=img.height,max=1100;if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r)}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);const data=c.toDataURL("image/jpeg",.72);if(data.length>850000) reject(new Error("Fotoğraf hâlâ çok büyük. Daha küçük bir fotoğraf seç."));else resolve(data)};reader.readAsDataURL(file)})}
-productForm.onsubmit=async e=>{e.preventDefault();saveBtn.disabled=true;try{let image="";const id=editId.value;if(imageFile.files[0]) image=await compressImage(imageFile.files[0]);else if(id) image=productsCache.find(x=>x.id===id)?.image||"";const data={nameTr:nameTr.value.trim(),nameAr:nameAr.value.trim(),price:price.value.trim(),category:category.value,descTr:descTr.value.trim(),descAr:descAr.value.trim(),image};if(id){await updateDoc(doc(db,"products",id),data);show(formMsg,"Ürün güncellendi.")}else{data.createdAt=serverTimestamp();await addDoc(collection(db,"products"),data);show(formMsg,"Ürün eklendi.")}resetForm();}catch(err){show(formMsg,err.message)}finally{saveBtn.disabled=false}};
-function resetForm(){productForm.reset();editId.value="";saveBtn.textContent="Ürünü Kaydet";cancelEdit.classList.add("hidden")}cancelEdit.onclick=resetForm;
-function startList(){const q=query(collection(db,"products"),orderBy("createdAt","desc"));onSnapshot(q,s=>{productsCache=s.docs.map(d=>({id:d.id,...d.data()}));adminList.innerHTML=productsCache.length?productsCache.map(p=>`<div class="admin-item"><img src="${p.image||"logo.jpeg"}"><div><h4>${p.nameTr||p.nameAr}</h4><p>${p.price} • ${p.category}</p></div><div><button class="btn" data-edit="${p.id}">Düzenle</button> <button class="btn red" data-del="${p.id}">Sil</button></div></div>`).join(""):`<div class="notice">Henüz ürün yok.</div>`;adminList.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>editProduct(b.dataset.edit));adminList.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>removeProduct(b.dataset.del));},e=>show(formMsg,e.message));}
-function editProduct(id){const p=productsCache.find(x=>x.id===id);if(!p)return;editId.value=id;nameTr.value=p.nameTr||"";nameAr.value=p.nameAr||"";price.value=p.price||"";category.value=p.category||"other";descTr.value=p.descTr||"";descAr.value=p.descAr||"";saveBtn.textContent="Değişiklikleri Kaydet";cancelEdit.classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})}
-async function removeProduct(id){if(confirm("Bu ürünü silmek istediğine emin misin?"))await deleteDoc(doc(db,"products",id));}
+productForm.onsubmit=async e=>{e.preventDefault();saveBtn.disabled=true;try{let image="";const id=editId.value;if(imageFile.files[0]) image=await compressImage(imageFile.files[0]);else if(id) image=productsCache.find(x=>x.id===id)?.image||"";const data={nameTr:nameTr.value.trim(),nameAr:nameAr.value.trim(),price:price.value.trim(),category:category.value,descTr:descTr.value.trim(),descAr:descAr.value.trim(),image};if(id){await updateDoc(doc(db,"products",id),data);show(formMsg,adminT[adminLang].updated)}else{data.createdAt=serverTimestamp();await addDoc(collection(db,"products"),data);show(formMsg,adminT[adminLang].added)}resetForm();}catch(err){show(formMsg,err.message)}finally{saveBtn.disabled=false}};
+function resetForm(){productForm.reset();editId.value="";saveBtn.textContent=adminT[adminLang].save;cancelEdit.classList.add("hidden")}cancelEdit.onclick=resetForm;
+function renderAdminList(){adminList.innerHTML=productsCache.length?productsCache.map(p=>`<div class="admin-item"><img src="${p.image||"logo.jpeg"}"><div><h4>${p.nameTr||p.nameAr}</h4><p>${p.price} • ${adminT[adminLang].cats[p.category]||p.category}</p></div><div><button class="btn" data-edit="${p.id}">${adminT[adminLang].edit}</button> <button class="btn red" data-del="${p.id}">${adminT[adminLang].del}</button></div></div>`).join(""):`<div class="notice">${adminT[adminLang].empty}</div>`;adminList.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>editProduct(b.dataset.edit));adminList.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>removeProduct(b.dataset.del));}
+function startList(){const q=query(collection(db,"products"),orderBy("createdAt","desc"));onSnapshot(q,s=>{productsCache=s.docs.map(d=>({id:d.id,...d.data()}));renderAdminList();},e=>show(formMsg,e.message));}
+function editProduct(id){const p=productsCache.find(x=>x.id===id);if(!p)return;editId.value=id;nameTr.value=p.nameTr||"";nameAr.value=p.nameAr||"";price.value=p.price||"";category.value=p.category||"other";descTr.value=p.descTr||"";descAr.value=p.descAr||"";saveBtn.textContent=adminT[adminLang].saveEdit;cancelEdit.classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})}
+async function removeProduct(id){if(confirm(adminT[adminLang].confirm))await deleteDoc(doc(db,"products",id));}
 </script>
 </body></html>

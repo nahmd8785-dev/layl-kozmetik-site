@@ -16,7 +16,8 @@ section{padding:28px 0}.section-head{display:flex;justify-content:space-between;
 .empty{text-align:center;padding:40px;border:1px dashed #6a592b;border-radius:18px;color:var(--muted);grid-column:1/-1}footer{border-top:1px solid rgba(212,175,55,.18);margin-top:30px}.footer{padding:26px 0;color:#91897c;text-align:center}
 .panel{max-width:760px;margin:36px auto;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:22px}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-weight:800;color:var(--gold2)}input,textarea,select{width:100%;background:#0c0c0c;color:#fff;border:1px solid #4b4128;border-radius:12px;padding:13px;font-size:16px}textarea{min-height:95px;resize:vertical}
 .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.btn.full{width:100%;border-radius:12px}.btn.red{border-color:var(--red);color:#fff;background:#9b2020}.notice{padding:12px;border-radius:12px;margin:12px 0;background:#202020;color:#ddd}.hidden{display:none!important}.admin-list{display:grid;gap:12px;margin-top:20px}.admin-item{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;background:#111;border:1px solid #3b321d;border-radius:14px;padding:10px}.admin-item img{width:72px;height:72px;object-fit:cover;border-radius:10px}.admin-item h4{margin:0 0 5px;color:var(--gold2)}.admin-item p{margin:0;color:var(--muted);font-size:13px}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.brand span{display:none}.grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.admin-grid{grid-template-columns:1fr}.admin-item{grid-template-columns:60px 1fr}.admin-item img{width:60px;height:60px}.admin-item .btn{grid-column:1/-1}}
+.premium-wrap{padding:10px 0 26px}.premium-title{text-align:center;margin-bottom:18px}.premium-title p{color:var(--muted);margin:8px auto 0;max-width:620px}.premium-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.premium-card{background:linear-gradient(145deg,#1a1710,#111);border:1px solid var(--gold);border-radius:20px;padding:22px;box-shadow:0 12px 30px rgba(0,0,0,.22)}.premium-card .icon{font-size:34px}.premium-card h3{margin:12px 0 8px}.premium-card p{color:var(--muted);margin:0;line-height:1.6}.floating-wa{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#07140b;font-size:28px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.premium-grid{grid-template-columns:1fr}.brand span{display:none}.grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.admin-grid{grid-template-columns:1fr}.admin-item{grid-template-columns:60px 1fr}.admin-item img{width:60px;height:60px}.admin-item .btn{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -31,6 +32,14 @@ section{padding:28px 0}.section-head{display:flex;justify-content:space-between;
 <p id="heroText">منتجات عناية وجمال مختارة بعناية. تصفح المنتجات واطلب بسهولة عبر واتساب.</p>
 <div class="cta"><a class="btn wa" href="https://wa.me/963991890234" target="_blank" id="mainWa">اطلب عبر واتساب</a><a class="btn ig" href="https://instagram.com/LAYL_kozmetik" target="_blank" id="mainIg">إنستغرام</a></div>
 </div>
+
+<section class="premium-wrap"><div class="container">
+<div class="premium-title"><h2 id="premiumTitle">مجموعة LAYL المميزة</h2><p id="premiumSub">اختيارات مميزة وتجربة طلب أسهل.</p></div>
+<div class="premium-grid">
+<div class="premium-card"><div class="icon">🌸</div><h3 id="newTitle">وصل حديثًا</h3><p id="newText">اكتشف أحدث المنتجات والعطور.</p></div>
+<div class="premium-card"><div class="icon">🔥</div><h3 id="bestTitle">الأكثر مبيعًا</h3><p id="bestText">المنتجات الأكثر طلبًا من عملائنا.</p></div>
+<div class="premium-card"><div class="icon">💬</div><h3 id="waTitle">اطلب عبر واتساب</h3><p id="waText">تواصل معنا بسرعة لإتمام طلبك.</p></div>
+</div></div></section>
 <section><div class="container">
 <div class="section-head"><div><h2 id="productsTitle">منتجاتنا</h2><p id="productsSub">تتم إضافة المنتجات من لوحة الإدارة.</p></div>
 <select id="categoryFilter" style="max-width:220px"><option value="all">كل الأقسام</option><option value="perfume">العطور</option><option value="shampoo">الشامبو</option><option value="mask">الماسكات</option><option value="cream">الكريمات</option><option value="other">أخرى</option></select>
@@ -38,6 +47,7 @@ section{padding:28px 0}.section-head{display:flex;justify-content:space-between;
 <div id="products" class="grid"><div class="empty">جاري تحميل المنتجات...</div></div>
 </div></section>
 </main>
+<a class="floating-wa" href="https://wa.me/963991890234" target="_blank" aria-label="WhatsApp">✆</a>
 <footer><div class="container footer">© 2026 LAYL Kozmetik</div></footer>
 
 <script type="module">
@@ -57,11 +67,11 @@ const firebaseConfig = {
 const app=initializeApp(firebaseConfig); const db=getFirestore(app);
 let lang="ar", allProducts=[];
 const t={
- ar:{dir:"rtl",title:"ليل لمستحضرات التجميل",text:"منتجات عناية وجمال مختارة بعناية. تصفح المنتجات واطلب بسهولة عبر واتساب.",wa:"اطلب عبر واتساب",ig:"إنستغرام",products:"منتجاتنا",sub:"تتم إضافة المنتجات من لوحة الإدارة.",empty:"لا توجد منتجات بعد.",order:"اطلب"},
- tr:{dir:"ltr",title:"LAYL Kozmetik",text:"Özenle seçilmiş bakım ve güzellik ürünleri. Ürünleri inceleyin ve WhatsApp üzerinden kolayca sipariş verin.",wa:"WhatsApp'tan Sipariş",ig:"Instagram",products:"Ürünlerimiz",sub:"Ürünler yönetim panelinden eklenir.",empty:"Henüz ürün eklenmedi.",order:"Sipariş"}
+ ar:{dir:"rtl",title:"ليل لمستحضرات التجميل",text:"منتجات عناية وجمال مختارة بعناية. تصفح المنتجات واطلب بسهولة عبر واتساب.",wa:"اطلب عبر واتساب",ig:"إنستغرام",products:"منتجاتنا",sub:"تتم إضافة المنتجات من لوحة الإدارة.",empty:"لا توجد منتجات بعد.",order:"اطلب",premiumTitle:"مجموعة LAYL المميزة",premiumSub:"اختيارات مميزة وتجربة طلب أسهل.",newTitle:"وصل حديثًا",newText:"اكتشف أحدث المنتجات والعطور.",bestTitle:"الأكثر مبيعًا",bestText:"المنتجات الأكثر طلبًا من عملائنا.",waTitle:"اطلب عبر واتساب",waText:"تواصل معنا بسرعة لإتمام طلبك.",cats:{all:"كل الأقسام",perfume:"العطور",shampoo:"الشامبو",mask:"الماسكات",cream:"الكريمات",other:"أخرى"}},
+ tr:{dir:"ltr",title:"LAYL Kozmetik",text:"Özenle seçilmiş bakım ve güzellik ürünleri. Ürünleri inceleyin ve WhatsApp üzerinden kolayca sipariş verin.",wa:"WhatsApp'tan Sipariş",ig:"Instagram",products:"Ürünlerimiz",sub:"Ürünler yönetim panelinden eklenir.",empty:"Henüz ürün eklenmedi.",order:"Sipariş",premiumTitle:"LAYL Premium Koleksiyonu",premiumSub:"Özel seçimler ve daha kolay sipariş deneyimi.",newTitle:"Yeni Gelenler",newText:"En yeni ürünleri ve parfümleri keşfet.",bestTitle:"En Çok Satanlar",bestText:"Müşterilerimizin en çok tercih ettiği ürünler.",waTitle:"WhatsApp Sipariş",waText:"Siparişini hızlıca tamamlamak için bize yaz.",cats:{all:"Tüm Kategoriler",perfume:"Parfümler",shampoo:"Şampuanlar",mask:"Maskeler",cream:"Kremler",other:"Diğer"}}
 };
-function setLang(l){lang=l;document.documentElement.lang=l;document.documentElement.dir=t[l].dir;heroTitle.textContent=t[l].title;heroText.textContent=t[l].text;mainWa.textContent=t[l].wa;mainIg.textContent=t[l].ig;productsTitle.textContent=t[l].products;productsSub.textContent=t[l].sub;arBtn.classList.toggle("active",l==="ar");trBtn.classList.toggle("active",l==="tr");render();}
-arBtn.onclick=()=>setLang("ar");trBtn.onclick=()=>setLang("tr");categoryFilter.onchange=render;
+function setLang(l){lang=l;document.documentElement.lang=l;document.documentElement.dir=t[l].dir;heroTitle.textContent=t[l].title;heroText.textContent=t[l].text;mainWa.textContent=t[l].wa;mainIg.textContent=t[l].ig;productsTitle.textContent=t[l].products;productsSub.textContent=t[l].sub;premiumTitle.textContent=t[l].premiumTitle;premiumSub.textContent=t[l].premiumSub;newTitle.textContent=t[l].newTitle;newText.textContent=t[l].newText;bestTitle.textContent=t[l].bestTitle;bestText.textContent=t[l].bestText;waTitle.textContent=t[l].waTitle;waText.textContent=t[l].waText;[...categoryFilter.options].forEach(o=>o.textContent=t[l].cats[o.value]);arBtn.classList.toggle("active",l==="ar");trBtn.classList.toggle("active",l==="tr");localStorage.setItem("laylLang",l);render();}
+arBtn.onclick=()=>setLang("ar");trBtn.onclick=()=>setLang("tr");categoryFilter.onchange=render;setLang(localStorage.getItem("laylLang")||"ar");
 function esc(s=""){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 function render(){const filter=categoryFilter.value;const list=allProducts.filter(p=>filter==="all"||p.category===filter);if(!list.length){products.innerHTML=`<div class="empty">${t[lang].empty}</div>`;return;}products.innerHTML=list.map(p=>{const name=lang==="ar"?(p.nameAr||p.nameTr):(p.nameTr||p.nameAr);const desc=lang==="ar"?(p.descAr||p.descTr||""):(p.descTr||p.descAr||"");const msg=encodeURIComponent((lang==="ar"?"مرحبًا، أريد طلب: ":"Merhaba, sipariş vermek istiyorum: ")+name);return `<article class="card"><img class="product-img" src="${esc(p.image||"logo.jpeg")}" alt="${esc(name)}"><div class="product-body"><h3>${esc(name)}</h3><p>${esc(desc)}</p><div class="row"><span class="price">${esc(p.price||"")}</span><a class="small-wa" target="_blank" href="https://wa.me/963991890234?text=${msg}">${t[lang].order}</a></div></div></article>`}).join("");}
 const q=query(collection(db,"products"),orderBy("createdAt","desc"));
