@@ -34,3 +34,10 @@ Not: Fotoğraflar tarayıcıda küçültülüp Firestore belgesine kaydedilir. �
 - Admin panelinde Stokta / Tükendi seçimi
 - Stok durumu ürünle birlikte Firebase'e kaydedilir
 - Ana sitede rozet ve sipariş butonu otomatik güncellenir
+
+
+## V6 English
+- Main site supports Turkish, Arabic and English
+- Admin panel supports Turkish, Arabic and English
+- English product name and description fields added
+- Existing products fall back to Turkish/Arabic until English text is entered
