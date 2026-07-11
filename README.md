@@ -41,3 +41,13 @@ Not: Fotoğraflar tarayıcıda küçültülüp Firestore belgesine kaydedilir. �
 - Admin panel supports Turkish, Arabic and English
 - English product name and description fields added
 - Existing products fall back to Turkish/Arabic until English text is entered
+
+## V7 Ultimate
+- İndirimli eski/yeni fiyat
+- Yeni ve En Çok Satan rozetleri
+- Stok adedi ve otomatik tükendi durumu
+- Bir üründe 4 fotoğrafa kadar galeri
+- Ürün video bağlantısı
+- 3 dil ve 4 para birimi
+- Favoriler, arama, stok, WhatsApp
+- Google Maps ve ödeme seçenekleri bölümü
