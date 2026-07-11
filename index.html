@@ -253,7 +253,7 @@ function render(){
       <span class="stock-badge ${inStock?"":"out"}">${inStock?t[lang].inStock:t[lang].outStock}</span>
       <img class="product-img" src="${esc(p.image||"logo.jpeg")}" alt="${esc(name)}">
       <div class="product-body"><h3>${esc(name)}</h3><p>${esc(desc)}</p>
-      <div class="row"><span class="price">${esc(p.price||"")}</span>
+      <div class="row"><span class="price">${esc(p.price||"")} ${p.currency==="EUR"?"€":p.currency==="TRY"?"₺":p.currency==="SYP"?"£S":"$"}</span>
       ${inStock?`<a class="small-wa" target="_blank" href="https://wa.me/963991890234?text=${msg}">${t[lang].order}</a>`:""}
       </div></div></article>`
   }).join("");
