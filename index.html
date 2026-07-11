@@ -1,16 +1,6 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta name="google-site-verification" content="VXygZpiY69-7y87ufxIBtkbKk7exm8HtMKImU0hg3so" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W5GBE7WRFF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-W5GBE7WRFF');
-</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#080808"><title>LAYL Kozmetik</title>
 <style>
@@ -76,4 +66,12 @@ function render(){const filter=categoryFilter.value;const list=allProducts.filte
 const q=query(collection(db,"products"),orderBy("createdAt","desc"));
 onSnapshot(q,s=>{allProducts=s.docs.map(d=>({id:d.id,...d.data()}));render();},e=>{products.innerHTML=`<div class="empty">Firebase: ${esc(e.message)}</div>`;});
 </script>
+
+<section id="layl-premium" style="padding:40px 20px;background:#111;color:#fff">
+<h2 style="color:#f0d36d;text-align:center">✨ LAYL Premium Koleksiyonu</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:1100px;margin:25px auto">
+<div style="background:#1b1b1b;border:1px solid #d4af37;border-radius:16px;padding:20px"><h3>🌸 Yeni Gelenler</h3><p>En yeni parfümler burada.</p></div>
+<div style="background:#1b1b1b;border:1px solid #d4af37;border-radius:16px;padding:20px"><h3>🔥 En Çok Satanlar</h3><p>En popüler ürünler.</p></div>
+<div style="background:#1b1b1b;border:1px solid #d4af37;border-radius:16px;padding:20px"><h3>💬 WhatsApp Sipariş</h3><p>Hızlı sipariş için bize yaz.</p></div>
+</div></section>
 </body></html>
