@@ -311,4 +311,5 @@ updateCountdown();setInterval(updateCountdown,1000);
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 
 </script>
+<script src="perfume-finder.js"></script>
 </body></html>
