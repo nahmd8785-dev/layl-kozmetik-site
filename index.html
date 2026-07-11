@@ -74,4 +74,35 @@ onSnapshot(q,s=>{allProducts=s.docs.map(d=>({id:d.id,...d.data()}));render();},e
 <div style="background:#1b1b1b;border:1px solid #d4af37;border-radius:16px;padding:20px"><h3>🔥 En Çok Satanlar</h3><p>En popüler ürünler.</p></div>
 <div style="background:#1b1b1b;border:1px solid #d4af37;border-radius:16px;padding:20px"><h3>💬 WhatsApp Sipariş</h3><p>Hızlı sipariş için bize yaz.</p></div>
 </div></section>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ function upd(){
+  const ar=document.documentElement.lang==='ar'||document.body.innerText.includes('عطر');
+  const h=document.querySelector('#layl-premium h2');
+  const cards=document.querySelectorAll('#layl-premium h3');
+  const ps=document.querySelectorAll('#layl-premium p');
+  if(!h||cards.length<3)return;
+  if(ar){
+    h.textContent='✨ مجموعة LAYL الفاخرة';
+    cards[0].textContent='🌸 وصل حديثًا';
+    ps[0].textContent='أحدث العطور هنا.';
+    cards[1].textContent='🔥 الأكثر مبيعًا';
+    ps[1].textContent='المنتجات الأكثر طلبًا.';
+    cards[2].textContent='💬 اطلب عبر واتساب';
+    ps[2].textContent='تواصل معنا بسرعة.';
+  }else{
+    h.textContent='LAYL Premium Koleksiyonu ✨';
+    cards[0].textContent='Yeni Gelenler 🌸';
+    ps[0].textContent='En yeni parfümler burada.';
+    cards[1].textContent='En Çok Satanlar 🔥';
+    ps[1].textContent='En popüler ürünler.';
+    cards[2].textContent='WhatsApp Sipariş 💬';
+    ps[2].textContent='Hızlı sipariş için bize yaz.';
+  }
+ }
+ upd();
+ setInterval(upd,500);
+});
+</script>
 </body></html>
