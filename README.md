@@ -20,3 +20,11 @@ Admin adresi:
 https://layl-kozmetik.vercel.app/admin
 
 Not: Fotoğraflar tarayıcıda küçültülüp Firestore belgesine kaydedilir. Çok büyük fotoğraflarda hata alırsan daha küçük fotoğraf seç.
+
+
+## Lüks V3
+- Ürün arama
+- Favoriler
+- Editörün seçimi yatay slider
+- Stok rozeti desteği
+- Türkçe/Arapça uyumlu yeni metinler

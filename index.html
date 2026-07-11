@@ -87,6 +87,31 @@ radial-gradient(circle at 50% 30%,rgba(245,220,138,.14),transparent 32%)}
 @keyframes marqueeMove{to{transform:translateX(-50%)}}
 @media(max-width:820px){.hero{min-height:84vh;padding:88px 0 64px}.hero img{width:170px;height:170px}.hero h1{letter-spacing:-1px}.editorial-grid{grid-template-columns:1fr}.editorial-main,.editorial-side{min-height:330px;padding:28px}.product-img{height:250px}.marquee-track{gap:26px}}
 
+
+/* LAYL Luxury V3 */
+.shop-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:18px 0 22px}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap input{padding-inline-start:46px;background:rgba(12,12,12,.92);border-color:rgba(212,175,55,.38)}
+.search-icon{position:absolute;inset-inline-start:16px;top:50%;transform:translateY(-50%);color:var(--gold2);pointer-events:none}
+.fav-filter{white-space:nowrap}
+.featured-slider{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,34%);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 16px;scrollbar-width:none}
+.featured-slider::-webkit-scrollbar{display:none}
+.featured-card{scroll-snap-align:start;min-height:320px;border-radius:24px;overflow:hidden;position:relative;border:1px solid rgba(212,175,55,.3);background:#111}
+.featured-card img{width:100%;height:320px;object-fit:cover;display:block;filter:saturate(.9) contrast(1.03)}
+.featured-overlay{position:absolute;inset:auto 0 0;padding:60px 20px 20px;background:linear-gradient(transparent,rgba(0,0,0,.92))}
+.featured-overlay h3{margin:0 0 8px;font-size:24px}.featured-overlay p{margin:0;color:#d9d0c0}
+.product-card-wrap{position:relative}
+.fav-btn{position:absolute;top:12px;right:12px;z-index:4;width:42px;height:42px;border-radius:50%;border:1px solid rgba(240,211,109,.42);background:rgba(8,8,8,.72);color:#fff;font-size:22px;display:grid;place-items:center;backdrop-filter:blur(8px);cursor:pointer}
+[dir="rtl"] .fav-btn{right:auto;left:12px}
+.fav-btn.active{background:#8e1d3a;color:#fff;border-color:#d94d6c}
+.stock-badge{position:absolute;left:12px;top:12px;z-index:3;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900;background:rgba(37,211,102,.9);color:#07140b}
+[dir="rtl"] .stock-badge{left:auto;right:12px}
+.stock-badge.out{background:rgba(255,91,91,.9);color:#fff}
+.result-count{color:var(--muted);font-size:14px}
+.toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:100;background:#171717;color:#fff;border:1px solid rgba(212,175,55,.4);padding:12px 18px;border-radius:999px;transition:.25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.featured-slider{grid-auto-columns:84%}.shop-tools{align-items:stretch}.fav-filter{width:100%}}
+
 </style>
 </head>
 <body>
@@ -145,15 +170,33 @@ radial-gradient(circle at 50% 30%,rgba(245,220,138,.14),transparent 32%)}
 <div class="test-card"><div class="stars">★★★★★</div><p id="review3">Paketleme ve ürün görünümü gerçekten premium hissettiriyor.</p><strong>LAYL Müşterisi</strong></div>
 </div></div></section>
 
+
+<section class="reveal" id="featured"><div class="container">
+<div class="premium-title"><h2 id="featuredTitle">Editörün Seçimi</h2><p id="featuredSub">Öne çıkan ürünleri yatay olarak keşfet.</p></div>
+<div id="featuredSlider" class="featured-slider">
+  <div class="empty">Ürünler yükleniyor...</div>
+</div>
+</div></section>
+
 <section class="reveal" id="products"><div class="container">
 <div class="section-head"><div><h2 id="productsTitle">منتجاتنا</h2><p id="productsSub">تتم إضافة المنتجات من لوحة الإدارة.</p></div>
 <select id="categoryFilter" style="max-width:220px"><option value="all">كل الأقسام</option><option value="perfume">العطور</option><option value="shampoo">الشامبو</option><option value="mask">الماسكات</option><option value="cream">الكريمات</option><option value="other">أخرى</option></select>
 </div>
+
+<div class="shop-tools">
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input id="productSearch" type="search" placeholder="Ürün ara..." autocomplete="off">
+  </div>
+  <button id="favFilter" class="pill fav-filter" type="button">♡ Favoriler</button>
+  <span id="resultCount" class="result-count"></span>
+</div>
+
 <div id="productGrid" class="grid"><div class="empty">جاري تحميل المنتجات...</div></div>
 </div></section>
 </main>
 <a class="floating-wa" href="https://wa.me/963991890234" target="_blank" aria-label="WhatsApp">✆</a>
-<footer><div class="container footer">© 2026 LAYL Kozmetik</div></footer>
+<footer><div class="container footer">© 2026 LAYL Kozmetik</div></footer><div id="toast" class="toast"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -170,15 +213,52 @@ const firebaseConfig = {
 };
 
 const app=initializeApp(firebaseConfig); const db=getFirestore(app);
-let lang="ar", allProducts=[];
+let lang="ar", allProducts=[],showFavOnly=false,searchTerm="";const favorites=new Set(JSON.parse(localStorage.getItem("laylFavorites")||"[]"));
 const t={
- ar:{dir:"rtl",title:"ليل لمستحضرات التجميل",text:"منتجات عناية وجمال مختارة بعناية. تصفح المنتجات واطلب بسهولة عبر واتساب.",wa:"اطلب عبر واتساب",ig:"إنستغرام",products:"منتجاتنا",sub:"تتم إضافة المنتجات من لوحة الإدارة.",empty:"لا توجد منتجات بعد.",order:"اطلب",premiumTitle:"مجموعة LAYL المميزة",premiumSub:"اختيارات مميزة وتجربة طلب أسهل.",newTitle:"وصل حديثًا",newText:"اكتشف أحدث المنتجات والعطور.",bestTitle:"الأكثر مبيعًا",bestText:"المنتجات الأكثر طلبًا من عملائنا.",waTitle:"اطلب عبر واتساب",waText:"تواصل معنا بسرعة لإتمام طلبك.",heroBadge:"✦ مجموعة LAYL الخاصة",mini1Title:"رائحة ثابتة",mini1Text:"زيوت عطرية مختارة بعناية",mini2Title:"طلب سريع",mini2Text:"سهولة الطلب عبر واتساب",mini3Title:"اختيارات مميزة",mini3Text:"مجموعات للنساء والرجال",mini4Title:"تواصل موثوق",mini4Text:"دعم قبل إتمام الطلب",campaignBadge:"عرض اليوم",campaignTitle:"اكتشف تميز LAYL.",campaignText:"أسعار خاصة على منتجات مختارة وطلب سريع عبر واتساب.",reviewsTitle:"اختيار عملائنا",reviewsSub:"آراء قصيرة من عملائنا عن تجربة LAYL.",review1:"الرائحة أنيقة وثباتها أفضل مما توقعت.",review2:"حصلت على المعلومات بسرعة وأتممت الطلب عبر واتساب.",review3:"التغليف وشكل المنتج يمنحان إحساسًا فاخرًا.",day:"يوم",hour:"ساعة",minute:"دقيقة",second:"ثانية",editorialBadge:"توقيع LAYL",editorialTitle:"أرقى صورة للعطر.",editorialText:"حوّل روتين العناية اليومي إلى تجربة أكثر تميزًا مع روائح مختارة ولمسات أنيقة.",editorialSideTitle:"فخامة هادئة.",editorialSideText:"منتجات بلا مبالغة، تأثيرها يدوم وتترك حضورًا يُذكر.",editorialBtn:"اكتشف المجموعة",cats:{all:"كل الأقسام",perfume:"العطور",shampoo:"الشامبو",mask:"الماسكات",cream:"الكريمات",other:"أخرى"}},
- tr:{dir:"ltr",title:"LAYL Kozmetik",text:"Özenle seçilmiş bakım ve güzellik ürünleri. Ürünleri inceleyin ve WhatsApp üzerinden kolayca sipariş verin.",wa:"WhatsApp'tan Sipariş",ig:"Instagram",products:"Ürünlerimiz",sub:"Ürünler yönetim panelinden eklenir.",empty:"Henüz ürün eklenmedi.",order:"Sipariş",premiumTitle:"LAYL Premium Koleksiyonu",premiumSub:"Özel seçimler ve daha kolay sipariş deneyimi.",newTitle:"Yeni Gelenler",newText:"En yeni ürünleri ve parfümleri keşfet.",bestTitle:"En Çok Satanlar",bestText:"Müşterilerimizin en çok tercih ettiği ürünler.",waTitle:"WhatsApp Sipariş",waText:"Siparişini hızlıca tamamlamak için bize yaz.",heroBadge:"✦ LAYL ÖZEL KOLEKSİYON",mini1Title:"Kalıcı Koku",mini1Text:"Özenle seçilmiş esanslar",mini2Title:"Hızlı Sipariş",mini2Text:"WhatsApp üzerinden kolayca",mini3Title:"Özel Seçimler",mini3Text:"Kadın ve erkek koleksiyonları",mini4Title:"Güvenli İletişim",mini4Text:"Sipariş öncesi destek",campaignBadge:"BUGÜNE ÖZEL",campaignTitle:"LAYL ayrıcalığını keşfet.",campaignText:"Seçili ürünlerde özel fiyatlar ve WhatsApp üzerinden hızlı sipariş fırsatı.",reviewsTitle:"Müşterilerimizin Seçimi",reviewsSub:"LAYL deneyimini paylaşan müşterilerimizden kısa notlar.",review1:"Kokusu çok zarif ve beklediğimden daha kalıcıydı.",review2:"WhatsApp üzerinden hızlıca bilgi aldım ve sipariş verdim.",review3:"Paketleme ve ürün görünümü gerçekten premium hissettiriyor.",day:"Gün",hour:"Saat",minute:"Dakika",second:"Saniye",editorialBadge:"LAYL SIGNATURE",editorialTitle:"Kokunun en zarif hali.",editorialText:"Günlük bakım ritüelini, seçkin kokular ve zarif dokularla daha özel bir deneyime dönüştür.",editorialSideTitle:"Sessiz lüks.",editorialSideText:"Gösterişten uzak, etkisi uzun süren ve seni hatırlatan ürünler.",editorialBtn:"Koleksiyonu keşfet",cats:{all:"Tüm Kategoriler",perfume:"Parfümler",shampoo:"Şampuanlar",mask:"Maskeler",cream:"Kremler",other:"Diğer"}}
+ ar:{dir:"rtl",title:"ليل لمستحضرات التجميل",text:"منتجات عناية وجمال مختارة بعناية. تصفح المنتجات واطلب بسهولة عبر واتساب.",wa:"اطلب عبر واتساب",ig:"إنستغرام",products:"منتجاتنا",sub:"تتم إضافة المنتجات من لوحة الإدارة.",empty:"لا توجد منتجات بعد.",order:"اطلب",premiumTitle:"مجموعة LAYL المميزة",premiumSub:"اختيارات مميزة وتجربة طلب أسهل.",newTitle:"وصل حديثًا",newText:"اكتشف أحدث المنتجات والعطور.",bestTitle:"الأكثر مبيعًا",bestText:"المنتجات الأكثر طلبًا من عملائنا.",waTitle:"اطلب عبر واتساب",waText:"تواصل معنا بسرعة لإتمام طلبك.",heroBadge:"✦ مجموعة LAYL الخاصة",mini1Title:"رائحة ثابتة",mini1Text:"زيوت عطرية مختارة بعناية",mini2Title:"طلب سريع",mini2Text:"سهولة الطلب عبر واتساب",mini3Title:"اختيارات مميزة",mini3Text:"مجموعات للنساء والرجال",mini4Title:"تواصل موثوق",mini4Text:"دعم قبل إتمام الطلب",campaignBadge:"عرض اليوم",campaignTitle:"اكتشف تميز LAYL.",campaignText:"أسعار خاصة على منتجات مختارة وطلب سريع عبر واتساب.",reviewsTitle:"اختيار عملائنا",reviewsSub:"آراء قصيرة من عملائنا عن تجربة LAYL.",review1:"الرائحة أنيقة وثباتها أفضل مما توقعت.",review2:"حصلت على المعلومات بسرعة وأتممت الطلب عبر واتساب.",review3:"التغليف وشكل المنتج يمنحان إحساسًا فاخرًا.",day:"يوم",hour:"ساعة",minute:"دقيقة",second:"ثانية",editorialBadge:"توقيع LAYL",editorialTitle:"أرقى صورة للعطر.",editorialText:"حوّل روتين العناية اليومي إلى تجربة أكثر تميزًا مع روائح مختارة ولمسات أنيقة.",editorialSideTitle:"فخامة هادئة.",editorialSideText:"منتجات بلا مبالغة، تأثيرها يدوم وتترك حضورًا يُذكر.",editorialBtn:"اكتشف المجموعة",featuredTitle:"اختيار المحرر",featuredSub:"اكتشف المنتجات المميزة بالسحب أفقيًا.",search:"ابحث عن منتج...",favorites:"المفضلة",allProducts:"كل المنتجات",inStock:"متوفر",outStock:"نفد المخزون",addedFav:"تمت الإضافة إلى المفضلة",removedFav:"تمت الإزالة من المفضلة",results:"منتج",cats:{all:"كل الأقسام",perfume:"العطور",shampoo:"الشامبو",mask:"الماسكات",cream:"الكريمات",other:"أخرى"}},
+ tr:{dir:"ltr",title:"LAYL Kozmetik",text:"Özenle seçilmiş bakım ve güzellik ürünleri. Ürünleri inceleyin ve WhatsApp üzerinden kolayca sipariş verin.",wa:"WhatsApp'tan Sipariş",ig:"Instagram",products:"Ürünlerimiz",sub:"Ürünler yönetim panelinden eklenir.",empty:"Henüz ürün eklenmedi.",order:"Sipariş",premiumTitle:"LAYL Premium Koleksiyonu",premiumSub:"Özel seçimler ve daha kolay sipariş deneyimi.",newTitle:"Yeni Gelenler",newText:"En yeni ürünleri ve parfümleri keşfet.",bestTitle:"En Çok Satanlar",bestText:"Müşterilerimizin en çok tercih ettiği ürünler.",waTitle:"WhatsApp Sipariş",waText:"Siparişini hızlıca tamamlamak için bize yaz.",heroBadge:"✦ LAYL ÖZEL KOLEKSİYON",mini1Title:"Kalıcı Koku",mini1Text:"Özenle seçilmiş esanslar",mini2Title:"Hızlı Sipariş",mini2Text:"WhatsApp üzerinden kolayca",mini3Title:"Özel Seçimler",mini3Text:"Kadın ve erkek koleksiyonları",mini4Title:"Güvenli İletişim",mini4Text:"Sipariş öncesi destek",campaignBadge:"BUGÜNE ÖZEL",campaignTitle:"LAYL ayrıcalığını keşfet.",campaignText:"Seçili ürünlerde özel fiyatlar ve WhatsApp üzerinden hızlı sipariş fırsatı.",reviewsTitle:"Müşterilerimizin Seçimi",reviewsSub:"LAYL deneyimini paylaşan müşterilerimizden kısa notlar.",review1:"Kokusu çok zarif ve beklediğimden daha kalıcıydı.",review2:"WhatsApp üzerinden hızlıca bilgi aldım ve sipariş verdim.",review3:"Paketleme ve ürün görünümü gerçekten premium hissettiriyor.",day:"Gün",hour:"Saat",minute:"Dakika",second:"Saniye",editorialBadge:"LAYL SIGNATURE",editorialTitle:"Kokunun en zarif hali.",editorialText:"Günlük bakım ritüelini, seçkin kokular ve zarif dokularla daha özel bir deneyime dönüştür.",editorialSideTitle:"Sessiz lüks.",editorialSideText:"Gösterişten uzak, etkisi uzun süren ve seni hatırlatan ürünler.",editorialBtn:"Koleksiyonu keşfet",featuredTitle:"Editörün Seçimi",featuredSub:"Öne çıkan ürünleri yatay olarak keşfet.",search:"Ürün ara...",favorites:"Favoriler",allProducts:"Tüm Ürünler",inStock:"Stokta",outStock:"Tükendi",addedFav:"Favorilere eklendi",removedFav:"Favorilerden çıkarıldı",results:"ürün",cats:{all:"Tüm Kategoriler",perfume:"Parfümler",shampoo:"Şampuanlar",mask:"Maskeler",cream:"Kremler",other:"Diğer"}}
 };
-function setLang(l){lang=l;document.documentElement.lang=l;document.documentElement.dir=t[l].dir;heroTitle.textContent=t[l].title;heroText.textContent=t[l].text;mainWa.textContent=t[l].wa;mainIg.textContent=t[l].ig;productsTitle.textContent=t[l].products;productsSub.textContent=t[l].sub;premiumTitle.textContent=t[l].premiumTitle;premiumSub.textContent=t[l].premiumSub;heroBadge.textContent=t[l].heroBadge;mini1Title.textContent=t[l].mini1Title;mini1Text.textContent=t[l].mini1Text;mini2Title.textContent=t[l].mini2Title;mini2Text.textContent=t[l].mini2Text;mini3Title.textContent=t[l].mini3Title;mini3Text.textContent=t[l].mini3Text;mini4Title.textContent=t[l].mini4Title;mini4Text.textContent=t[l].mini4Text;campaignBadge.textContent=t[l].campaignBadge;campaignTitle.textContent=t[l].campaignTitle;campaignText.textContent=t[l].campaignText;reviewsTitle.textContent=t[l].reviewsTitle;reviewsSub.textContent=t[l].reviewsSub;review1.textContent=t[l].review1;review2.textContent=t[l].review2;review3.textContent=t[l].review3;cdDayText.textContent=t[l].day;cdHourText.textContent=t[l].hour;cdMinuteText.textContent=t[l].minute;cdSecondText.textContent=t[l].second;editorialBadge.textContent=t[l].editorialBadge;editorialTitle.textContent=t[l].editorialTitle;editorialText.textContent=t[l].editorialText;editorialSideTitle.textContent=t[l].editorialSideTitle;editorialSideText.textContent=t[l].editorialSideText;editorialBtn.textContent=t[l].editorialBtn;newTitle.textContent=t[l].newTitle;newText.textContent=t[l].newText;bestTitle.textContent=t[l].bestTitle;bestText.textContent=t[l].bestText;waTitle.textContent=t[l].waTitle;waText.textContent=t[l].waText;[...categoryFilter.options].forEach(o=>o.textContent=t[l].cats[o.value]);arBtn.classList.toggle("active",l==="ar");trBtn.classList.toggle("active",l==="tr");localStorage.setItem("laylLang",l);render();}
-arBtn.onclick=()=>setLang("ar");trBtn.onclick=()=>setLang("tr");categoryFilter.onchange=render;setLang(localStorage.getItem("laylLang")||"ar");
+function setLang(l){lang=l;document.documentElement.lang=l;document.documentElement.dir=t[l].dir;heroTitle.textContent=t[l].title;heroText.textContent=t[l].text;mainWa.textContent=t[l].wa;mainIg.textContent=t[l].ig;productsTitle.textContent=t[l].products;productsSub.textContent=t[l].sub;premiumTitle.textContent=t[l].premiumTitle;premiumSub.textContent=t[l].premiumSub;heroBadge.textContent=t[l].heroBadge;mini1Title.textContent=t[l].mini1Title;mini1Text.textContent=t[l].mini1Text;mini2Title.textContent=t[l].mini2Title;mini2Text.textContent=t[l].mini2Text;mini3Title.textContent=t[l].mini3Title;mini3Text.textContent=t[l].mini3Text;mini4Title.textContent=t[l].mini4Title;mini4Text.textContent=t[l].mini4Text;campaignBadge.textContent=t[l].campaignBadge;campaignTitle.textContent=t[l].campaignTitle;campaignText.textContent=t[l].campaignText;reviewsTitle.textContent=t[l].reviewsTitle;reviewsSub.textContent=t[l].reviewsSub;review1.textContent=t[l].review1;review2.textContent=t[l].review2;review3.textContent=t[l].review3;cdDayText.textContent=t[l].day;cdHourText.textContent=t[l].hour;cdMinuteText.textContent=t[l].minute;cdSecondText.textContent=t[l].second;editorialBadge.textContent=t[l].editorialBadge;editorialTitle.textContent=t[l].editorialTitle;editorialText.textContent=t[l].editorialText;editorialSideTitle.textContent=t[l].editorialSideTitle;editorialSideText.textContent=t[l].editorialSideText;editorialBtn.textContent=t[l].editorialBtn;featuredTitle.textContent=t[l].featuredTitle;featuredSub.textContent=t[l].featuredSub;productSearch.placeholder=t[l].search;favFilter.textContent=(showFavOnly?"♥ ":"♡ ")+t[l].favorites;newTitle.textContent=t[l].newTitle;newText.textContent=t[l].newText;bestTitle.textContent=t[l].bestTitle;bestText.textContent=t[l].bestText;waTitle.textContent=t[l].waTitle;waText.textContent=t[l].waText;[...categoryFilter.options].forEach(o=>o.textContent=t[l].cats[o.value]);arBtn.classList.toggle("active",l==="ar");trBtn.classList.toggle("active",l==="tr");localStorage.setItem("laylLang",l);render();}
+arBtn.onclick=()=>setLang("ar");trBtn.onclick=()=>setLang("tr");categoryFilter.onchange=render;
+productSearch.oninput=()=>{searchTerm=productSearch.value.trim().toLowerCase();render();};
+favFilter.onclick=()=>{showFavOnly=!showFavOnly;favFilter.classList.toggle("active",showFavOnly);favFilter.textContent=(showFavOnly?"♥ ":"♡ ")+t[lang].favorites;render();};
+setLang(localStorage.getItem("laylLang")||"ar");
 function esc(s=""){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
-function render(){const filter=categoryFilter.value;const list=allProducts.filter(p=>filter==="all"||p.category===filter);if(!list.length){productGrid.innerHTML=`<div class="empty">${t[lang].empty}</div>`;return;}productGrid.innerHTML=list.map(p=>{const name=lang==="ar"?(p.nameAr||p.nameTr):(p.nameTr||p.nameAr);const desc=lang==="ar"?(p.descAr||p.descTr||""):(p.descTr||p.descAr||"");const msg=encodeURIComponent((lang==="ar"?"مرحبًا، أريد طلب: ":"Merhaba, sipariş vermek istiyorum: ")+name);return `<article class="card"><img class="product-img" src="${esc(p.image||"logo.jpeg")}" alt="${esc(name)}"><div class="product-body"><h3>${esc(name)}</h3><p>${esc(desc)}</p><div class="row"><span class="price">${esc(p.price||"")}</span><a class="small-wa" target="_blank" href="https://wa.me/963991890234?text=${msg}">${t[lang].order}</a></div></div></article>`}).join("");}
+function toastMsg(msg){toast.textContent=msg;toast.classList.add("show");clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>toast.classList.remove("show"),1800);}
+function toggleFav(id){
+  if(favorites.has(id)){favorites.delete(id);toastMsg(t[lang].removedFav);}else{favorites.add(id);toastMsg(t[lang].addedFav);}
+  localStorage.setItem("laylFavorites",JSON.stringify([...favorites]));render();
+}
+function productName(p){return lang==="ar"?(p.nameAr||p.nameTr):(p.nameTr||p.nameAr);}
+function productDesc(p){return lang==="ar"?(p.descAr||p.descTr||""):(p.descTr||p.descAr||"");}
+function renderFeatured(list){
+  const featured=list.slice(0,5);
+  if(!featured.length){featuredSlider.innerHTML=`<div class="empty">${t[lang].empty}</div>`;return;}
+  featuredSlider.innerHTML=featured.map(p=>{const name=productName(p),desc=productDesc(p);return `<article class="featured-card"><img src="${esc(p.image||"logo.jpeg")}" alt="${esc(name)}"><div class="featured-overlay"><h3>${esc(name)}</h3><p>${esc(desc)}</p></div></article>`}).join("");
+}
+function render(){
+  const filter=categoryFilter.value;
+  let list=allProducts.filter(p=>filter==="all"||p.category===filter);
+  if(searchTerm) list=list.filter(p=>`${p.nameTr||""} ${p.nameAr||""} ${p.descTr||""} ${p.descAr||""}`.toLowerCase().includes(searchTerm));
+  if(showFavOnly) list=list.filter(p=>favorites.has(p.id));
+  resultCount.textContent=`${list.length} ${t[lang].results}`;
+  renderFeatured(allProducts);
+  if(!list.length){productGrid.innerHTML=`<div class="empty">${t[lang].empty}</div>`;return;}
+  productGrid.innerHTML=list.map(p=>{
+    const name=productName(p),desc=productDesc(p);
+    const msg=encodeURIComponent((lang==="ar"?"مرحبًا، أريد طلب: ":"Merhaba, sipariş vermek istiyorum: ")+name);
+    const inStock=p.stock===0||p.stock==="0"||p.inStock===false?false:true;
+    return `<article class="card product-card-wrap">
+      <button class="fav-btn ${favorites.has(p.id)?"active":""}" onclick="toggleFav('${p.id}')" aria-label="Favori">${favorites.has(p.id)?"♥":"♡"}</button>
+      <span class="stock-badge ${inStock?"":"out"}">${inStock?t[lang].inStock:t[lang].outStock}</span>
+      <img class="product-img" src="${esc(p.image||"logo.jpeg")}" alt="${esc(name)}">
+      <div class="product-body"><h3>${esc(name)}</h3><p>${esc(desc)}</p>
+      <div class="row"><span class="price">${esc(p.price||"")}</span>
+      ${inStock?`<a class="small-wa" target="_blank" href="https://wa.me/963991890234?text=${msg}">${t[lang].order}</a>`:""}
+      </div></div></article>`
+  }).join("");
+}
+window.toggleFav=toggleFav;
 const q=query(collection(db,"products"),orderBy("createdAt","desc"));
 onSnapshot(q,s=>{allProducts=s.docs.map(d=>({id:d.id,...d.data()}));render();},e=>{productGrid.innerHTML=`<div class="empty">Firebase: ${esc(e.message)}</div>`;});
 
