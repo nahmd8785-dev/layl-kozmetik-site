@@ -249,7 +249,7 @@ function setLang(l){lang=l;document.documentElement.lang=l;document.documentElem
 arBtn.onclick=()=>setLang("ar");trBtn.onclick=()=>setLang("tr");enBtn.onclick=()=>setLang("en");categoryFilter.onchange=render;
 productSearch.oninput=()=>{searchTerm=productSearch.value.trim().toLowerCase();render();};
 favFilter.onclick=()=>{showFavOnly=!showFavOnly;favFilter.classList.toggle("active",showFavOnly);favFilter.textContent=(showFavOnly?"♥ ":"♡ ")+t[lang].favorites;render();};
-allProducts=[...BUILTIN_PRODUCTS];window.allProducts=allProducts;window.dispatchEvent(new Event("layl-products-updated"));
+allProducts=[...BUILTIN_PRODUCTS];
 setLang(localStorage.getItem("laylLang")||"ar");
 function esc(s=""){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
 function toastMsg(msg){toast.textContent=msg;toast.classList.add("show");clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>toast.classList.remove("show"),1800);}
@@ -303,7 +303,7 @@ window.slideGallery=(id,step)=>{
 };
 render();
 const q=query(collection(db,"products"),orderBy("createdAt","desc"));
-onSnapshot(q,s=>{allProducts=[...BUILTIN_PRODUCTS,...s.docs.map(d=>({id:d.id,...d.data()}))];window.allProducts=allProducts;window.dispatchEvent(new Event("layl-products-updated"));render();},e=>{allProducts=[...BUILTIN_PRODUCTS];window.allProducts=allProducts;window.dispatchEvent(new Event("layl-products-updated"));render();console.error(e);});
+onSnapshot(q,s=>{allProducts=[...BUILTIN_PRODUCTS,...s.docs.map(d=>({id:d.id,...d.data()}))];render();},e=>{allProducts=[...BUILTIN_PRODUCTS];render();console.error(e);});
 
 const campaignEnd=new Date(); campaignEnd.setDate(campaignEnd.getDate()+3);
 function updateCountdown(){const diff=Math.max(0,campaignEnd-new Date());cdDays.textContent=String(Math.floor(diff/86400000)).padStart(2,"0");cdHours.textContent=String(Math.floor(diff/3600000)%24).padStart(2,"0");cdMinutes.textContent=String(Math.floor(diff/60000)%60).padStart(2,"0");cdSeconds.textContent=String(Math.floor(diff/1000)%60).padStart(2,"0");}
