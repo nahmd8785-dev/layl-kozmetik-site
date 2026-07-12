@@ -38,6 +38,11 @@ section{padding:28px 0}.section-head{display:flex;justify-content:space-between;
 <div class="field"><label data-i18n="price">Fiyat</label><select id="currency"><option value="USD">USD ($)</option><option value="EUR">Euro (€)</option><option value="TRY">TL (₺)</option><option value="SYP">SYP (£S)</option></select><input id="price" placeholder="Yeni fiyat" required></div><div class="field"><label data-i18n="oldPrice">Eski fiyat (isteğe bağlı)</label><input id="oldPrice" placeholder="İndirim yoksa boş bırak"></div>
 <div class="field"><label data-i18n="category">Kategori</label><select id="category"><option value="perfume" data-cat="perfume">Parfüm</option><option value="shampoo" data-cat="shampoo">Şampuan</option><option value="mask" data-cat="mask">Maske</option><option value="cream" data-cat="cream">Krem</option><option value="other" data-cat="other">Diğer</option></select></div>
 <div class="field"><label data-i18n="stock">Stok durumu</label><select id="stock"><option value="1" data-stock="in">Stokta</option><option value="0" data-stock="out">Tükendi</option></select></div><div class="field"><label data-i18n="stockQty">Stok adedi</label><input id="stockQty" type="number" min="0" value="1"></div>
+<div class="field perfume-meta"><label>Parfüm: Kimin için?</label><select id="pfGender"><option value="">Seç</option><option value="women">Kadın</option><option value="men">Erkek</option><option value="unisex">Unisex</option></select></div>
+<div class="field perfume-meta"><label>Parfüm: Koku tarzı</label><select id="pfStyle"><option value="">Seç</option><option value="sweet">Tatlı</option><option value="fresh">Ferah</option><option value="woody">Odunsu</option><option value="spicy">Baharatlı</option><option value="floral">Çiçeksi</option></select></div>
+<div class="field perfume-meta"><label>Parfüm: Mevsim</label><select id="pfSeason"><option value="">Seç</option><option value="summer">Yaz</option><option value="winter">Kış</option><option value="spring">İlkbahar</option><option value="autumn">Sonbahar</option><option value="all">Dört mevsim</option></select></div>
+<div class="field perfume-meta"><label>Parfüm: Kullanım</label><select id="pfOccasion"><option value="">Seç</option><option value="day">Gündüz</option><option value="night">Gece</option><option value="daily">Günlük</option><option value="special">Özel gün</option></select></div>
+<div class="field perfume-meta"><label>Parfüm: Yoğunluk</label><select id="pfStrength"><option value="">Seç</option><option value="light">Hafif</option><option value="medium">Orta</option><option value="strong">Güçlü</option></select></div>
 </div>
 <div class="admin-grid">
 <div class="field"><label data-i18n="badges">Ürün rozetleri</label><div class="check-row">
@@ -95,7 +100,7 @@ productForm.onsubmit=async e=>{e.preventDefault();saveBtn.disabled=true;try{
  const data={
   nameTr:nameTr.value.trim(),nameAr:nameAr.value.trim(),nameEn:nameEn.value.trim(),
   price:price.value.trim(),oldPrice:oldPrice.value.trim(),currency:currency.value,
-  category:category.value,descTr:descTr.value.trim(),descAr:descAr.value.trim(),descEn:descEn.value.trim(),
+  category:category.value,pfGender:pfGender.value,pfStyle:pfStyle.value,pfSeason:pfSeason.value,pfOccasion:pfOccasion.value,pfStrength:pfStrength.value,descTr:descTr.value.trim(),descAr:descAr.value.trim(),descEn:descEn.value.trim(),
   images,image:images[0]||"",videoUrl:videoUrl.value.trim(),
   stock:Number(stock.value),stockQty:qty,inStock:stock.value==="1"&&qty>0,
   isNew:isNew.checked,isBest:isBest.checked
@@ -111,7 +116,7 @@ function editProduct(id){const p=productsCache.find(x=>x.id===id);if(!p)return;
  editId.value=id;nameTr.value=p.nameTr||"";nameAr.value=p.nameAr||"";nameEn.value=p.nameEn||"";
  price.value=p.price||"";oldPrice.value=p.oldPrice||"";currency.value=p.currency||"USD";category.value=p.category||"other";
  stock.value=(p.stock===0||p.inStock===false)?"0":"1";stockQty.value=p.stockQty??1;
- isNew.checked=!!p.isNew;isBest.checked=!!p.isBest;
+ isNew.checked=!!p.isNew;isBest.checked=!!p.isBest; pfGender.value=p.pfGender||"";pfStyle.value=p.pfStyle||"";pfSeason.value=p.pfSeason||"";pfOccasion.value=p.pfOccasion||"";pfStrength.value=p.pfStrength||"";
  descTr.value=p.descTr||"";descAr.value=p.descAr||"";descEn.value=p.descEn||"";videoUrl.value=p.videoUrl||"";
  const imgs=p.images?.length?p.images:(p.image?[p.image]:[]);
  imagePreview.innerHTML=imgs.map(src=>`<img src="${src}" alt="">`).join("");
