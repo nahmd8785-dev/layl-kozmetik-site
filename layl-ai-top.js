@@ -1,25 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
+// LAYL AI Top Button
 
-const aiButton = document.createElement("button");
+document.addEventListener("DOMContentLoaded", function () {
 
-aiButton.innerHTML = "🤖 LAYL AI";
+  const aiButton = document.createElement("div");
 
-aiButton.style.position = "fixed";
-aiButton.style.bottom = "120px";
-aiButton.style.right = "20px";
-aiButton.style.zIndex = "99999";
-aiButton.style.padding = "12px 18px";
-aiButton.style.borderRadius = "30px";
-aiButton.style.border = "1px solid #d4af37";
-aiButton.style.background = "#111";
-aiButton.style.color = "#f0d36d";
-aiButton.style.fontWeight = "bold";
-aiButton.style.cursor = "pointer";
+  aiButton.innerHTML = `
+    <div id="layl-ai-top-btn">
+      🤖
+    </div>
+  `;
 
-aiButton.onclick = () => {
- alert("Merhaba, ben LAYL AI. Parfüm seçmenize yardımcı olabilirim.");
-};
+  document.body.appendChild(aiButton);
 
-document.body.appendChild(aiButton);
+
+  const style = document.createElement("style");
+
+  style.innerHTML = `
+    #layl-ai-top-btn {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      width: 65px;
+      height: 65px;
+      background: #111;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      cursor: pointer;
+      z-index: 99999;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    #layl-ai-top-btn:hover {
+      transform: scale(1.1);
+    }
+  `;
+
+  document.head.appendChild(style);
+
+
+  document.getElementById("layl-ai-top-btn").onclick = function () {
+
+    if(window.openLaylAI){
+      window.openLaylAI();
+    } else {
+      alert("Merhaba, ben LAYL AI. Parfüm seçmenize yardımcı olabilirim.");
+    }
+
+  };
 
 });
