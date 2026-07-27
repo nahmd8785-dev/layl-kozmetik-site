@@ -310,13 +310,15 @@ const campaignEnd=new Date(); campaignEnd.setDate(campaignEnd.getDate()+3);
 function updateCountdown(){const diff=Math.max(0,campaignEnd-new Date());cdDays.textContent=String(Math.floor(diff/86400000)).padStart(2,"0");cdHours.textContent=String(Math.floor(diff/3600000)%24).padStart(2,"0");cdMinutes.textContent=String(Math.floor(diff/60000)%60).padStart(2,"0");cdSeconds.textContent=String(Math.floor(diff/1000)%60).padStart(2,"0");}
 updateCountdown();setInterval(updateCountdown,1000);
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
-
 <script src="perfume-finder.js"></script>
 <script src="layl-ai.js"></script>
+
 <div id="layl-ai-box">
   <div id="layl-ai-title">🤖 LAYL AI</div>
   <div id="layl-ai-chat"></div>
+
   <input id="layl-ai-input" placeholder="Parfüm hakkında sorun..." />
+
   <button onclick="askLaylAI()">Gönder</button>
 </div>
 
@@ -326,6 +328,7 @@ function askLaylAI() {
   const chat = document.getElementById("layl-ai-chat");
 
   const message = input.value;
+
   if (!message) return;
 
   chat.innerHTML += "<p><b>Siz:</b> " + message + "</p>";
@@ -337,5 +340,7 @@ function askLaylAI() {
   input.value = "";
 }
 </script>
+
 </body>
 </html>
+
