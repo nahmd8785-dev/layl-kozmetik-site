@@ -1,120 +1,147 @@
 // LAYL AI Asistan
 
-const laylAI = (message, lang = "tr") => {
+window.laylAI = function(message, lang = "tr") {
+
   const text = message.toLowerCase();
 
+
+  // Önce ürünleri kontrol et
+  if (window.LAYL_AI && window.LAYL_AI.answer) {
+
+    const productAnswer = window.LAYL_AI.answer(message, lang);
+
+    if (
+      productAnswer &&
+      !productAnswer.includes("Ürün, fiyat, stok")
+    ) {
+      return productAnswer;
+    }
+  }
+
+
   const responses = {
+
     tr: {
-      hello: "Merhaba, ben LAYL AI. Ürün seçimi, parfüm önerisi ve site hakkında yardımcı olabilirim.",
-      perfume: "Size uygun parfümü bulabilirim. Erkek, kadın veya unisex seçeneklerinden tercih yapabilirsiniz.",
-      male: "Erkek parfümlerinde odunsu, baharatlı, ferah ve güçlü kokular önerebilirim.",
-      female: "Kadın parfümlerinde çiçeksi, tatlı, vanilyalı ve zarif kokular önerebilirim.",
-      unisex: "Unisex parfümler hem kadın hem erkek kullanımı için uygundur.",
-      vanilla: "Vanilyalı ve tatlı kokular sıcak ve dikkat çekici bir his verir.",
-      fresh: "Ferah kokular günlük kullanım için uygundur.",
-      price: "Ürün fiyatlarını ürün sayfasından görebilirsiniz.",
-      stock: "Stok bilgisi için ürün sayfasındaki bilgileri kontrol edebilirsiniz.",
-      category: "Kategoriler: Erkek Parfüm, Kadın Parfüm, Unisex Parfüm ve Mask ürünleri.",
-      whatsapp: "Size yardımcı olmam için WhatsApp üzerinden de iletişime geçebilirsiniz.",
-      default: "Size yardımcı olabilirim. Parfüm, ürün, fiyat, stok veya kategori hakkında soru sorabilirsiniz."
+      hello:
+      "Merhaba, ben LAYL AI. Parfüm seçimi, ürün bilgisi ve sipariş konusunda yardımcı olabilirim.",
+
+      perfume:
+      "Size uygun parfümü bulabilirim. Erkek, kadın veya unisex seçeneklerinden yardımcı olabilirim.",
+
+      male:
+      "Erkek parfümlerinde odunsu, baharatlı, amber ve vanilyalı kokular önerebilirim.",
+
+      female:
+      "Kadın parfümlerinde çiçeksi, tatlı ve zarif kokular önerebilirim.",
+
+      vanilla:
+      "Vanilyalı kokular sıcak, tatlı ve kalıcı bir his verir.",
+
+      price:
+      "Ürün fiyatlarını ürün sayfasından görebilirsiniz.",
+
+      stock:
+      "Stok bilgilerini ürün sayfasından kontrol edebilirsiniz.",
+
+      default:
+      "LAYL AI size parfüm seçimi, ürün bilgisi ve stok konusunda yardımcı olabilir."
     },
+
 
     ar: {
-      hello: "مرحباً، أنا مساعد LAYL للذكاء الاصطناعي. يمكنني مساعدتك في اختيار المنتجات.",
-      perfume: "يمكنني مساعدتك في اختيار العطر المناسب.",
-      male: "لدينا عطور رجالية بروائح قوية ومنعشة.",
-      female: "لدينا عطور نسائية بروائح ناعمة وجذابة.",
-      unisex: "عطور مناسبة للنساء والرجال.",
-      price: "يمكنك رؤية الأسعار من صفحة المنتجات.",
-      stock: "يمكنك معرفة حالة المخزون من صفحة المنتج.",
-      default: "يمكنك السؤال عن العطور أو المنتجات."
+      hello:
+      "مرحباً، أنا مساعد LAYL للذكاء الاصطناعي.",
+
+      perfume:
+      "يمكنني مساعدتك في اختيار العطر المناسب.",
+
+      male:
+      "لدينا عطور رجالية بروائح قوية وفاخرة.",
+
+      female:
+      "لدينا عطور نسائية بروائح ناعمة وجذابة.",
+
+      default:
+      "يمكنني مساعدتك في اختيار العطور والمنتجات."
     },
 
+
     en: {
-      hello: "Hello, I am LAYL AI assistant. I can help with products and perfumes.",
-      perfume: "I can help you choose the right perfume.",
-      male: "We have men's perfumes with fresh and strong notes.",
-      female: "We have women's perfumes with elegant scents.",
-      unisex: "Unisex perfumes are suitable for everyone.",
-      price: "You can check prices on the product page.",
-      stock: "You can check stock information on product pages.",
-      default: "Ask me about perfumes, products, prices or categories."
+      hello:
+      "Hello, I am LAYL AI assistant.",
+
+      perfume:
+      "I can help you choose the right perfume.",
+
+      male:
+      "I can recommend strong and elegant men's perfumes.",
+
+      female:
+      "I can recommend elegant women's perfumes.",
+
+      default:
+      "I can help you with perfumes and products."
     }
+
   };
+
 
   const r = responses[lang] || responses.tr;
 
 
-  if (
+  if(
     text.includes("merhaba") ||
     text.includes("hello") ||
     text.includes("مرحبا")
-  ) return r.hello;
+  )
+  return r.hello;
 
 
-  if (
+  if(
     text.includes("parfüm") ||
     text.includes("perfume") ||
     text.includes("عطر")
-  ) return r.perfume;
+  )
+  return r.perfume;
 
 
-  if (
+  if(
     text.includes("erkek") ||
     text.includes("male") ||
     text.includes("رجال")
-  ) return r.male;
+  )
+  return r.male;
 
 
-  if (
+  if(
     text.includes("kadın") ||
     text.includes("female") ||
     text.includes("نساء")
-  ) return r.female;
+  )
+  return r.female;
 
 
-  if (
-    text.includes("unisex")
-  ) return r.unisex;
-
-
-  if (
+  if(
     text.includes("vanilya") ||
     text.includes("vanilla")
-  ) return r.vanilla;
+  )
+  return r.vanilla;
 
 
-  if (
-    text.includes("ferah") ||
-    text.includes("fresh")
-  ) return r.fresh;
-
-
-  if (
+  if(
     text.includes("fiyat") ||
-    text.includes("price") ||
-    text.includes("سعر")
-  ) return r.price;
+    text.includes("price")
+  )
+  return r.price;
 
 
-  if (
+  if(
     text.includes("stok") ||
     text.includes("stock")
-  ) return r.stock;
-
-
-  if (
-    text.includes("kategori") ||
-    text.includes("category")
-  ) return r.category;
-
-
-  if (
-    text.includes("whatsapp")
-  ) return r.whatsapp;
+  )
+  return r.stock;
 
 
   return r.default;
-};
 
-export default laylAI;
+};
