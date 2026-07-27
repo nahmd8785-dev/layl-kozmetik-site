@@ -312,7 +312,7 @@ updateCountdown();setInterval(updateCountdown,1000);
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 <script src="perfume-finder.js"></script>
 <script src="layl-ai.js"></script>
-
+<script src="layl-chat.js"></script>
 <div id="layl-ai-box">
   <div id="layl-ai-title">🤖 LAYL AI</div>
   <div id="layl-ai-chat"></div>
