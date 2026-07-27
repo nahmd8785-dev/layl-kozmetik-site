@@ -4,7 +4,7 @@ const aiButton = document.createElement("button");
 
 aiButton.innerHTML = "🤖 LAYL AI";
 aiButton.style.position = "fixed";
-aiButton.style.top = "90px";
+aiButaiButton.style.bottom = "95px";
 aiButton.style.right = "20px";
 aiButton.style.zIndex = "9999";
 aiButton.style.padding = "12px 18px";
