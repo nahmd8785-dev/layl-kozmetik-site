@@ -1,53 +1,187 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-let lang=localStorage.getItem("laylLanguage")||"tr";
+let lang=localStorage.getItem("laylLang")||"ar";
 
-const box=document.createElement("div");
-box.innerHTML=`
-<div id="layl-btn">🤖</div>
+const text={
+tr:{
+hello:"Merhaba 👋 Ben LAYL AI. Tüm ürünler hakkında yardımcı olabilirim.",
+write:"Mesaj yazın...",
+not:"Size ürün, fiyat, stok ve kullanım bilgileri konusunda yardımcı olabilirim."
+},
+ar:{
+hello:"مرحباً 👋 أنا مساعد LAYL. يمكنني مساعدتك في جميع المنتجات.",
+write:"اكتب رسالتك...",
+not:"يمكنني مساعدتك في المنتجات والأسعار والمخزون."
+},
+en:{
+hello:"Hello 👋 I am LAYL AI. I can help with all products.",
+write:"Write a message...",
+not:"I can help with products, prices and stock."
+}
+};
 
-<div id="layl-chat">
 
-<div class="head">
-LAYL AI
-<span id="close">×</span>
-</div>
+function getLang(){
+lang=localStorage.getItem("laylLang")||"ar";
+return text[lang]||text.ar;
+}
 
-<div id="messages">
-<div class="bot">${getText("hello")}</div>
-</div>
 
-<div class="send">
-<input id="input" placeholder="${getText("write")}">
-<button id="send">➤</button>
-</div>
+function findProduct(message){
 
-</div>
+let products=window.allProducts||[];
+
+let m=message.toLowerCase();
+
+return products.find(p=>{
+
+let names=[
+p.nameTr,
+p.nameAr,
+p.nameEn
+].filter(Boolean).join(" ").toLowerCase();
+
+return names.split(" ").some(word=>
+word.length>3 && m.includes(word)
+);
+
+});
+
+}
+
+
+function answer(message){
+
+let t=getLang();
+let m=message.toLowerCase();
+
+let product=findProduct(message);
+
+if(product){
+
+let name=
+lang==="ar" ? product.nameAr :
+lang==="en" ? product.nameEn :
+product.nameTr;
+
+return `
+<b>${name||"LAYL Ürün"}</b><br>
+${product.descriptionTr||product.descriptionAr||"Ürün bilgisi mevcut."}
+<br>
+${product.price ? "Fiyat: "+product.price+" TL":""}
 `;
 
-document.body.appendChild(box);
+}
 
 
-const style=document.createElement("style");
-style.innerHTML=`
+if(
+m.includes("maske")||
+m.includes("mask")||
+m.includes("ماسك")
+)
+return lang==="ar"?
+"لدينا ماسكات للعناية بالبشرة. يمكنني مساعدتك باختيار المناسب.":
+lang==="en"?
+"We have skincare masks. I can help you choose one.":
+"Maske ürünlerimiz var. Cilt ihtiyacınıza göre seçim yapabiliriz.";
 
-#layl-btn{
+
+if(
+m.includes("krem")||
+m.includes("cream")||
+m.includes("كريم")
+)
+return lang==="ar"?
+"لدينا كريمات للعناية بالبشرة.":
+lang==="en"?
+"We have skincare creams.":
+"Krem ürünlerimiz mevcut. Size uygun olanı bulabiliriz.";
+
+
+if(
+m.includes("fiyat")||
+m.includes("price")||
+m.includes("سعر")
+)
+return t.not;
+
+
+if(
+m.includes("stok")||
+m.includes("stock")||
+m.includes("متوفر")
+)
+return t.not;
+
+
+if(
+m.includes("parfüm")||
+m.includes("perfume")||
+m.includes("عطر")
+)
+return lang==="ar"?
+"يمكنني مساعدتك في اختيار العطر المناسب.":
+lang==="en"?
+"I can help you choose the right perfume.":
+"Size uygun parfüm seçmenize yardımcı olabilirim.";
+
+
+return t.not;
+
+}
+
+
+
+const app=document.createElement("div");
+
+app.innerHTML=`
+
+<div id="layl-ai-btn">🤖</div>
+
+<div id="layl-ai-chat">
+
+<div class="ai-head">
+LAYL AI
+<span id="ai-close">×</span>
+</div>
+
+<div id="ai-msg">
+<div class="bot">${getLang().hello}</div>
+</div>
+
+<div class="ai-send">
+<input id="ai-input" placeholder="${getLang().write}">
+<button id="ai-send">➤</button>
+</div>
+
+</div>
+
+`;
+
+document.body.appendChild(app);
+
+
+let css=document.createElement("style");
+css.innerHTML=`
+
+#layl-ai-btn{
 position:fixed;
 right:20px;
 bottom:90px;
-background:#111;
-color:white;
 width:70px;
 height:70px;
 border-radius:50%;
+background:#111;
+color:white;
 display:flex;
 align-items:center;
 justify-content:center;
 font-size:35px;
 z-index:99999;
+cursor:pointer;
 }
 
-#layl-chat{
+#layl-ai-chat{
 display:none;
 position:fixed;
 right:20px;
@@ -56,12 +190,12 @@ width:360px;
 height:520px;
 background:white;
 border-radius:20px;
-box-shadow:0 10px 40px #0005;
-z-index:99999;
 overflow:hidden;
+z-index:99999;
+box-shadow:0 10px 40px #000;
 }
 
-.head{
+.ai-head{
 background:#111;
 color:white;
 padding:18px;
@@ -70,7 +204,7 @@ display:flex;
 justify-content:space-between;
 }
 
-#messages{
+#ai-msg{
 height:390px;
 overflow:auto;
 padding:10px;
@@ -80,7 +214,6 @@ padding:10px;
 padding:12px;
 margin:8px;
 border-radius:15px;
-max-width:80%;
 }
 
 .bot{
@@ -91,128 +224,58 @@ color:#111;
 .user{
 background:#111;
 color:white;
-margin-left:auto;
 }
 
-.send{
+.ai-send{
 display:flex;
 padding:10px;
 }
 
-.send input{
+.ai-send input{
 flex:1;
 padding:12px;
 }
 
-.send button{
+.ai-send button{
 width:50px;
 }
 
 `;
 
-document.head.appendChild(style);
+document.head.appendChild(css);
 
 
-function getText(key){
-
-let t={
-tr:{
-hello:"Merhaba 👋 Ben LAYL AI. Parfüm ve ürün konusunda yardımcı olabilirim.",
-write:"Mesaj yazın",
-not:"Size ürün, parfüm, fiyat ve sipariş konusunda yardımcı olabilirim."
-},
-
-ar:{
-hello:"مرحباً 👋 أنا مساعد LAYL للذكاء الاصطناعي.",
-write:"اكتب رسالة",
-not:"يمكنني مساعدتك في العطور والمنتجات والطلبات."
-},
-
-en:{
-hello:"Hello 👋 I am LAYL AI assistant.",
-write:"Write a message",
-not:"I can help with perfumes, products and orders."
-}
-
-};
-
-return t[lang][key]||t.tr[key];
-
-}
-
-
-
-function answer(msg){
-
-let m=msg.toLowerCase();
-
-if(m.includes("عطر")||m.includes("parfüm")||m.includes("perfume"))
-return lang=="ar"?
-"يمكنني اقتراح عطر مناسب حسب ذوقك.":
-lang=="en"?
-"I can suggest a perfume based on your style.":
-"Tarzınıza uygun parfüm önerebilirim.";
-
-if(m.includes("fiyat")||m.includes("price")||m.includes("سعر"))
-return lang=="ar"?
-"يمكنك رؤية الأسعار من صفحة المنتجات.":
-lang=="en"?
-"You can see prices on product pages.":
-"Ürün fiyatlarını ürün sayfasından görebilirsiniz.";
-
-if(m.includes("stok")||m.includes("stock"))
-return "Stok bilgisi için ürün detaylarına bakabilirsiniz.";
-
-if(m.includes("sipariş")||m.includes("order"))
-return "Sipariş için WhatsApp destek hattımız yardımcı olabilir.";
-
-if(m.includes("erkek"))
-return "Erkek için güçlü, kalıcı ve şık kokular önerebilirim.";
-
-if(m.includes("kadın"))
-return "Kadın için zarif ve özel kokular önerebilirim.";
-
-return getText("not");
-
-}
-
-
-
-document.querySelector("#layl-btn").onclick=()=>{
-document.querySelector("#layl-chat").style.display="block";
-};
-
-document.querySelector("#close").onclick=()=>{
-document.querySelector("#layl-chat").style.display="none";
+document.querySelector("#layl-ai-btn").onclick=()=>{
+document.querySelector("#layl-ai-chat").style.display="block";
 };
 
 
-document.querySelector("#send").onclick=()=>{
+document.querySelector("#ai-close").onclick=()=>{
+document.querySelector("#layl-ai-chat").style.display="none";
+};
 
-let input=document.querySelector("#input");
-let text=input.value;
 
-if(!text)return;
+document.querySelector("#ai-send").onclick=()=>{
 
-let area=document.querySelector("#messages");
+let input=document.querySelector("#ai-input");
+let msg=input.value.trim();
 
-area.innerHTML+=`
-<div class="user">${text}</div>
-`;
+if(!msg)return;
+
+let box=document.querySelector("#ai-msg");
+
+box.innerHTML+=`<div class="user">${msg}</div>`;
 
 setTimeout(()=>{
 
-area.innerHTML+=`
-<div class="bot">${answer(text)}</div>
-`;
+box.innerHTML+=`<div class="bot">${answer(msg)}</div>`;
+box.scrollTop=box.scrollHeight;
 
-area.scrollTop=area.scrollHeight;
-
-},400);
-
+},300);
 
 input.value="";
 
 };
+
 
 });
