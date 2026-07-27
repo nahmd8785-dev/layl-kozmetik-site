@@ -1,132 +1,124 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-let lang=localStorage.getItem("laylLang")||"ar";
+let getLang=()=>localStorage.getItem("laylLang")||"ar";
 
-const text={
+
+const words={
 tr:{
-hello:"Merhaba 👋 Ben LAYL AI. Tüm ürünler hakkında yardımcı olabilirim.",
-write:"Mesaj yazın...",
-not:"Size ürün, fiyat, stok ve kullanım bilgileri konusunda yardımcı olabilirim."
+hello:"Merhaba 👋 Ben LAYL AI. LAYL ürünleri hakkında yardımcı olabilirim.",
+default:"Size ürün seçimi, kullanım, fiyat ve stok konusunda yardımcı olabilirim.",
+mask:"Maske ürünlerimiz hakkında yardımcı olabilirim. Cilt ihtiyacınıza göre seçim yapabiliriz.",
+cream:"Krem ürünlerimiz hakkında bilgi verebilirim.",
+perfume:"Parfüm seçiminizde yardımcı olabilirim."
 },
 ar:{
-hello:"مرحباً 👋 أنا مساعد LAYL. يمكنني مساعدتك في جميع المنتجات.",
-write:"اكتب رسالتك...",
-not:"يمكنني مساعدتك في المنتجات والأسعار والمخزون."
+hello:"مرحباً 👋 أنا مساعد LAYL للمنتجات.",
+default:"يمكنني مساعدتك في المنتجات والأسعار والمخزون.",
+mask:"يمكنني مساعدتك في اختيار الماسكات المناسبة.",
+cream:"يمكنني مساعدتك في الكريمات.",
+perfume:"يمكنني مساعدتك في اختيار العطر المناسب."
 },
 en:{
-hello:"Hello 👋 I am LAYL AI. I can help with all products.",
-write:"Write a message...",
-not:"I can help with products, prices and stock."
+hello:"Hello 👋 I am LAYL AI product assistant.",
+default:"I can help with products, prices and stock.",
+mask:"I can help you choose skincare masks.",
+cream:"I can help you with creams.",
+perfume:"I can help you choose perfumes."
 }
 };
 
 
-function getLang(){
-lang=localStorage.getItem("laylLang")||"ar";
-return text[lang]||text.ar;
+function langText(){
+return words[getLang()]||words.tr;
 }
 
 
-function findProduct(message){
+function findProduct(msg){
 
 let products=window.allProducts||[];
-
-let m=message.toLowerCase();
+let text=msg.toLowerCase();
 
 return products.find(p=>{
 
-let names=[
+let all=[
 p.nameTr,
 p.nameAr,
-p.nameEn
-].filter(Boolean).join(" ").toLowerCase();
+p.nameEn,
+p.title
+]
+.filter(Boolean)
+.join(" ")
+.toLowerCase();
 
-return names.split(" ").some(word=>
-word.length>3 && m.includes(word)
-);
+return all.split(" ").some(x=>x.length>3 && text.includes(x));
 
 });
 
 }
 
 
-function answer(message){
+function answer(msg){
 
-let t=getLang();
-let m=message.toLowerCase();
+let t=langText();
+let text=msg.toLowerCase();
 
-let product=findProduct(message);
+let product=findProduct(msg);
+
 
 if(product){
 
 let name=
-lang==="ar" ? product.nameAr :
-lang==="en" ? product.nameEn :
+getLang()=="ar" ? product.nameAr :
+getLang()=="en" ? product.nameEn :
 product.nameTr;
+
+
+let desc=
+product.descriptionTr ||
+product.descriptionAr ||
+product.descriptionEn ||
+product.description ||
+product.desc ||
+product.details ||
+product.content ||
+"";
+
+
+let price=
+product.price ||
+product.salePrice ||
+"";
+
+
+let stock=
+product.stock===0 ?
+"Tükendi" :
+"";
+
 
 return `
 <b>${name||"LAYL Ürün"}</b><br>
-${product.descriptionTr||product.descriptionAr||"Ürün bilgisi mevcut."}
-<br>
-${product.price ? "Fiyat: "+product.price+" TL":""}
+${desc || "Ürün bilgisi mevcut."}<br>
+${price ? "Fiyat: "+price+" TL":""}
+${stock}
 `;
 
 }
 
 
-if(
-m.includes("maske")||
-m.includes("mask")||
-m.includes("ماسك")
-)
-return lang==="ar"?
-"لدينا ماسكات للعناية بالبشرة. يمكنني مساعدتك باختيار المناسب.":
-lang==="en"?
-"We have skincare masks. I can help you choose one.":
-"Maske ürünlerimiz var. Cilt ihtiyacınıza göre seçim yapabiliriz.";
+if(text.includes("maske")||text.includes("mask")||text.includes("ماسك"))
+return t.mask;
 
 
-if(
-m.includes("krem")||
-m.includes("cream")||
-m.includes("كريم")
-)
-return lang==="ar"?
-"لدينا كريمات للعناية بالبشرة.":
-lang==="en"?
-"We have skincare creams.":
-"Krem ürünlerimiz mevcut. Size uygun olanı bulabiliriz.";
+if(text.includes("krem")||text.includes("cream")||text.includes("كريم"))
+return t.cream;
 
 
-if(
-m.includes("fiyat")||
-m.includes("price")||
-m.includes("سعر")
-)
-return t.not;
+if(text.includes("parfüm")||text.includes("perfume")||text.includes("عطر"))
+return t.perfume;
 
 
-if(
-m.includes("stok")||
-m.includes("stock")||
-m.includes("متوفر")
-)
-return t.not;
-
-
-if(
-m.includes("parfüm")||
-m.includes("perfume")||
-m.includes("عطر")
-)
-return lang==="ar"?
-"يمكنني مساعدتك في اختيار العطر المناسب.":
-lang==="en"?
-"I can help you choose the right perfume.":
-"Size uygun parfüm seçmenize yardımcı olabilirim.";
-
-
-return t.not;
+return t.default;
 
 }
 
@@ -136,22 +128,22 @@ const app=document.createElement("div");
 
 app.innerHTML=`
 
-<div id="layl-ai-btn">🤖</div>
+<div id="layl-ai-button">🤖</div>
 
-<div id="layl-ai-chat">
+<div id="layl-ai-box">
 
-<div class="ai-head">
+<div class="layl-ai-header">
 LAYL AI
-<span id="ai-close">×</span>
+<span id="layl-ai-close">×</span>
 </div>
 
-<div id="ai-msg">
-<div class="bot">${getLang().hello}</div>
+<div id="layl-ai-messages">
+<div class="layl-ai-bot">${langText().hello}</div>
 </div>
 
-<div class="ai-send">
-<input id="ai-input" placeholder="${getLang().write}">
-<button id="ai-send">➤</button>
+<div class="layl-ai-input">
+<input id="layl-ai-text" placeholder="...">
+<button id="layl-ai-send">➤</button>
 </div>
 
 </div>
@@ -162,9 +154,10 @@ document.body.appendChild(app);
 
 
 let css=document.createElement("style");
+
 css.innerHTML=`
 
-#layl-ai-btn{
+#layl-ai-button{
 position:fixed;
 right:20px;
 bottom:90px;
@@ -178,10 +171,9 @@ align-items:center;
 justify-content:center;
 font-size:35px;
 z-index:99999;
-cursor:pointer;
 }
 
-#layl-ai-chat{
+#layl-ai-box{
 display:none;
 position:fixed;
 right:20px;
@@ -191,11 +183,11 @@ height:520px;
 background:white;
 border-radius:20px;
 overflow:hidden;
-z-index:99999;
 box-shadow:0 10px 40px #000;
+z-index:99999;
 }
 
-.ai-head{
+.layl-ai-header{
 background:#111;
 color:white;
 padding:18px;
@@ -204,40 +196,36 @@ display:flex;
 justify-content:space-between;
 }
 
-#ai-msg{
+#layl-ai-messages{
 height:390px;
 overflow:auto;
 padding:10px;
 }
 
-.bot,.user{
+.layl-ai-bot,.layl-ai-user{
 padding:12px;
 margin:8px;
 border-radius:15px;
 }
 
-.bot{
+.layl-ai-bot{
 background:#eee;
 color:#111;
 }
 
-.user{
+.layl-ai-user{
 background:#111;
 color:white;
 }
 
-.ai-send{
+.layl-ai-input{
 display:flex;
 padding:10px;
 }
 
-.ai-send input{
+.layl-ai-input input{
 flex:1;
 padding:12px;
-}
-
-.ai-send button{
-width:50px;
 }
 
 `;
@@ -245,37 +233,36 @@ width:50px;
 document.head.appendChild(css);
 
 
-document.querySelector("#layl-ai-btn").onclick=()=>{
-document.querySelector("#layl-ai-chat").style.display="block";
+document.querySelector("#layl-ai-button").onclick=()=>{
+document.querySelector("#layl-ai-box").style.display="block";
 };
 
 
-document.querySelector("#ai-close").onclick=()=>{
-document.querySelector("#layl-ai-chat").style.display="none";
+document.querySelector("#layl-ai-close").onclick=()=>{
+document.querySelector("#layl-ai-box").style.display="none";
 };
 
 
-document.querySelector("#ai-send").onclick=()=>{
+document.querySelector("#layl-ai-send").onclick=()=>{
 
-let input=document.querySelector("#ai-input");
+let input=document.querySelector("#layl-ai-text");
 let msg=input.value.trim();
 
 if(!msg)return;
 
-let box=document.querySelector("#ai-msg");
+let area=document.querySelector("#layl-ai-messages");
 
-box.innerHTML+=`<div class="user">${msg}</div>`;
+area.innerHTML+=`<div class="layl-ai-user">${msg}</div>`;
 
 setTimeout(()=>{
 
-box.innerHTML+=`<div class="bot">${answer(msg)}</div>`;
-box.scrollTop=box.scrollHeight;
+area.innerHTML+=`<div class="layl-ai-bot">${answer(msg)}</div>`;
+area.scrollTop=area.scrollHeight;
 
 },300);
 
 input.value="";
 
 };
-
 
 });
