@@ -311,9 +311,10 @@ function updateCountdown(){const diff=Math.max(0,campaignEnd-new Date());cdDays.
 updateCountdown();setInterval(updateCountdown,1000);
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 </script>
-  <script src="perfume-finder.js"></script>
+<script src="perfume-finder.js"></script>
 <script src="layl-ai.js"></script>
 <script src="layl-chat.js"></script>
+<script src="layl-ai-top.js"></script>
 <div id="layl-ai-box">
   <div id="layl-ai-title">🤖 LAYL AI</div>
   <div id="layl-ai-chat"></div>
