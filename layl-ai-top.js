@@ -1,39 +1,34 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-const button=document.createElement("div");
-button.id="layl-ai-btn";
-button.innerHTML="🤖";
+const btn=document.createElement("div");
+btn.id="layl-ai-btn";
+btn.innerHTML="🤖";
 
 const chat=document.createElement("div");
 chat.id="layl-ai-chat";
 
 chat.innerHTML=`
-
-<div class="layl-title">
+<div class="layl-head">
 LAYL AI
-<span id="layl-x">×</span>
+<span id="layl-close">×</span>
 </div>
 
-<div id="layl-msg">
-<div class="bot">
-Merhaba 👋 Ben LAYL AI. Parfüm seçimi, ürünler ve sipariş konusunda yardımcı olabilirim.
-</div>
+<div id="layl-messages">
+<div class="bot">Merhaba 👋 Ben LAYL AI. Parfüm, ürün, fiyat ve sipariş konusunda yardımcı olabilirim.</div>
 </div>
 
-<div class="layl-send">
-<input id="layl-input" placeholder="Mesaj yazın...">
-<button id="layl-go">➤</button>
+<div class="layl-input">
+<input id="layl-text" placeholder="Mesaj yazın...">
+<button id="layl-send">➤</button>
 </div>
-
 `;
 
-document.body.appendChild(button);
+document.body.appendChild(btn);
 document.body.appendChild(chat);
 
 
-let css=document.createElement("style");
-
-css.innerHTML=`
+const style=document.createElement("style");
+style.innerHTML=`
 
 #layl-ai-btn{
 position:fixed;
@@ -50,16 +45,16 @@ justify-content:center;
 font-size:38px;
 cursor:pointer;
 z-index:999999;
+box-shadow:0 5px 20px #0005;
 }
-
 
 #layl-ai-chat{
 display:none;
 position:fixed;
 right:20px;
-bottom:180px;
-width:350px;
-height:500px;
+bottom:90px;
+width:360px;
+height:520px;
 background:white;
 border-radius:20px;
 box-shadow:0 10px 40px #0005;
@@ -67,8 +62,7 @@ overflow:hidden;
 z-index:999999;
 }
 
-
-.layl-title{
+.layl-head{
 background:#111;
 color:white;
 padding:18px;
@@ -77,143 +71,134 @@ display:flex;
 justify-content:space-between;
 }
 
-
-#layl-msg{
-height:380px;
+#layl-messages{
+height:390px;
 padding:10px;
-overflow:auto;
+overflow-y:auto;
 }
-
 
 .bot,.user{
+max-width:80%;
 padding:12px;
-margin:8px;
+margin:10px;
 border-radius:15px;
+font-size:15px;
 }
-
 
 .bot{
 background:#eee;
+color:#111;
 }
-
 
 .user{
 background:#111;
 color:white;
+margin-left:auto;
+text-align:right;
 }
 
-
-.layl-send{
+.layl-input{
 display:flex;
 padding:10px;
+border-top:1px solid #ddd;
 }
 
-
-.layl-send input{
+.layl-input input{
 flex:1;
 padding:12px;
 border-radius:10px;
 border:1px solid #ccc;
 }
 
-
-.layl-send button{
+.layl-input button{
 width:50px;
 margin-left:5px;
+background:#111;
+color:white;
+border:0;
+border-radius:10px;
 }
 
+@media(max-width:600px){
+
+#layl-ai-chat{
+right:10px;
+bottom:80px;
+width:calc(100% - 20px);
+height:520px;
+}
+
+#layl-ai-btn{
+right:15px;
+bottom:80px;
+}
+
+}
 
 `;
 
-document.head.appendChild(css);
+document.head.appendChild(style);
 
 
-
-button.onclick=()=>{
+btn.onclick=()=>{
 chat.style.display="block";
 };
 
-
-document.getElementById("layl-x").onclick=()=>{
+document.getElementById("layl-close").onclick=()=>{
 chat.style.display="none";
 };
 
 
+document.getElementById("layl-send").onclick=function(){
 
-document.getElementById("layl-go").onclick=function(){
-
-let input=document.getElementById("layl-input");
-
-let text=input.value.toLowerCase();
+let input=document.getElementById("layl-text");
+let text=input.value.trim();
 
 if(!text)return;
 
+let area=document.getElementById("layl-messages");
 
-let box=document.getElementById("layl-msg");
-
-box.innerHTML+=`
-<div class="user">${input.value}</div>
+area.innerHTML+=`
+<div class="user">${text}</div>
 `;
 
-
+let t=text.toLowerCase();
 let cevap="";
 
 
-if(text.includes("merhaba")||text.includes("selam")){
-cevap="Merhaba 👋 LAYL AI size yardımcı olmaktan mutluluk duyar.";
+if(t.includes("merhaba")||t.includes("selam")){
+cevap="Merhaba 👋 LAYL AI size yardımcı olabilir.";
 }
-
-else if(text.includes("erkek")){
-cevap="Erkek parfümleri için kalıcı, odunsu, ferah ve güçlü seçenekler önerebilirim.";
+else if(t.includes("erkek")){
+cevap="Erkek parfümleri için kalıcı ve şık seçenekler önerebilirim.";
 }
-
-else if(text.includes("kadın")){
-cevap="Kadın parfümlerinde çiçeksi, tatlı ve zarif seçenekler önerebilirim.";
+else if(t.includes("kadın")){
+cevap="Kadın parfümleri için zarif ve özel seçenekler önerebilirim.";
 }
-
-else if(text.includes("unisex")){
-cevap="Unisex parfümler hem kadın hem erkek kullanımı için uygundur.";
+else if(t.includes("fiyat")||t.includes("price")||t.includes("سعر")){
+cevap="Ürün fiyatlarını ürün sayfasından görebilirsiniz.";
 }
-
-else if(text.includes("fiyat")||text.includes("price")||text.includes("سعر")){
-cevap="Ürün fiyatlarını LAYL ürün sayfasından görebilirsiniz.";
-}
-
-else if(text.includes("stok")){
-cevap="Stok bilgisi için ürün detaylarını kontrol edebilirsiniz.";
-}
-
-else if(text.includes("sipariş")){
-cevap="Sipariş için WhatsApp üzerinden bizimle iletişime geçebilirsiniz.";
-}
-
-else if(text.includes("عطر")){
+else if(t.includes("عطر")){
 cevap="يمكنني مساعدتك في اختيار العطر المناسب.";
 }
-
-else if(text.includes("hello")){
+else if(t.includes("hello")){
 cevap="Hello 👋 I am LAYL AI assistant.";
 }
-
 else{
-cevap="Size parfüm seçimi, ürün bilgisi, fiyat, stok ve sipariş konularında yardımcı olabilirim.";
+cevap="Parfüm seçimi, ürün bilgisi, fiyat, stok ve sipariş konularında yardımcı olabilirim.";
 }
 
 
 setTimeout(()=>{
-
-box.innerHTML+=`
+area.innerHTML+=`
 <div class="bot">${cevap}</div>
 `;
-
-box.scrollTop=box.scrollHeight;
-
+area.scrollTop=area.scrollHeight;
 },500);
 
 
 input.value="";
 
 };
-
 
 });
