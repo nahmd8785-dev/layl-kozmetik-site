@@ -20,7 +20,7 @@ function openLaylChat() {
 
     <div id="layl-messages">
       <div class="ai-message">
-      Merhaba, ben LAYL AI. Ürün seçimi, parfüm önerisi ve site hakkında yardımcı olabilirim.
+      Merhaba, ben LAYL AI. Ürün seçimi, parfüm önerisi, fiyat, stok ve sipariş konusunda yardımcı olabilirim.
       </div>
     </div>
 
@@ -35,7 +35,6 @@ function openLaylChat() {
   const style = document.createElement("style");
 
   style.innerHTML = `
-
   #layl-chat-box {
     position:fixed;
     right:20px;
@@ -78,6 +77,7 @@ function openLaylChat() {
     margin:8px 0;
     border-radius:15px;
     max-width:80%;
+    white-space:pre-line;
   }
 
   .ai-message {
@@ -111,53 +111,82 @@ function openLaylChat() {
     background:#111;
     color:white;
   }
-
   `;
 
   document.head.appendChild(style);
 
-  document.getElementById("layl-send").onclick = function(){
+
+  function sendMessage(){
 
     const input = document.getElementById("layl-text");
-    const text = input.value;
+    const text = input.value.trim();
 
     if(!text) return;
 
+
     const messages = document.getElementById("layl-messages");
 
+
     messages.innerHTML += `
-    <div class="user-message">
-    ${text}
-    </div>
+      <div class="user-message">
+      ${text}
+      </div>
     `;
+
 
     let lang = "tr";
 
-if (
-  /[\u0600-\u06FF]/.test(text)
-) {
-  lang = "ar";
-}
 
-if (
-  /^[a-zA-Z\s]+$/.test(text)
-) {
-  lang = "en";
-}
+    if (/[\u0600-\u06FF]/.test(text)) {
+      lang = "ar";
+    }
 
-const answer = laylAI(text, lang);
+
+    if (/^[a-zA-Z\s]+$/.test(text)) {
+      lang = "en";
+    }
+
+
+
+    let answer = "";
+
+
+    if(window.LAYL_AI && typeof window.LAYL_AI.answer === "function"){
+
+      answer = window.LAYL_AI.answer(text, lang);
+
+    } else {
+
+      answer = "LAYL AI hazır değil. Lütfen tekrar deneyin.";
+
+    }
+
+
 
     messages.innerHTML += `
-    <div class="ai-message">
-    ${answer}
-    </div>
+      <div class="ai-message">
+      ${answer}
+      </div>
     `;
 
-    input.value="";
 
+    input.value="";
     messages.scrollTop = messages.scrollHeight;
 
-  };
+  }
+
+
+
+  document.getElementById("layl-send").onclick = sendMessage;
+
+
+  document.getElementById("layl-text").addEventListener("keypress",function(e){
+    if(e.key==="Enter"){
+      sendMessage();
+    }
+  });
+
+
 
   document.getElementById("layl-close").onclick=function(){
     chat.style.display="none";
