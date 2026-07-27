@@ -9,7 +9,6 @@ function openLaylChat() {
     return;
   }
 
-
   const chat = document.createElement("div");
   chat.id = "layl-chat-box";
 
@@ -31,9 +30,7 @@ function openLaylChat() {
     </div>
   `;
 
-
   document.body.appendChild(chat);
-
 
   const style = document.createElement("style");
 
@@ -55,7 +52,6 @@ function openLaylChat() {
     font-family:Arial;
   }
 
-
   .layl-header {
     background:#111;
     color:white;
@@ -65,19 +61,16 @@ function openLaylChat() {
     justify-content:space-between;
   }
 
-
   #layl-close {
     cursor:pointer;
     font-size:25px;
   }
-
 
   #layl-messages {
     flex:1;
     padding:15px;
     overflow:auto;
   }
-
 
   .ai-message,
   .user-message {
@@ -87,11 +80,9 @@ function openLaylChat() {
     max-width:80%;
   }
 
-
   .ai-message {
     background:#eee;
   }
-
 
   .user-message {
     background:#111;
@@ -99,13 +90,11 @@ function openLaylChat() {
     margin-left:auto;
   }
 
-
   .layl-input {
     display:flex;
     padding:10px;
     border-top:1px solid #ddd;
   }
-
 
   .layl-input input {
     flex:1;
@@ -113,7 +102,6 @@ function openLaylChat() {
     border-radius:20px;
     border:1px solid #ccc;
   }
-
 
   .layl-input button {
     margin-left:8px;
@@ -126,10 +114,7 @@ function openLaylChat() {
 
   `;
 
-
   document.head.appendChild(style);
-
-
 
   document.getElementById("layl-send").onclick = function(){
 
@@ -138,9 +123,7 @@ function openLaylChat() {
 
     if(!text) return;
 
-
     const messages = document.getElementById("layl-messages");
-
 
     messages.innerHTML += `
     <div class="user-message">
@@ -148,9 +131,21 @@ function openLaylChat() {
     </div>
     `;
 
+    let lang = "tr";
 
-    const answer = laylAI(text,"tr");
+if (
+  /[\u0600-\u06FF]/.test(text)
+) {
+  lang = "ar";
+}
 
+if (
+  /^[a-zA-Z\s]+$/.test(text)
+) {
+  lang = "en";
+}
+
+const answer = laylAI(text, lang);
 
     messages.innerHTML += `
     <div class="ai-message">
@@ -158,14 +153,11 @@ function openLaylChat() {
     </div>
     `;
 
-
     input.value="";
 
     messages.scrollTop = messages.scrollHeight;
 
   };
-
-
 
   document.getElementById("layl-close").onclick=function(){
     chat.style.display="none";
