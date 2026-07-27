@@ -3,10 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
 const aiButton = document.createElement("button");
 
 aiButton.innerHTML = "🤖 LAYL AI";
+
 aiButton.style.position = "fixed";
-aiButaiButton.style.bottom = "95px";
+aiButton.style.bottom = "120px";
 aiButton.style.right = "20px";
-aiButton.style.zIndex = "9999";
+aiButton.style.zIndex = "99999";
 aiButton.style.padding = "12px 18px";
 aiButton.style.borderRadius = "30px";
 aiButton.style.border = "1px solid #d4af37";
