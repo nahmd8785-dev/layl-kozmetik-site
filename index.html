@@ -311,6 +311,7 @@ function updateCountdown(){const diff=Math.max(0,campaignEnd-new Date());cdDays.
 updateCountdown();setInterval(updateCountdown,1000);
 const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
 
-</script>
 <script src="perfume-finder.js"></script>
-</body></html>
+<script src="layl-ai.js"></script>
+</body>
+</html>
