@@ -44,12 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   aiButton.onclick = function(){
 
-    let chat = document.querySelector("#layl-chat");
-
-    if(chat){
-      chat.style.display = "block";
+    if (typeof openLaylChat === "function") {
+      openLaylChat();
     } else {
-      alert("Merhaba, ben LAYL AI. Parfüm seçmenize yardımcı olabilirim.");
+      alert("LAYL AI yüklenemedi.");
     }
 
   };
