@@ -69,7 +69,7 @@ button{
 }
 
 /* ========================================
-   LAYL OPENING
+   OPENING
 ======================================== */
 
 #laylLoader{
@@ -95,8 +95,11 @@ button{
 .layl-loader-logo{
   width:132px;
   height:132px;
+  min-width:132px;
   border-radius:50%;
   object-fit:cover;
+  object-position:center;
+  display:block;
   border:2px solid var(--champagne);
   padding:5px;
   background:var(--white);
@@ -188,13 +191,21 @@ button{
   letter-spacing:1px;
 }
 
+/* ÜST MENÜ LOGOSU TAM YUVARLAK */
 .brand img{
-  width:48px;
-  height:48px;
+  width:52px;
+  height:52px;
+  min-width:52px;
   border-radius:50%;
   object-fit:cover;
-  border:1px solid var(--champagne);
+  object-position:center;
+  display:block;
+  border:2px solid var(--champagne);
+  padding:3px;
   background:var(--white);
+  box-shadow:
+    0 0 0 4px rgba(200,169,107,.08),
+    0 8px 20px rgba(33,26,22,.12);
 }
 
 .actions{
@@ -443,8 +454,7 @@ button{
 .collection-card{
   min-height:250px;
   padding:28px;
-  background:
-    linear-gradient(145deg,#2b211b,#17120f);
+  background:linear-gradient(145deg,#2b211b,#17120f);
   color:var(--cream);
   position:relative;
   overflow:hidden;
@@ -461,13 +471,11 @@ button{
 }
 
 .collection-card:nth-child(2){
-  background:
-    linear-gradient(145deg,#795e4b,#4e3a2d);
+  background:linear-gradient(145deg,#795e4b,#4e3a2d);
 }
 
 .collection-card:nth-child(3){
-  background:
-    linear-gradient(145deg,#3c2e23,#241b16);
+  background:linear-gradient(145deg,#3c2e23,#241b16);
 }
 
 .collection-number{
@@ -533,10 +541,6 @@ button{
   outline:none;
 }
 
-.category:focus{
-  border-color:var(--champagne);
-}
-
 .shop-tools{
   display:flex;
   gap:10px;
@@ -557,12 +561,6 @@ button{
   border-radius:4px;
   outline:none;
   color:var(--dark);
-  transition:.25s;
-}
-
-.search-wrap input:focus{
-  border-color:var(--champagne);
-  box-shadow:0 5px 20px rgba(33,26,22,.05);
 }
 
 .search-icon{
@@ -600,7 +598,6 @@ button{
   border:1px solid #ddd1c1;
   position:relative;
   transition:.3s ease;
-  contain:layout paint;
   overflow:hidden;
 }
 
@@ -622,7 +619,6 @@ button{
   object-fit:cover;
   display:block;
   transition:transform .5s;
-  content-visibility:auto;
 }
 
 .card:hover .gallery img{
@@ -632,7 +628,7 @@ button{
 .fav-btn{
   position:absolute;
   top:14px;
-  left:14px;
+  right:14px;
   z-index:5;
   width:40px;
   height:40px;
@@ -644,11 +640,6 @@ button{
   font-size:21px;
 }
 
-[dir="rtl"] .fav-btn{
-  left:auto;
-  right:14px;
-}
-
 .fav-btn.active{
   background:var(--red);
   color:white;
@@ -658,15 +649,10 @@ button{
 .badge-stack{
   position:absolute;
   top:14px;
-  right:14px;
+  left:14px;
   z-index:5;
   display:flex;
   gap:5px;
-}
-
-[dir="rtl"] .badge-stack{
-  right:auto;
-  left:14px;
 }
 
 .product-badge{
@@ -675,7 +661,6 @@ button{
   color:var(--espresso);
   font-size:10px;
   font-weight:bold;
-  letter-spacing:.5px;
 }
 
 .product-badge.new{
@@ -745,7 +730,6 @@ button{
   color:#9c9187;
   text-decoration:line-through;
   font-size:13px;
-  margin-inline-end:5px;
 }
 
 .discount-pill{
@@ -754,7 +738,6 @@ button{
   padding:4px 7px;
   border-radius:20px;
   font-size:10px;
-  margin-inline-start:5px;
 }
 
 .small-wa{
@@ -764,12 +747,6 @@ button{
   font-size:12px;
   font-weight:bold;
   border-radius:3px;
-  transition:.25s;
-}
-
-.small-wa:hover{
-  background:var(--coffee);
-  transform:translateY(-1px);
 }
 
 .stock-qty{
@@ -783,14 +760,6 @@ button{
   color:white;
   padding:9px 12px;
   font-size:11px;
-}
-
-.video-btn{
-  display:inline-block;
-  margin-top:12px;
-  color:var(--coffee);
-  font-weight:bold;
-  font-size:12px;
 }
 
 /* ========================================
@@ -843,7 +812,6 @@ button{
   width:100%;
   height:100%;
   object-fit:cover;
-  content-visibility:auto;
 }
 
 .featured-overlay{
@@ -1004,15 +972,10 @@ footer{
   border-radius:50%;
   font-size:27px;
   box-shadow:0 10px 30px rgba(37,211,102,.25);
-  transition:.25s;
-}
-
-.floating-wa:hover{
-  transform:scale(1.08);
 }
 
 /* ========================================
-   EMPTY / TOAST
+   EMPTY
 ======================================== */
 
 .empty{
@@ -1037,17 +1000,12 @@ footer{
   border-radius:3px;
   z-index:200;
   transition:.25s;
-  font-size:13px;
 }
 
 .toast.show{
   opacity:1;
   transform:translate(-50%,0);
 }
-
-/* ========================================
-   REVEAL
-======================================== */
 
 .reveal{
   opacity:0;
@@ -1126,6 +1084,17 @@ footer{
     min-height:70px;
   }
 
+  /* MOBİLDE DE ÜST LOGO TAM YUVARLAK */
+  .brand img{
+    width:46px;
+    height:46px;
+    min-width:46px;
+    border-radius:50%;
+    object-fit:cover;
+    padding:3px;
+    border:2px solid var(--champagne);
+  }
+
   .brand span{
     display:none;
   }
@@ -1152,7 +1121,6 @@ footer{
   .hero-photo{
     width:220px;
     height:310px;
-    box-shadow:18px 18px 0 rgba(200,169,107,.15);
   }
 
   .intro{
@@ -1161,10 +1129,6 @@ footer{
 
   .intro h2{
     font-size:42px;
-  }
-
-  .collection{
-    padding-bottom:55px;
   }
 
   .products-section{
@@ -1230,6 +1194,8 @@ footer{
   .layl-loader-logo{
     width:105px;
     height:105px;
+    min-width:105px;
+    border-radius:50%;
   }
 
   .layl-loader-name{
@@ -1240,8 +1206,6 @@ footer{
 </head>
 
 <body class="loading">
-
-<!-- LAYL AÇILIŞ EKRANI -->
 
 <div id="laylLoader">
   <img
@@ -1351,24 +1315,15 @@ footer{
   <div class="container intro-grid">
 
     <div>
-
-      <div class="eyebrow" id="introEyebrow">
-        توقيع LAYL
-      </div>
-
-      <h2 id="introTitle">
-        أناقة العطر تبدأ من التفاصيل.
-      </h2>
-
+      <div class="eyebrow" id="introEyebrow">توقيع LAYL</div>
+      <h2 id="introTitle">أناقة العطر تبدأ من التفاصيل.</h2>
     </div>
 
     <div>
-
       <p id="introText">
         تجمع LAYL بين العطور والعناية والجمال في تجربة
         هادئة وأنيقة، مع منتجات مختارة بعناية لكل من يحب التفاصيل.
       </p>
-
     </div>
 
   </div>
@@ -1380,88 +1335,46 @@ footer{
   <div class="container collection-grid">
 
     <div class="collection-card">
-
       <span class="collection-number">01</span>
-
-      <h3 id="collection1Title">
-        العطور المميزة
-      </h3>
-
-      <p id="collection1Text">
-        روائح ذات شخصية وحضور خاص.
-      </p>
-
+      <h3 id="collection1Title">العطور المميزة</h3>
+      <p id="collection1Text">روائح ذات شخصية وحضور خاص.</p>
     </div>
 
     <div class="collection-card">
-
       <span class="collection-number">02</span>
-
-      <h3 id="collection2Title">
-        طقوس الجمال
-      </h3>
-
-      <p id="collection2Text">
-        منتجات تضيف لمسة أجمل إلى روتينك اليومي.
-      </p>
-
+      <h3 id="collection2Title">طقوس الجمال</h3>
+      <p id="collection2Text">منتجات تضيف لمسة أجمل إلى روتينك اليومي.</p>
     </div>
 
     <div class="collection-card">
-
       <span class="collection-number">03</span>
-
-      <h3 id="collection3Title">
-        اختيارات خاصة
-      </h3>
-
-      <p id="collection3Text">
-        مجموعة منتقاة بعناية من LAYL.
-      </p>
-
+      <h3 id="collection3Title">اختيارات خاصة</h3>
+      <p id="collection3Text">مجموعة منتقاة بعناية من LAYL.</p>
     </div>
 
   </div>
 
 </section>
 
-<section
-  class="products-section reveal"
-  id="products">
+<section class="products-section reveal" id="products">
 
   <div class="container">
 
     <div class="section-heading">
 
       <div>
-
-        <div
-          class="eyebrow"
-          id="productsEyebrow">
-          THE COLLECTION
-        </div>
-
-        <h2 id="productsTitle">
-          منتجاتنا
-        </h2>
-
-        <p id="productsSub">
-          اكتشف مجموعتنا من منتجات الجمال والعناية.
-        </p>
-
+        <div class="eyebrow" id="productsEyebrow">THE COLLECTION</div>
+        <h2 id="productsTitle">منتجاتنا</h2>
+        <p id="productsSub">اكتشف مجموعتنا من منتجات الجمال والعناية.</p>
       </div>
 
-      <select
-        id="categoryFilter"
-        class="category">
-
+      <select id="categoryFilter" class="category">
         <option value="all">كل الأقسام</option>
         <option value="perfume">العطور</option>
         <option value="shampoo">الشامبو</option>
         <option value="mask">الماسكات</option>
         <option value="cream">الكريمات</option>
         <option value="other">أخرى</option>
-
       </select>
 
     </div>
@@ -1469,40 +1382,25 @@ footer{
     <div class="shop-tools">
 
       <div class="search-wrap">
-
-        <span class="search-icon">
-          ⌕
-        </span>
+        <span class="search-icon">⌕</span>
 
         <input
           id="productSearch"
           type="search"
           placeholder="ابحث عن منتج..."
           autocomplete="off">
-
       </div>
 
-      <button
-        id="favFilter"
-        class="pill fav-filter">
+      <button id="favFilter" class="pill fav-filter">
         ♡ المفضلة
       </button>
 
-      <span
-        id="resultCount"
-        class="result-count">
-      </span>
+      <span id="resultCount" class="result-count"></span>
 
     </div>
 
-    <div
-      id="productGrid"
-      class="product-grid">
-
-      <div class="empty">
-        جاري تحميل المنتجات...
-      </div>
-
+    <div id="productGrid" class="product-grid">
+      <div class="empty">جاري تحميل المنتجات...</div>
     </div>
 
   </div>
@@ -1515,30 +1413,18 @@ footer{
 
     <div class="featured-head">
 
-      <div
-        class="eyebrow"
-        id="featuredEyebrow">
+      <div class="eyebrow" id="featuredEyebrow">
         LAYL SELECTION
       </div>
 
-      <h2 id="featuredTitle">
-        اختيار LAYL
-      </h2>
+      <h2 id="featuredTitle">اختيار LAYL</h2>
 
-      <p id="featuredSub">
-        منتجات مختارة من المجموعة.
-      </p>
+      <p id="featuredSub">منتجات مختارة من المجموعة.</p>
 
     </div>
 
-    <div
-      id="featuredSlider"
-      class="featured-slider">
-
-      <div class="empty">
-        جاري تحميل المنتجات...
-      </div>
-
+    <div id="featuredSlider" class="featured-slider">
+      <div class="empty">جاري تحميل المنتجات...</div>
     </div>
 
   </div>
@@ -1592,9 +1478,7 @@ footer{
 
     <div class="info-panel">
 
-      <h2 id="locationTitle">
-        المتجر والموقع
-      </h2>
+      <h2 id="locationTitle">المتجر والموقع</h2>
 
       <p id="locationText">
         يمكنك إضافة رابط موقع المتجر هنا.
@@ -1612,22 +1496,18 @@ footer{
 
     <div class="info-panel">
 
-      <h2 id="paymentTitle">
-        خيارات الدفع
-      </h2>
+      <h2 id="paymentTitle">خيارات الدفع</h2>
 
       <p id="paymentText">
         اعرض طرق الدفع المتاحة لعملائك.
       </p>
 
       <div class="payment-icons">
-
         <span>Cash</span>
         <span>USD</span>
         <span>EUR</span>
         <span>TRY</span>
         <span>SYP</span>
-
       </div>
 
     </div>
@@ -1648,21 +1528,14 @@ footer{
 
 <footer>
 
-  <div
-    class="container footer"
-    id="siteSignature">
-
+  <div class="container footer" id="siteSignature">
     © 2026 LAYL لمستحضرات التجميل
     • المؤسس ومالك الموقع: احمد سعد الدين
-
   </div>
 
 </footer>
 
-<div
-  id="toast"
-  class="toast">
-</div>
+<div id="toast" class="toast"></div>
 
 <script type="module">
 
@@ -1942,877 +1815,4 @@ sub:"اكتشف مجموعتنا من منتجات الجمال والعناية
 search:"ابحث عن منتج...",
 favorites:"المفضلة",
 results:"منتج",
-empty:"لا توجد منتجات.",
-order:"اطلب",
-inStock:"متوفر",
-outStock:"نفد المخزون",
-onlyLeft:"قطعة متبقية",
-newBadge:"جديد",
-bestBadge:"الأكثر مبيعًا",
-featured:"اختيار LAYL",
-featuredSub:"منتجات مختارة من المجموعة.",
-storyEyebrow:"عن LAYL",
-storyTitle:"فخامة هادئة. حضور يُذكر.",
-storyText:"تؤمن LAYL بأن الفخامة لا تحتاج إلى ضجيج. كل منتج يتم اختياره ليمنحك تجربة جميلة وبسيطة ومميزة.",
-storyBtn:"اكتشف المجموعة",
-locationTitle:"المتجر والموقع",
-locationText:"يمكنك إضافة رابط موقع المتجر هنا.",
-paymentTitle:"خيارات الدفع",
-paymentText:"اعرض طرق الدفع المتاحة لعملائك.",
-cats:{
-all:"كل الأقسام",
-perfume:"العطور",
-shampoo:"الشامبو",
-mask:"الماسكات",
-cream:"الكريمات",
-other:"أخرى"
-}
-},
-
-tr:{
-dir:"ltr",
-title:"LAYL",
-title2:"Kozmetik",
-text:"Özenle seçilmiş güzellik ve bakım ürünleri. LAYL koleksiyonunu keşfet ve WhatsApp üzerinden kolayca sipariş ver.",
-wa:"WhatsApp'tan Sipariş",
-ig:"Instagram",
-introEyebrow:"LAYL SIGNATURE",
-introTitle:"Zarafet detaylarda başlar.",
-introText:"LAYL, parfüm, bakım ve güzellik ürünlerini sade ve seçkin bir deneyimde bir araya getirir.",
-c1:"Signature Scents",
-c1t:"Karakter sahibi kokular ve özel seçimler.",
-c2:"Beauty Ritual",
-c2t:"Günlük bakımına zarif bir dokunuş.",
-c3:"Private Selection",
-c3t:"LAYL tarafından özenle seçilmiş ürünler.",
-products:"Ürünlerimiz",
-sub:"Güzellik ve bakım koleksiyonumuzu keşfet.",
-search:"Ürün ara...",
-favorites:"Favoriler",
-results:"ürün",
-empty:"Henüz ürün bulunmuyor.",
-order:"Sipariş",
-inStock:"Stokta",
-outStock:"Tükendi",
-onlyLeft:"adet kaldı",
-newBadge:"YENİ",
-bestBadge:"ÇOK SATAN",
-featured:"LAYL Seçimi",
-featuredSub:"Koleksiyondan öne çıkan ürünler.",
-storyEyebrow:"LAYL HAKKINDA",
-storyTitle:"Sessiz lüks. Hatırlanan bir iz.",
-storyText:"LAYL için lüks, gösterişten çok detaylarda saklıdır. Her ürün sade, kaliteli ve özel bir deneyim sunması için seçilir.",
-storyBtn:"Koleksiyonu keşfet",
-locationTitle:"Mağaza ve Konum",
-locationText:"Konum bağlantını buraya ekleyebilirsin.",
-paymentTitle:"Ödeme Seçenekleri",
-paymentText:"Kabul ettiğin ödeme yöntemlerini müşterilerine göster.",
-cats:{
-all:"Tüm Kategoriler",
-perfume:"Parfümler",
-shampoo:"Şampuanlar",
-mask:"Maskeler",
-cream:"Kremler",
-other:"Diğer"
-}
-},
-
-en:{
-dir:"ltr",
-title:"LAYL",
-title2:"Cosmetics",
-text:"Carefully selected beauty and personal care products. Discover the LAYL collection and order easily through WhatsApp.",
-wa:"Order on WhatsApp",
-ig:"Instagram",
-introEyebrow:"LAYL SIGNATURE",
-introTitle:"Elegance begins with details.",
-introText:"LAYL brings fragrance, care and beauty together in a calm and refined experience.",
-c1:"Signature Scents",
-c1t:"Character-driven fragrances and special selections.",
-c2:"Beauty Ritual",
-c2t:"Elegant products for your everyday routine.",
-c3:"Private Selection",
-c3t:"Carefully selected products by LAYL.",
-products:"Our Products",
-sub:"Discover our beauty and care collection.",
-search:"Search products...",
-favorites:"Favorites",
-results:"products",
-empty:"No products found.",
-order:"Order",
-inStock:"In Stock",
-outStock:"Out of Stock",
-onlyLeft:"left in stock",
-newBadge:"NEW",
-bestBadge:"BEST SELLER",
-featured:"LAYL Selection",
-featuredSub:"Featured products from the collection.",
-storyEyebrow:"ABOUT LAYL",
-storyTitle:"Quiet luxury. A memorable presence.",
-storyText:"For LAYL, luxury is found in the details rather than in excess. Every product is selected to offer a simple, refined experience.",
-storyBtn:"Explore collection",
-locationTitle:"Store & Location",
-locationText:"Add your store location link here.",
-paymentTitle:"Payment Options",
-paymentText:"Show customers the payment methods you accept.",
-cats:{
-all:"All Categories",
-perfume:"Perfumes",
-shampoo:"Shampoos",
-mask:"Masks",
-cream:"Creams",
-other:"Other"
-}
-}
-
-};
-
-
-/* ========================================
-   HELPERS
-======================================== */
-
-function esc(s=""){
-return String(s).replace(/[&<>"']/g,m=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
-}[m]));
-}
-
-function productName(p){
-return lang==="ar"
-?(p.nameAr||p.nameTr||p.nameEn)
-:lang==="en"
-?(p.nameEn||p.nameTr||p.nameAr)
-:(p.nameTr||p.nameAr||p.nameEn);
-}
-
-function productDesc(p){
-return lang==="ar"
-?(p.descAr||p.descTr||p.descEn||"")
-:lang==="en"
-?(p.descEn||p.descTr||p.descAr||"")
-:(p.descTr||p.descAr||p.descEn||"");
-}
-
-function toastMsg(msg){
-
-toast.textContent=msg;
-
-toast.classList.add("show");
-
-clearTimeout(window.__toastTimer);
-
-window.__toastTimer=setTimeout(()=>{
-toast.classList.remove("show");
-},1800);
-
-}
-
-
-/* ========================================
-   LANGUAGE
-======================================== */
-
-function setLang(l){
-
-lang=l;
-
-const x=t[l];
-
-document.documentElement.lang=l;
-document.documentElement.dir=x.dir;
-
-heroBadge.textContent="✦ "+(
-l==="ar"
-?"مجموعة LAYL الخاصة":
-l==="en"
-?"LAYL SIGNATURE COLLECTION":
-"LAYL ÖZEL KOLEKSİYON"
-);
-
-heroTitle.innerHTML=
-`${x.title}<br><span>${x.title2}</span>`;
-
-heroText.textContent=x.text;
-
-mainWa.textContent=x.wa;
-mainIg.textContent=x.ig;
-
-introEyebrow.textContent=x.introEyebrow;
-introTitle.textContent=x.introTitle;
-introText.textContent=x.introText;
-
-collection1Title.textContent=x.c1;
-collection1Text.textContent=x.c1t;
-
-collection2Title.textContent=x.c2;
-collection2Text.textContent=x.c2t;
-
-collection3Title.textContent=x.c3;
-collection3Text.textContent=x.c3t;
-
-productsTitle.textContent=x.products;
-productsSub.textContent=x.sub;
-
-productSearch.placeholder=x.search;
-
-favFilter.textContent=
-(showFavOnly?"♥ ":"♡ ")+x.favorites;
-
-featuredTitle.textContent=x.featured;
-featuredSub.textContent=x.featuredSub;
-
-storyEyebrow.textContent=x.storyEyebrow;
-storyTitle.textContent=x.storyTitle;
-storyText.textContent=x.storyText;
-storyBtn.textContent=x.storyBtn;
-
-locationTitle.textContent=x.locationTitle;
-locationText.textContent=x.locationText;
-
-paymentTitle.textContent=x.paymentTitle;
-paymentText.textContent=x.paymentText;
-
-[...categoryFilter.options].forEach(o=>{
-o.textContent=x.cats[o.value];
-});
-
-arBtn.classList.toggle("active",l==="ar");
-trBtn.classList.toggle("active",l==="tr");
-enBtn.classList.toggle("active",l==="en");
-
-siteSignature.textContent=
-l==="ar"
-?"© 2026 LAYL لمستحضرات التجميل • المؤسس ومالك الموقع: احمد سعد الدين"
-:l==="en"
-?"© 2026 LAYL Cosmetics • Founder & Site Owner: Ahmed Saad Al-Din"
-:"© 2026 LAYL Kozmetik • Kurucu & Site Sahibi: Ahmed Saad Al-Din";
-
-localStorage.setItem("laylLang",l);
-
-render();
-
-}
-
-
-/* ========================================
-   EVENTS
-======================================== */
-
-arBtn.onclick=()=>setLang("ar");
-trBtn.onclick=()=>setLang("tr");
-enBtn.onclick=()=>setLang("en");
-
-categoryFilter.onchange=render;
-
-productSearch.oninput=()=>{
-searchTerm=productSearch.value.trim().toLowerCase();
-render();
-};
-
-favFilter.onclick=()=>{
-
-showFavOnly=!showFavOnly;
-
-favFilter.classList.toggle(
-"active",
-showFavOnly
-);
-
-favFilter.textContent=
-(showFavOnly?"♥ ":"♡ ")+t[lang].favorites;
-
-render();
-
-};
-
-
-/* ========================================
-   FAVORITES
-======================================== */
-
-function toggleFav(id){
-
-if(favorites.has(id)){
-favorites.delete(id);
-}else{
-favorites.add(id);
-}
-
-localStorage.setItem(
-"laylFavorites",
-JSON.stringify([...favorites])
-);
-
-render();
-
-}
-
-window.toggleFav=toggleFav;
-
-
-/* ========================================
-   FEATURED
-======================================== */
-
-function renderFeatured(list){
-
-const featured=list
-.slice(0,5);
-
-if(!featured.length){
-
-featuredSlider.innerHTML=
-`<div class="empty">${t[lang].empty}</div>`;
-
-return;
-
-}
-
-featuredSlider.innerHTML=
-featured.map(p=>{
-
-const name=productName(p);
-const desc=productDesc(p);
-
-return `
-<article class="featured-card">
-
-<img
-src="${esc(p.image||"logo.jpeg")}"
-alt="${esc(name)}"
-loading="lazy"
-decoding="async"
-onerror="this.src='logo.jpeg'">
-
-<div class="featured-overlay">
-
-<h3>${esc(name)}</h3>
-
-<p>${esc(desc)}</p>
-
-</div>
-
-</article>
-`;
-
-}).join("");
-
-}
-
-
-/* ========================================
-   PRODUCTS
-======================================== */
-
-function render(){
-
-const filter=categoryFilter.value;
-
-let list=allProducts.filter(
-p=>filter==="all"||p.category===filter
-);
-
-if(searchTerm){
-
-list=list.filter(p=>{
-
-const text=`
-${p.nameTr||""}
-${p.nameAr||""}
-${p.nameEn||""}
-${p.descTr||""}
-${p.descAr||""}
-${p.descEn||""}
-`.toLowerCase();
-
-return text.includes(searchTerm);
-
-});
-
-}
-
-if(showFavOnly){
-list=list.filter(
-p=>favorites.has(p.id)
-);
-}
-
-resultCount.textContent=
-`${list.length} ${t[lang].results}`;
-
-renderFeatured(allProducts);
-
-if(!list.length){
-
-productGrid.innerHTML=
-`<div class="empty">${t[lang].empty}</div>`;
-
-return;
-
-}
-
-productGrid.innerHTML=
-list.map(p=>{
-
-const name=productName(p);
-const desc=productDesc(p);
-
-const qty=Number(
-p.stockQty??1
-);
-
-const inStock=
-!(
-p.stock===0||
-p.stock==="0"||
-p.inStock===false||
-qty<=0
-);
-
-const images=
-p.images?.length
-?p.images
-:(p.image?[p.image]:["logo.jpeg"]);
-
-const symbol=
-p.currency==="EUR"?"€":
-p.currency==="TRY"?"₺":
-p.currency==="SYP"?"£S":"$";
-
-const oldNum=parseFloat(p.oldPrice);
-const newNum=parseFloat(p.price);
-
-const discount=
-(
-oldNum>newNum&&
-newNum>=0
-)
-?
-Math.round(
-(oldNum-newNum)/
-oldNum*100
-)
-:0;
-
-const msg=
-encodeURIComponent(
-(lang==="ar"
-?"مرحبًا، أريد طلب: "
-:lang==="en"
-?"Hello, I would like to order: "
-:"Merhaba, sipariş vermek istiyorum: "
-)+name
-);
-
-return `
-
-<article class="card">
-
-${
-p.isNew||p.isBest
-?
-`
-<div class="badge-stack">
-
-${p.isNew
-?`<span class="product-badge new">${t[lang].newBadge}</span>`
-:""}
-
-${p.isBest
-?`<span class="product-badge best">${t[lang].bestBadge}</span>`
-:""}
-
-</div>
-`
-:""
-}
-
-<button
-class="fav-btn ${favorites.has(p.id)?"active":""}"
-onclick="toggleFav('${esc(p.id)}')"
-aria-label="Favorite">
-
-${favorites.has(p.id)?"♥":"♡"}
-
-</button>
-
-<div
-class="gallery"
-data-gallery="${esc(p.id)}"
-data-index="0">
-
-<img
-src="${esc(images[0])}"
-alt="${esc(name)}"
-loading="lazy"
-decoding="async"
-onerror="this.src='logo.jpeg'">
-
-${
-images.length>1
-?
-`
-<button
-class="gallery-btn prev"
-onclick="slideGallery('${esc(p.id)}',-1)">
-‹
-</button>
-
-<button
-class="gallery-btn next"
-onclick="slideGallery('${esc(p.id)}',1)">
-›
-</button>
-`
-:""
-}
-
-</div>
-
-<div class="product-body">
-
-<h3>${esc(name)}</h3>
-
-<p>${esc(desc)}</p>
-
-<div class="row">
-
-<span class="price">
-
-${
-p.oldPrice
-?
-`
-<span class="old-price">
-${esc(p.oldPrice)} ${symbol}
-</span>
-`
-:""
-}
-
-${esc(p.price||"")}
-
-${p.price?symbol:""}
-
-${
-discount
-?
-`
-<span class="discount-pill">
--%${discount}
-</span>
-`
-:""
-}
-
-</span>
-
-${
-inStock
-?
-`
-<a
-class="small-wa"
-target="_blank"
-rel="noopener"
-href="https://wa.me/963991890234?text=${msg}">
-${t[lang].order}
-</a>
-`
-:
-`
-<span class="stock-badge">
-${t[lang].outStock}
-</span>
-`
-}
-
-</div>
-
-${
-inStock
-?
-`
-<div class="stock-qty">
-${qty} ${t[lang].onlyLeft}
-</div>
-`
-:""
-}
-
-${
-p.videoUrl
-?
-`
-<a
-class="video-btn"
-target="_blank"
-rel="noopener"
-href="${esc(p.videoUrl)}">
-
-▶ ${
-lang==="ar"
-?"مشاهدة الفيديو":
-lang==="en"
-?"Watch video":
-"Videoyu izle"
-}
-
-</a>
-`
-:""
-}
-
-</div>
-
-</article>
-
-`;
-
-}).join("");
-
-}
-
-
-/* ========================================
-   GALLERY
-======================================== */
-
-window.slideGallery=(id,step)=>{
-
-const el=document.querySelector(
-`[data-gallery="${CSS.escape(id)}"]`
-);
-
-if(!el)return;
-
-const p=allProducts.find(
-x=>x.id===id
-);
-
-const imgs=
-p?.images?.length
-?p.images
-:(p?.image?[p.image]:["logo.jpeg"]);
-
-let i=
-(
-Number(el.dataset.index||0)
-+step+
-imgs.length
-)
-%imgs.length;
-
-el.dataset.index=i;
-
-const img=el.querySelector("img");
-
-if(img){
-
-img.src=imgs[i];
-
-img.onerror=()=>{
-img.src="logo.jpeg";
-};
-
-}
-
-};
-
-
-/* ========================================
-   IMMEDIATE PRODUCTS
-======================================== */
-
-allProducts=[
-...BUILTIN_PRODUCTS
-];
-
-window.allProducts=allProducts;
-
-setLang(lang);
-
-
-/* ========================================
-   FIREBASE
-======================================== */
-
-try{
-
-const q=query(
-collection(db,"products"),
-orderBy("createdAt","desc")
-);
-
-onSnapshot(
-q,
-
-snapshot=>{
-
-allProducts=[
-...BUILTIN_PRODUCTS,
-
-...snapshot.docs.map(d=>({
-id:d.id,
-...d.data()
-}))
-];
-
-window.allProducts=allProducts;
-
-render();
-
-},
-
-error=>{
-
-console.error(
-"LAYL Firebase:",
-error
-);
-
-allProducts=[
-...BUILTIN_PRODUCTS
-];
-
-window.allProducts=allProducts;
-
-render();
-
-}
-
-);
-
-}catch(error){
-
-console.error(
-"LAYL Firebase başlatılamadı:",
-error
-);
-
-render();
-
-}
-
-
-/* ========================================
-   REVEAL
-======================================== */
-
-const observer=
-new IntersectionObserver(
-entries=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.add(
-"visible"
-);
-
-}
-
-});
-
-},
-{
-threshold:.12
-}
-);
-
-document
-.querySelectorAll(".reveal")
-.forEach(el=>{
-observer.observe(el);
-});
-
-
-/* ========================================
-   FAST LOADER
-======================================== */
-
-function closeLaylLoader(){
-
-const loader=
-document.getElementById(
-"laylLoader"
-);
-
-if(!loader)return;
-
-setTimeout(()=>{
-
-loader.classList.add("hide");
-
-document.body.classList.remove(
-"loading"
-);
-
-setTimeout(()=>{
-
-if(loader.parentNode){
-loader.remove();
-}
-
-},600);
-
-},850);
-
-}
-
-
-/*
-  Sayfa tamamen yüklenirse loader kapanır.
-  Firebase'in ürünleri beklemesi gerekmez.
-*/
-
-if(document.readyState==="complete"){
-closeLaylLoader();
-}else{
-
-window.addEventListener(
-"load",
-closeLaylLoader,
-{
-once:true
-}
-);
-
-}
-
-
-/* ========================================
-   IMAGE ERROR FALLBACK
-======================================== */
-
-document.addEventListener(
-"error",
-event=>{
-
-const img=event.target;
-
-if(
-img &&
-img.tagName==="IMG" &&
-img.src &&
-!img.src.endsWith("/logo.jpeg")
-){
-
-img.src="logo.jpeg";
-
-}
-
-},
-true
-);
-
-</script>
-
-</body>
-</html>
+empty:"
