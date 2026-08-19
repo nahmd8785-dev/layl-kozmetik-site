@@ -36,10 +36,16 @@ html{
 
 body{
   margin:0;
-  background:var(--cream);
+  background:
+    radial-gradient(circle at 50% -10%,rgba(200,169,107,.12),transparent 32%),
+    var(--cream);
   color:var(--dark);
   font-family:Arial,Tahoma,sans-serif;
   overflow-x:hidden;
+}
+
+body.loading{
+  overflow:hidden;
 }
 
 a{
@@ -53,20 +59,115 @@ select{
   font:inherit;
 }
 
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
 .container{
   width:min(1180px,calc(100% - 36px));
   margin:auto;
 }
 
-/* HEADER */
+/* ========================================
+   LAYL OPENING
+======================================== */
+
+#laylLoader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(200,169,107,.14),transparent 32%),
+    #f5f0e8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  transition:opacity .55s ease,visibility .55s ease;
+}
+
+#laylLoader.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.layl-loader-logo{
+  width:132px;
+  height:132px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--champagne);
+  padding:5px;
+  background:var(--white);
+  box-shadow:
+    0 0 0 9px rgba(200,169,107,.08),
+    0 24px 65px rgba(33,26,22,.18);
+  animation:laylLogoIn .8s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.layl-loader-name{
+  margin-top:22px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:25px;
+  letter-spacing:4px;
+  color:var(--espresso);
+  animation:laylTextIn 1s ease both;
+}
+
+.layl-loader-line{
+  width:55px;
+  height:1px;
+  background:var(--champagne);
+  margin-top:14px;
+  animation:laylLineIn 1.2s ease both;
+}
+
+@keyframes laylLogoIn{
+  from{
+    opacity:0;
+    transform:scale(.72);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes laylTextIn{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes laylLineIn{
+  from{
+    width:0;
+    opacity:0;
+  }
+  to{
+    width:55px;
+    opacity:1;
+  }
+}
+
+/* ========================================
+   HEADER
+======================================== */
 
 .topbar{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(245,240,232,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(33,26,22,.1);
+  background:rgba(245,240,232,.88);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(33,26,22,.08);
 }
 
 .nav{
@@ -93,6 +194,7 @@ select{
   border-radius:50%;
   object-fit:cover;
   border:1px solid var(--champagne);
+  background:var(--white);
 }
 
 .actions{
@@ -104,7 +206,7 @@ select{
 
 .pill{
   border:1px solid #cfc1af;
-  background:transparent;
+  background:rgba(255,253,249,.45);
   color:var(--espresso);
   padding:9px 14px;
   border-radius:30px;
@@ -126,7 +228,9 @@ select{
   border-color:var(--espresso);
 }
 
-/* HERO */
+/* ========================================
+   HERO
+======================================== */
 
 .hero{
   min-height:calc(100vh - 78px);
@@ -145,6 +249,18 @@ select{
   order:2;
   display:flex;
   justify-content:center;
+  position:relative;
+}
+
+.hero-visual:before{
+  content:"";
+  position:absolute;
+  width:390px;
+  height:390px;
+  border-radius:50%;
+  background:rgba(200,169,107,.10);
+  filter:blur(3px);
+  z-index:-1;
 }
 
 .hero-label{
@@ -201,7 +317,7 @@ select{
   align-items:center;
   min-height:48px;
   padding:0 22px;
-  border-radius:3px;
+  border-radius:4px;
   border:1px solid var(--espresso);
   font-weight:bold;
   cursor:pointer;
@@ -211,14 +327,16 @@ select{
 .btn-dark{
   background:var(--espresso);
   color:var(--white);
+  box-shadow:0 10px 25px rgba(33,26,22,.12);
 }
 
 .btn-dark:hover{
   background:var(--coffee);
+  transform:translateY(-2px);
 }
 
 .btn-light{
-  background:transparent;
+  background:rgba(255,253,249,.35);
   color:var(--espresso);
 }
 
@@ -232,12 +350,16 @@ select{
   height:540px;
   object-fit:cover;
   border-radius:220px 220px 8px 8px;
-  border:1px solid rgba(200,169,107,.55);
-  box-shadow:30px 30px 0 rgba(200,169,107,.15);
+  border:1px solid rgba(200,169,107,.7);
+  box-shadow:
+    30px 30px 0 rgba(200,169,107,.14),
+    0 25px 70px rgba(33,26,22,.12);
   background:var(--cream2);
 }
 
-/* MARQUEE */
+/* ========================================
+   MARQUEE
+======================================== */
 
 .marquee{
   background:var(--espresso);
@@ -266,7 +388,9 @@ select{
   }
 }
 
-/* INTRO */
+/* ========================================
+   INTRO
+======================================== */
 
 .intro{
   padding:95px 0 65px;
@@ -302,7 +426,9 @@ select{
   max-width:650px;
 }
 
-/* COLLECTION CARDS */
+/* ========================================
+   COLLECTION
+======================================== */
 
 .collection{
   padding:20px 0 80px;
@@ -317,21 +443,31 @@ select{
 .collection-card{
   min-height:250px;
   padding:28px;
-  background:var(--espresso);
+  background:
+    linear-gradient(145deg,#2b211b,#17120f);
   color:var(--cream);
   position:relative;
   overflow:hidden;
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
+  border:1px solid rgba(200,169,107,.18);
+  transition:.35s ease;
+}
+
+.collection-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(200,169,107,.45);
 }
 
 .collection-card:nth-child(2){
-  background:var(--coffee);
+  background:
+    linear-gradient(145deg,#795e4b,#4e3a2d);
 }
 
 .collection-card:nth-child(3){
-  background:#33271e;
+  background:
+    linear-gradient(145deg,#3c2e23,#241b16);
 }
 
 .collection-number{
@@ -356,11 +492,15 @@ select{
   margin:0;
 }
 
-/* PRODUCTS */
+/* ========================================
+   PRODUCTS
+======================================== */
 
 .products-section{
   padding:85px 0;
-  background:#eee6da;
+  background:
+    radial-gradient(circle at 10% 20%,rgba(200,169,107,.10),transparent 25%),
+    #eee6da;
 }
 
 .section-heading{
@@ -389,7 +529,12 @@ select{
   border:1px solid var(--line);
   color:var(--espresso);
   padding:13px;
-  border-radius:3px;
+  border-radius:4px;
+  outline:none;
+}
+
+.category:focus{
+  border-color:var(--champagne);
 }
 
 .shop-tools{
@@ -409,13 +554,15 @@ select{
   background:var(--white);
   border:1px solid var(--line);
   padding:14px 18px;
-  border-radius:3px;
+  border-radius:4px;
   outline:none;
   color:var(--dark);
+  transition:.25s;
 }
 
 .search-wrap input:focus{
   border-color:var(--champagne);
+  box-shadow:0 5px 20px rgba(33,26,22,.05);
 }
 
 .search-icon{
@@ -449,10 +596,12 @@ select{
 }
 
 .card{
-  background:var(--white);
+  background:rgba(255,253,249,.96);
   border:1px solid #ddd1c1;
   position:relative;
   transition:.3s ease;
+  contain:layout paint;
+  overflow:hidden;
 }
 
 .card:hover{
@@ -472,7 +621,8 @@ select{
   height:100%;
   object-fit:cover;
   display:block;
-  transition:.5s;
+  transition:transform .5s;
+  content-visibility:auto;
 }
 
 .card:hover .gallery img{
@@ -488,7 +638,7 @@ select{
   height:40px;
   border-radius:50%;
   border:1px solid rgba(33,26,22,.2);
-  background:rgba(255,253,249,.9);
+  background:rgba(255,253,249,.92);
   color:var(--espresso);
   cursor:pointer;
   font-size:21px;
@@ -614,10 +764,12 @@ select{
   font-size:12px;
   font-weight:bold;
   border-radius:3px;
+  transition:.25s;
 }
 
 .small-wa:hover{
   background:var(--coffee);
+  transform:translateY(-1px);
 }
 
 .stock-qty{
@@ -641,7 +793,9 @@ select{
   font-size:12px;
 }
 
-/* FEATURED */
+/* ========================================
+   FEATURED
+======================================== */
 
 .featured{
   padding:90px 0;
@@ -682,12 +836,14 @@ select{
   height:400px;
   overflow:hidden;
   background:#ddd;
+  border:1px solid rgba(200,169,107,.3);
 }
 
 .featured-card img{
   width:100%;
   height:100%;
   object-fit:cover;
+  content-visibility:auto;
 }
 
 .featured-overlay{
@@ -710,10 +866,14 @@ select{
   color:#e9e0d4;
 }
 
-/* STORY */
+/* ========================================
+   STORY
+======================================== */
 
 .story{
-  background:var(--espresso);
+  background:
+    radial-gradient(circle at 80% 20%,rgba(200,169,107,.12),transparent 28%),
+    var(--espresso);
   color:var(--cream);
   padding:95px 0;
 }
@@ -745,6 +905,16 @@ select{
   display:grid;
   place-items:center;
   position:relative;
+  overflow:hidden;
+}
+
+.story-mark:before{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  border:1px solid rgba(226,201,148,.22);
 }
 
 .story-mark span{
@@ -752,9 +922,12 @@ select{
   font-size:190px;
   color:var(--champagne);
   opacity:.8;
+  z-index:1;
 }
 
-/* INFO */
+/* ========================================
+   INFO
+======================================== */
 
 .info-section{
   padding:80px 0;
@@ -798,7 +971,9 @@ select{
   font-weight:bold;
 }
 
-/* FOOTER */
+/* ========================================
+   FOOTER
+======================================== */
 
 footer{
   background:#130f0c;
@@ -811,7 +986,9 @@ footer{
   font-size:12px;
 }
 
-/* FLOATING WHATSAPP */
+/* ========================================
+   WHATSAPP
+======================================== */
 
 .floating-wa{
   position:fixed;
@@ -827,9 +1004,16 @@ footer{
   border-radius:50%;
   font-size:27px;
   box-shadow:0 10px 30px rgba(37,211,102,.25);
+  transition:.25s;
 }
 
-/* EMPTY */
+.floating-wa:hover{
+  transform:scale(1.08);
+}
+
+/* ========================================
+   EMPTY / TOAST
+======================================== */
 
 .empty{
   grid-column:1/-1;
@@ -839,8 +1023,6 @@ footer{
   border:1px dashed #cbbda9;
   background:rgba(255,255,255,.35);
 }
-
-/* TOAST */
 
 .toast{
   position:fixed;
@@ -863,7 +1045,9 @@ footer{
   transform:translate(-50%,0);
 }
 
-/* REVEAL */
+/* ========================================
+   REVEAL
+======================================== */
 
 .reveal{
   opacity:0;
@@ -876,7 +1060,9 @@ footer{
   transform:none;
 }
 
-/* MOBILE */
+/* ========================================
+   MOBILE
+======================================== */
 
 @media(max-width:900px){
 
@@ -1040,17 +1226,43 @@ footer{
     right:15px;
     bottom:15px;
   }
+
+  .layl-loader-logo{
+    width:105px;
+    height:105px;
+  }
+
+  .layl-loader-name{
+    font-size:20px;
+  }
 }
 </style>
 </head>
 
-<body>
+<body class="loading">
+
+<!-- LAYL AÇILIŞ EKRANI -->
+
+<div id="laylLoader">
+  <img
+    class="layl-loader-logo"
+    src="logo.jpeg"
+    alt="LAYL"
+    loading="eager"
+    decoding="async">
+  <div class="layl-loader-name">LAYL KOZMETİK</div>
+  <div class="layl-loader-line"></div>
+</div>
 
 <header class="topbar">
   <div class="container nav">
 
     <a class="brand" href="#">
-      <img src="logo.jpeg" alt="LAYL">
+      <img
+        src="logo.jpeg"
+        alt="LAYL"
+        loading="eager"
+        decoding="async">
       <span>LAYL KOZMETİK</span>
     </a>
 
@@ -1084,7 +1296,7 @@ footer{
     <div class="hero-copy">
 
       <div class="hero-label" id="heroBadge">
-        LAYL SIGNATURE COLLECTION
+        ✦ مجموعة LAYL الخاصة
       </div>
 
       <h1 id="heroTitle">
@@ -1094,31 +1306,40 @@ footer{
 
       <p class="hero-text" id="heroText">
         منتجات عناية وجمال مختارة بعناية.
-        اكتشف مجموعتنا واستمتع بتجربة LAYL.
+        اكتشف مجموعة LAYL واطلب بسهولة عبر واتساب.
       </p>
 
       <div class="hero-actions">
-        <a class="btn btn-dark"
-           href="https://wa.me/963991890234"
-           target="_blank"
-           id="mainWa">
+
+        <a
+          class="btn btn-dark"
+          href="https://wa.me/963991890234"
+          target="_blank"
+          id="mainWa">
           اطلب عبر واتساب
         </a>
 
-        <a class="btn btn-light"
-           href="https://instagram.com/LAYL_kozmetik"
-           target="_blank"
-           id="mainIg">
+        <a
+          class="btn btn-light"
+          href="https://instagram.com/LAYL_kozmetik"
+          target="_blank"
+          id="mainIg">
           إنستغرام
         </a>
+
       </div>
 
     </div>
 
     <div class="hero-visual">
-      <img class="hero-photo"
-           src="logo.jpeg"
-           alt="LAYL Kozmetik">
+
+      <img
+        class="hero-photo"
+        src="logo.jpeg"
+        alt="LAYL Kozmetik"
+        loading="eager"
+        decoding="async">
+
     </div>
 
   </div>
@@ -1130,21 +1351,24 @@ footer{
   <div class="container intro-grid">
 
     <div>
+
       <div class="eyebrow" id="introEyebrow">
-        LAYL SIGNATURE
+        توقيع LAYL
       </div>
 
       <h2 id="introTitle">
-        Kokunun<br>zarif tarafı.
+        أناقة العطر تبدأ من التفاصيل.
       </h2>
+
     </div>
 
     <div>
+
       <p id="introText">
-        LAYL, günlük bakım ve parfüm deneyimini daha özel
-        hissettirmek için seçilmiş ürünleri bir araya getirir.
-        Sade görünüm, kaliteli seçim ve kişisel bir dokunuş.
+        تجمع LAYL بين العطور والعناية والجمال في تجربة
+        هادئة وأنيقة، مع منتجات مختارة بعناية لكل من يحب التفاصيل.
       </p>
+
     </div>
 
   </div>
@@ -1156,41 +1380,64 @@ footer{
   <div class="container collection-grid">
 
     <div class="collection-card">
+
       <span class="collection-number">01</span>
-      <h3 id="collection1Title">Signature Scents</h3>
+
+      <h3 id="collection1Title">
+        العطور المميزة
+      </h3>
+
       <p id="collection1Text">
-        Karakter sahibi kokular ve seçkin parfüm seçenekleri.
+        روائح ذات شخصية وحضور خاص.
       </p>
+
     </div>
 
     <div class="collection-card">
+
       <span class="collection-number">02</span>
-      <h3 id="collection2Title">Beauty Ritual</h3>
+
+      <h3 id="collection2Title">
+        طقوس الجمال
+      </h3>
+
       <p id="collection2Text">
-        Günlük bakımını daha keyifli hale getiren ürünler.
+        منتجات تضيف لمسة أجمل إلى روتينك اليومي.
       </p>
+
     </div>
 
     <div class="collection-card">
+
       <span class="collection-number">03</span>
-      <h3 id="collection3Title">Private Selection</h3>
+
+      <h3 id="collection3Title">
+        اختيارات خاصة
+      </h3>
+
       <p id="collection3Text">
-        LAYL tarafından özenle seçilmiş özel ürünler.
+        مجموعة منتقاة بعناية من LAYL.
       </p>
+
     </div>
 
   </div>
 
 </section>
 
-<section class="products-section reveal" id="products">
+<section
+  class="products-section reveal"
+  id="products">
 
   <div class="container">
 
     <div class="section-heading">
 
       <div>
-        <div class="eyebrow" id="productsEyebrow">
+
+        <div
+          class="eyebrow"
+          id="productsEyebrow">
           THE COLLECTION
         </div>
 
@@ -1199,17 +1446,22 @@ footer{
         </h2>
 
         <p id="productsSub">
-          تتم إضافة المنتجات من لوحة الإدارة.
+          اكتشف مجموعتنا من منتجات الجمال والعناية.
         </p>
+
       </div>
 
-      <select id="categoryFilter" class="category">
+      <select
+        id="categoryFilter"
+        class="category">
+
         <option value="all">كل الأقسام</option>
         <option value="perfume">العطور</option>
         <option value="shampoo">الشامبو</option>
         <option value="mask">الماسكات</option>
         <option value="cream">الكريمات</option>
         <option value="other">أخرى</option>
+
       </select>
 
     </div>
@@ -1217,26 +1469,40 @@ footer{
     <div class="shop-tools">
 
       <div class="search-wrap">
-        <span class="search-icon">⌕</span>
+
+        <span class="search-icon">
+          ⌕
+        </span>
+
         <input
           id="productSearch"
           type="search"
           placeholder="ابحث عن منتج..."
           autocomplete="off">
+
       </div>
 
-      <button id="favFilter" class="pill fav-filter">
+      <button
+        id="favFilter"
+        class="pill fav-filter">
         ♡ المفضلة
       </button>
 
-      <span id="resultCount" class="result-count"></span>
+      <span
+        id="resultCount"
+        class="result-count">
+      </span>
 
     </div>
 
-    <div id="productGrid" class="product-grid">
+    <div
+      id="productGrid"
+      class="product-grid">
+
       <div class="empty">
         جاري تحميل المنتجات...
       </div>
+
     </div>
 
   </div>
@@ -1249,22 +1515,30 @@ footer{
 
     <div class="featured-head">
 
-      <div class="eyebrow" id="featuredEyebrow">
-        EDITORIAL
+      <div
+        class="eyebrow"
+        id="featuredEyebrow">
+        LAYL SELECTION
       </div>
 
       <h2 id="featuredTitle">
-        Editörün Seçimi
+        اختيار LAYL
       </h2>
 
       <p id="featuredSub">
-        Öne çıkan ürünleri keşfet.
+        منتجات مختارة من المجموعة.
       </p>
 
     </div>
 
-    <div id="featuredSlider" class="featured-slider">
-      <div class="empty">Ürünler yükleniyor...</div>
+    <div
+      id="featuredSlider"
+      class="featured-slider">
+
+      <div class="empty">
+        جاري تحميل المنتجات...
+      </div>
+
     </div>
 
   </div>
@@ -1277,26 +1551,29 @@ footer{
 
     <div>
 
-      <div class="eyebrow" style="color:#c8a96b" id="storyEyebrow">
-        ABOUT LAYL
+      <div
+        class="eyebrow"
+        style="color:#c8a96b"
+        id="storyEyebrow">
+        عن LAYL
       </div>
 
       <h2 id="storyTitle">
-        Less noise.<br>
-        More character.
+        فخامة هادئة.<br>
+        حضور يُذكر.
       </h2>
 
       <p id="storyText">
-        LAYL, gösterişli olmak yerine hatırlanmayı tercih eder.
-        Seçilen her ürünün kendi karakteri, kendi dokusu ve
-        kendi hikâyesi vardır.
+        تؤمن LAYL بأن الفخامة لا تحتاج إلى ضجيج.
+        كل منتج يتم اختياره ليمنحك تجربة جميلة وبسيطة ومميزة.
       </p>
 
-      <a href="#products"
-         class="btn"
-         style="border-color:#c8a96b;color:#f5f0e8;margin-top:15px"
-         id="storyBtn">
-        Koleksiyonu keşfet
+      <a
+        href="#products"
+        class="btn"
+        style="border-color:#c8a96b;color:#f5f0e8;margin-top:15px"
+        id="storyBtn">
+        اكتشف المجموعة
       </a>
 
     </div>
@@ -1316,17 +1593,18 @@ footer{
     <div class="info-panel">
 
       <h2 id="locationTitle">
-        Mağaza ve Konum
+        المتجر والموقع
       </h2>
 
       <p id="locationText">
-        Konum bağlantını buraya ekleyebilirsin.
+        يمكنك إضافة رابط موقع المتجر هنا.
       </p>
 
-      <a id="mapBtn"
-         class="btn btn-dark"
-         target="_blank"
-         href="https://maps.google.com">
+      <a
+        id="mapBtn"
+        class="btn btn-dark"
+        target="_blank"
+        href="https://maps.google.com">
         Google Maps
       </a>
 
@@ -1335,19 +1613,21 @@ footer{
     <div class="info-panel">
 
       <h2 id="paymentTitle">
-        Ödeme Seçenekleri
+        خيارات الدفع
       </h2>
 
       <p id="paymentText">
-        Kabul ettiğin ödeme yöntemlerini müşterilerine göster.
+        اعرض طرق الدفع المتاحة لعملائك.
       </p>
 
       <div class="payment-icons">
+
         <span>Cash</span>
         <span>USD</span>
         <span>EUR</span>
         <span>TRY</span>
         <span>SYP</span>
+
       </div>
 
     </div>
@@ -1358,25 +1638,39 @@ footer{
 
 </main>
 
-<a class="floating-wa"
-   href="https://wa.me/963991890234"
-   target="_blank"
-   aria-label="WhatsApp">
+<a
+  class="floating-wa"
+  href="https://wa.me/963991890234"
+  target="_blank"
+  aria-label="WhatsApp">
   ✆
 </a>
 
 <footer>
-  <div class="container footer" id="siteSignature">
-    © 2026 LAYL لمستحضرات التجميل • المؤسس ومالك الموقع: احمد سعد الدين
+
+  <div
+    class="container footer"
+    id="siteSignature">
+
+    © 2026 LAYL لمستحضرات التجميل
+    • المؤسس ومالك الموقع: احمد سعد الدين
+
   </div>
+
 </footer>
 
-<div id="toast" class="toast"></div>
+<div
+  id="toast"
+  class="toast">
+</div>
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
   getFirestore,
@@ -1385,12 +1679,15 @@ import {
   query,
   orderBy
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-/* FIREBASE */
+/* ========================================
+   FIREBASE
+======================================== */
 
-const firebaseConfig = {
+const firebaseConfig={
   apiKey:"AIzaSyA3KR8qNbuNtPXGfz4hKm7fRfaRftuIZvE",
   authDomain:"layl-kozmetik.firebaseapp.com",
   projectId:"layl-kozmetik",
@@ -1404,7 +1701,9 @@ const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
 
 
-/* STATE */
+/* ========================================
+   STATE
+======================================== */
 
 let lang=localStorage.getItem("laylLang")||"ar";
 let allProducts=[];
@@ -1412,11 +1711,15 @@ let showFavOnly=false;
 let searchTerm="";
 
 const favorites=new Set(
-  JSON.parse(localStorage.getItem("laylFavorites")||"[]")
+  JSON.parse(
+    localStorage.getItem("laylFavorites")||"[]"
+  )
 );
 
 
-/* BUILT-IN PRODUCTS */
+/* ========================================
+   BUILT-IN PRODUCTS
+======================================== */
 
 const BUILTIN_PRODUCTS=[
 
@@ -1612,7 +1915,9 @@ isBest:false
 ];
 
 
-/* TRANSLATIONS */
+/* ========================================
+   TRANSLATIONS
+======================================== */
 
 const t={
 
@@ -1763,7 +2068,9 @@ other:"Other"
 };
 
 
-/* HELPERS */
+/* ========================================
+   HELPERS
+======================================== */
 
 function esc(s=""){
 return String(s).replace(/[&<>"']/g,m=>({
@@ -1792,7 +2099,9 @@ return lang==="ar"
 }
 
 function toastMsg(msg){
+
 toast.textContent=msg;
+
 toast.classList.add("show");
 
 clearTimeout(window.__toastTimer);
@@ -1800,10 +2109,13 @@ clearTimeout(window.__toastTimer);
 window.__toastTimer=setTimeout(()=>{
 toast.classList.remove("show");
 },1800);
+
 }
 
 
-/* LANGUAGE */
+/* ========================================
+   LANGUAGE
+======================================== */
 
 function setLang(l){
 
@@ -1815,8 +2127,10 @@ document.documentElement.lang=l;
 document.documentElement.dir=x.dir;
 
 heroBadge.textContent="✦ "+(
-l==="ar"?"مجموعة LAYL الخاصة":
-l==="en"?"LAYL SIGNATURE COLLECTION":
+l==="ar"
+?"مجموعة LAYL الخاصة":
+l==="en"
+?"LAYL SIGNATURE COLLECTION":
 "LAYL ÖZEL KOLEKSİYON"
 );
 
@@ -1881,10 +2195,13 @@ l==="ar"
 localStorage.setItem("laylLang",l);
 
 render();
+
 }
 
 
-/* EVENTS */
+/* ========================================
+   EVENTS
+======================================== */
 
 arBtn.onclick=()=>setLang("ar");
 trBtn.onclick=()=>setLang("tr");
@@ -1898,15 +2215,25 @@ render();
 };
 
 favFilter.onclick=()=>{
+
 showFavOnly=!showFavOnly;
-favFilter.classList.toggle("active",showFavOnly);
+
+favFilter.classList.toggle(
+"active",
+showFavOnly
+);
+
 favFilter.textContent=
 (showFavOnly?"♥ ":"♡ ")+t[lang].favorites;
+
 render();
+
 };
 
 
-/* FAVORITES */
+/* ========================================
+   FAVORITES
+======================================== */
 
 function toggleFav(id){
 
@@ -1922,24 +2249,32 @@ JSON.stringify([...favorites])
 );
 
 render();
+
 }
 
 window.toggleFav=toggleFav;
 
 
-/* FEATURED */
+/* ========================================
+   FEATURED
+======================================== */
 
 function renderFeatured(list){
 
-const featured=list.slice(0,5);
+const featured=list
+.slice(0,5);
 
 if(!featured.length){
+
 featuredSlider.innerHTML=
 `<div class="empty">${t[lang].empty}</div>`;
+
 return;
+
 }
 
-featuredSlider.innerHTML=featured.map(p=>{
+featuredSlider.innerHTML=
+featured.map(p=>{
 
 const name=productName(p);
 const desc=productDesc(p);
@@ -1949,21 +2284,30 @@ return `
 
 <img
 src="${esc(p.image||"logo.jpeg")}"
-alt="${esc(name)}">
+alt="${esc(name)}"
+loading="lazy"
+decoding="async"
+onerror="this.src='logo.jpeg'">
 
 <div class="featured-overlay">
+
 <h3>${esc(name)}</h3>
+
 <p>${esc(desc)}</p>
+
 </div>
 
 </article>
 `;
 
 }).join("");
+
 }
 
 
-/* PRODUCTS */
+/* ========================================
+   PRODUCTS
+======================================== */
 
 function render(){
 
@@ -1993,7 +2337,9 @@ return text.includes(searchTerm);
 }
 
 if(showFavOnly){
-list=list.filter(p=>favorites.has(p.id));
+list=list.filter(
+p=>favorites.has(p.id)
+);
 }
 
 resultCount.textContent=
@@ -2007,20 +2353,26 @@ productGrid.innerHTML=
 `<div class="empty">${t[lang].empty}</div>`;
 
 return;
+
 }
 
-productGrid.innerHTML=list.map(p=>{
+productGrid.innerHTML=
+list.map(p=>{
 
 const name=productName(p);
 const desc=productDesc(p);
 
-const qty=Number(p.stockQty??1);
+const qty=Number(
+p.stockQty??1
+);
 
 const inStock=
-!(p.stock===0||
+!(
+p.stock===0||
 p.stock==="0"||
 p.inStock===false||
-qty<=0);
+qty<=0
+);
 
 const images=
 p.images?.length
@@ -2036,11 +2388,19 @@ const oldNum=parseFloat(p.oldPrice);
 const newNum=parseFloat(p.price);
 
 const discount=
-(oldNum>newNum&&newNum>=0)
-?Math.round((oldNum-newNum)/oldNum*100)
+(
+oldNum>newNum&&
+newNum>=0
+)
+?
+Math.round(
+(oldNum-newNum)/
+oldNum*100
+)
 :0;
 
-const msg=encodeURIComponent(
+const msg=
+encodeURIComponent(
 (lang==="ar"
 ?"مرحبًا، أريد طلب: "
 :lang==="en"
@@ -2053,17 +2413,32 @@ return `
 
 <article class="card">
 
-${p.isNew||p.isBest?`
+${
+p.isNew||p.isBest
+?
+`
 <div class="badge-stack">
-${p.isNew?`<span class="product-badge new">${t[lang].newBadge}</span>`:""}
-${p.isBest?`<span class="product-badge best">${t[lang].bestBadge}</span>`:""}
+
+${p.isNew
+?`<span class="product-badge new">${t[lang].newBadge}</span>`
+:""}
+
+${p.isBest
+?`<span class="product-badge best">${t[lang].bestBadge}</span>`
+:""}
+
 </div>
-`:""}
+`
+:""
+}
 
 <button
 class="fav-btn ${favorites.has(p.id)?"active":""}"
-onclick="toggleFav('${p.id}')">
+onclick="toggleFav('${esc(p.id)}')"
+aria-label="Favorite">
+
 ${favorites.has(p.id)?"♥":"♡"}
+
 </button>
 
 <div
@@ -2073,11 +2448,15 @@ data-index="0">
 
 <img
 src="${esc(images[0])}"
-alt="${esc(name)}">
+alt="${esc(name)}"
+loading="lazy"
+decoding="async"
+onerror="this.src='logo.jpeg'">
 
 ${
 images.length>1
-?`
+?
+`
 <button
 class="gallery-btn prev"
 onclick="slideGallery('${esc(p.id)}',-1)">
@@ -2105,35 +2484,48 @@ onclick="slideGallery('${esc(p.id)}',1)">
 
 <span class="price">
 
-${p.oldPrice
-?`<span class="old-price">
+${
+p.oldPrice
+?
+`
+<span class="old-price">
 ${esc(p.oldPrice)} ${symbol}
-</span>`
-:""}
+</span>
+`
+:""
+}
 
 ${esc(p.price||"")}
 
 ${p.price?symbol:""}
 
-${discount
-?`<span class="discount-pill">
+${
+discount
+?
+`
+<span class="discount-pill">
 -%${discount}
-</span>`
-:""}
+</span>
+`
+:""
+}
 
 </span>
 
 ${
 inStock
-?`
+?
+`
 <a
 class="small-wa"
 target="_blank"
+rel="noopener"
 href="https://wa.me/963991890234?text=${msg}">
 ${t[lang].order}
 </a>
 `
-:`
+:
+`
 <span class="stock-badge">
 ${t[lang].outStock}
 </span>
@@ -2144,7 +2536,8 @@ ${t[lang].outStock}
 
 ${
 inStock
-?`
+?
+`
 <div class="stock-qty">
 ${qty} ${t[lang].onlyLeft}
 </div>
@@ -2154,12 +2547,22 @@ ${qty} ${t[lang].onlyLeft}
 
 ${
 p.videoUrl
-?`
+?
+`
 <a
 class="video-btn"
 target="_blank"
+rel="noopener"
 href="${esc(p.videoUrl)}">
-▶ ${lang==="ar"?"مشاهدة الفيديو":lang==="en"?"Watch video":"Videoyu izle"}
+
+▶ ${
+lang==="ar"
+?"مشاهدة الفيديو":
+lang==="en"
+?"Watch video":
+"Videoyu izle"
+}
+
 </a>
 `
 :""
@@ -2172,20 +2575,25 @@ href="${esc(p.videoUrl)}">
 `;
 
 }).join("");
+
 }
 
 
-/* GALLERY */
+/* ========================================
+   GALLERY
+======================================== */
 
 window.slideGallery=(id,step)=>{
 
 const el=document.querySelector(
-`[data-gallery="${id}"]`
+`[data-gallery="${CSS.escape(id)}"]`
 );
 
 if(!el)return;
 
-const p=allProducts.find(x=>x.id===id);
+const p=allProducts.find(
+x=>x.id===id
+);
 
 const imgs=
 p?.images?.length
@@ -2193,25 +2601,48 @@ p?.images?.length
 :(p?.image?[p.image]:["logo.jpeg"]);
 
 let i=
-(Number(el.dataset.index||0)+step+imgs.length)
+(
+Number(el.dataset.index||0)
++step+
+imgs.length
+)
 %imgs.length;
 
 el.dataset.index=i;
 
-el.querySelector("img").src=imgs[i];
+const img=el.querySelector("img");
+
+if(img){
+
+img.src=imgs[i];
+
+img.onerror=()=>{
+img.src="logo.jpeg";
+};
+
+}
+
 };
 
 
-/* INITIAL PRODUCTS */
+/* ========================================
+   IMMEDIATE PRODUCTS
+======================================== */
 
-allProducts=[...BUILTIN_PRODUCTS];
+allProducts=[
+...BUILTIN_PRODUCTS
+];
 
 window.allProducts=allProducts;
 
 setLang(lang);
 
 
-/* FIREBASE PRODUCTS */
+/* ========================================
+   FIREBASE
+======================================== */
+
+try{
 
 const q=query(
 collection(db,"products"),
@@ -2220,10 +2651,12 @@ orderBy("createdAt","desc")
 
 onSnapshot(
 q,
+
 snapshot=>{
 
 allProducts=[
 ...BUILTIN_PRODUCTS,
+
 ...snapshot.docs.map(d=>({
 id:d.id,
 ...d.data()
@@ -2235,21 +2668,41 @@ window.allProducts=allProducts;
 render();
 
 },
+
 error=>{
 
-console.error(error);
+console.error(
+"LAYL Firebase:",
+error
+);
 
-allProducts=[...BUILTIN_PRODUCTS];
+allProducts=[
+...BUILTIN_PRODUCTS
+];
 
 window.allProducts=allProducts;
 
 render();
 
 }
+
 );
 
+}catch(error){
 
-/* REVEAL */
+console.error(
+"LAYL Firebase başlatılamadı:",
+error
+);
+
+render();
+
+}
+
+
+/* ========================================
+   REVEAL
+======================================== */
 
 const observer=
 new IntersectionObserver(
@@ -2258,18 +2711,106 @@ entries=>{
 entries.forEach(entry=>{
 
 if(entry.isIntersecting){
-entry.target.classList.add("visible");
+
+entry.target.classList.add(
+"visible"
+);
+
 }
 
 });
 
 },
-{threshold:.12}
+{
+threshold:.12
+}
 );
 
 document
 .querySelectorAll(".reveal")
-.forEach(el=>observer.observe(el));
+.forEach(el=>{
+observer.observe(el);
+});
+
+
+/* ========================================
+   FAST LOADER
+======================================== */
+
+function closeLaylLoader(){
+
+const loader=
+document.getElementById(
+"laylLoader"
+);
+
+if(!loader)return;
+
+setTimeout(()=>{
+
+loader.classList.add("hide");
+
+document.body.classList.remove(
+"loading"
+);
+
+setTimeout(()=>{
+
+if(loader.parentNode){
+loader.remove();
+}
+
+},600);
+
+},850);
+
+}
+
+
+/*
+  Sayfa tamamen yüklenirse loader kapanır.
+  Firebase'in ürünleri beklemesi gerekmez.
+*/
+
+if(document.readyState==="complete"){
+closeLaylLoader();
+}else{
+
+window.addEventListener(
+"load",
+closeLaylLoader,
+{
+once:true
+}
+);
+
+}
+
+
+/* ========================================
+   IMAGE ERROR FALLBACK
+======================================== */
+
+document.addEventListener(
+"error",
+event=>{
+
+const img=event.target;
+
+if(
+img &&
+img.tagName==="IMG" &&
+img.src &&
+!img.src.endsWith("/logo.jpeg")
+){
+
+img.src="logo.jpeg";
+
+}
+
+},
+true
+);
 
 </script>
 
