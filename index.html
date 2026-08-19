@@ -26,13 +26,9 @@
   --red:#9b3145;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
@@ -44,28 +40,12 @@ body{
   overflow-x:hidden;
 }
 
-body.loading{
-  overflow:hidden;
-}
+body.loading{overflow:hidden}
 
-a{
-  text-decoration:none;
-  color:inherit;
-}
+a{text-decoration:none;color:inherit}
 
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  -webkit-tap-highlight-color:transparent;
-}
-
-/* ================================
-   CONTAINER
-================================ */
+button,input,select{font:inherit}
+button{-webkit-tap-highlight-color:transparent}
 
 .container{
   width:min(1180px,calc(100% - 36px));
@@ -73,7 +53,7 @@ button{
 }
 
 /* ================================
-   OPENING SCREEN
+   AÇILIŞ EKRANI
 ================================ */
 
 #laylLoader{
@@ -81,7 +61,7 @@ button{
   inset:0;
   z-index:99999;
   background:
-    radial-gradient(circle at 50% 35%,rgba(200,169,107,.16),transparent 34%),
+    radial-gradient(circle at 50% 35%,rgba(200,169,107,.14),transparent 32%),
     #f5f0e8;
   display:flex;
   align-items:center;
@@ -96,16 +76,20 @@ button{
   pointer-events:none;
 }
 
-/* AÇILIŞ LOGOSU TAM YUVARLAK */
+/* TAM YUVARLAK AÇILIŞ LOGOSU */
 .layl-loader-logo{
-  width:145px;
-  height:145px;
-  min-width:145px;
-  min-height:145px;
+  width:132px !important;
+  height:132px !important;
+  min-width:132px;
+  min-height:132px;
+  max-width:132px;
+  max-height:132px;
+  aspect-ratio:1 / 1;
+  display:block;
   border-radius:50% !important;
   object-fit:cover;
   object-position:center;
-  display:block;
+  overflow:hidden;
   border:2px solid var(--champagne);
   padding:5px;
   background:var(--white);
@@ -133,36 +117,18 @@ button{
 }
 
 @keyframes laylLogoIn{
-  from{
-    opacity:0;
-    transform:scale(.72);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
+  from{opacity:0;transform:scale(.72)}
+  to{opacity:1;transform:scale(1)}
 }
 
 @keyframes laylTextIn{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 @keyframes laylLineIn{
-  from{
-    width:0;
-    opacity:0;
-  }
-  to{
-    width:55px;
-    opacity:1;
-  }
+  from{width:0;opacity:0}
+  to{width:55px;opacity:1}
 }
 
 /* ================================
@@ -173,7 +139,7 @@ button{
   position:sticky;
   top:0;
   z-index:100;
-  background:rgba(245,240,232,.9);
+  background:rgba(245,240,232,.88);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(33,26,22,.08);
@@ -187,7 +153,6 @@ button{
   gap:20px;
 }
 
-/* ÜST MENÜ LOGOSU TAM YUVARLAK */
 .brand{
   display:flex;
   align-items:center;
@@ -199,18 +164,13 @@ button{
 }
 
 .brand img{
-  width:52px;
-  height:52px;
-  min-width:52px;
-  min-height:52px;
-  border-radius:50% !important;
+  width:48px;
+  height:48px;
+  aspect-ratio:1/1;
+  border-radius:50%;
   object-fit:cover;
-  object-position:center;
-  display:block;
   border:1px solid var(--champagne);
-  padding:2px;
   background:var(--white);
-  box-shadow:0 4px 14px rgba(33,26,22,.10);
 }
 
 .actions{
@@ -232,12 +192,7 @@ button{
   transition:.25s;
 }
 
-.pill:hover{
-  background:var(--espresso);
-  color:var(--white);
-  border-color:var(--espresso);
-}
-
+.pill:hover,
 .pill.active{
   background:var(--espresso);
   color:var(--white);
@@ -257,9 +212,7 @@ button{
   padding:70px 0;
 }
 
-.hero-copy{
-  order:1;
-}
+.hero-copy{order:1}
 
 .hero-visual{
   order:2;
@@ -275,7 +228,6 @@ button{
   height:390px;
   border-radius:50%;
   background:rgba(200,169,107,.10);
-  filter:blur(3px);
   z-index:-1;
 }
 
@@ -394,14 +346,10 @@ button{
   font-weight:bold;
 }
 
-.marquee-track span{
-  white-space:nowrap;
-}
+.marquee-track span{white-space:nowrap}
 
 @keyframes move{
-  to{
-    transform:translateX(-50%);
-  }
+  to{transform:translateX(-50%)}
 }
 
 /* ================================
@@ -582,9 +530,7 @@ button{
   right:15px;
 }
 
-.fav-filter{
-  white-space:nowrap;
-}
+.fav-filter{white-space:nowrap}
 
 .result-count{
   color:var(--muted);
@@ -633,7 +579,7 @@ button{
 .fav-btn{
   position:absolute;
   top:14px;
-  right:14px;
+  left:14px;
   z-index:5;
   width:40px;
   height:40px;
@@ -645,6 +591,11 @@ button{
   font-size:21px;
 }
 
+[dir="rtl"] .fav-btn{
+  left:auto;
+  right:14px;
+}
+
 .fav-btn.active{
   background:var(--red);
   color:white;
@@ -654,10 +605,15 @@ button{
 .badge-stack{
   position:absolute;
   top:14px;
-  left:14px;
+  right:14px;
   z-index:5;
   display:flex;
   gap:5px;
+}
+
+[dir="rtl"] .badge-stack{
+  right:auto;
+  left:14px;
 }
 
 .product-badge{
@@ -691,13 +647,8 @@ button{
   cursor:pointer;
 }
 
-.gallery-btn.prev{
-  left:10px;
-}
-
-.gallery-btn.next{
-  right:10px;
-}
+.gallery-btn.prev{left:10px}
+.gallery-btn.next{right:10px}
 
 .product-body{
   padding:20px;
@@ -735,7 +686,6 @@ button{
   color:#9c9187;
   text-decoration:line-through;
   font-size:13px;
-  margin-inline-end:5px;
 }
 
 .discount-pill{
@@ -744,7 +694,6 @@ button{
   padding:4px 7px;
   border-radius:20px;
   font-size:10px;
-  margin-inline-start:5px;
 }
 
 .small-wa{
@@ -769,6 +718,14 @@ button{
   font-size:11px;
 }
 
+.video-btn{
+  display:inline-block;
+  margin-top:12px;
+  color:var(--coffee);
+  font-weight:bold;
+  font-size:12px;
+}
+
 /* ================================
    FEATURED
 ================================ */
@@ -789,9 +746,7 @@ button{
   margin:8px 0;
 }
 
-.featured-head p{
-  color:var(--muted);
-}
+.featured-head p{color:var(--muted)}
 
 .featured-slider{
   display:grid;
@@ -803,9 +758,7 @@ button{
   padding:5px 3px 18px;
 }
 
-.featured-slider::-webkit-scrollbar{
-  display:none;
-}
+.featured-slider::-webkit-scrollbar{display:none}
 
 .featured-card{
   position:relative;
@@ -897,7 +850,6 @@ button{
   font-size:190px;
   color:var(--champagne);
   opacity:.8;
-  z-index:1;
 }
 
 /* ================================
@@ -982,7 +934,7 @@ footer{
 }
 
 /* ================================
-   EMPTY
+   EMPTY / TOAST
 ================================ */
 
 .empty{
@@ -1015,10 +967,6 @@ footer{
   transform:translate(-50%,0);
 }
 
-/* ================================
-   REVEAL
-================================ */
-
 .reveal{
   opacity:0;
   transform:translateY(25px);
@@ -1042,13 +990,8 @@ footer{
     padding:55px 0;
   }
 
-  .hero-copy{
-    order:2;
-  }
-
-  .hero-visual{
-    order:1;
-  }
+  .hero-copy{order:2}
+  .hero-visual{order:1}
 
   .hero-label{
     justify-content:center;
@@ -1096,13 +1039,6 @@ footer{
     min-height:70px;
   }
 
-  .brand img{
-    width:48px;
-    height:48px;
-    min-width:48px;
-    min-height:48px;
-  }
-
   .brand span{
     display:none;
   }
@@ -1137,10 +1073,6 @@ footer{
 
   .intro h2{
     font-size:42px;
-  }
-
-  .collection{
-    padding-bottom:55px;
   }
 
   .products-section{
@@ -1203,11 +1135,16 @@ footer{
     bottom:15px;
   }
 
+  /* MOBİLDE DE TAM YUVARLAK LOGO */
   .layl-loader-logo{
-    width:115px;
-    height:115px;
-    min-width:115px;
-    min-height:115px;
+    width:105px !important;
+    height:105px !important;
+    min-width:105px;
+    min-height:105px;
+    max-width:105px;
+    max-height:105px;
+    aspect-ratio:1 / 1;
+    border-radius:50% !important;
   }
 
   .layl-loader-name{
@@ -1219,7 +1156,7 @@ footer{
 
 <body class="loading">
 
-<!-- AÇILIŞ LOGOSU -->
+<!-- AÇILIŞ -->
 
 <div id="laylLoader">
 
@@ -1297,8 +1234,6 @@ footer{
 
 <main>
 
-<!-- HERO -->
-
 <section class="hero">
 
   <div class="container hero" style="display:contents">
@@ -1356,17 +1291,13 @@ footer{
 
 </section>
 
-<!-- INTRO -->
-
 <section class="intro reveal">
 
   <div class="container intro-grid">
 
     <div>
 
-      <div
-        class="eyebrow"
-        id="introEyebrow">
+      <div class="eyebrow" id="introEyebrow">
         توقيع LAYL
       </div>
 
@@ -1389,17 +1320,13 @@ footer{
 
 </section>
 
-<!-- COLLECTION -->
-
 <section class="collection reveal">
 
   <div class="container collection-grid">
 
     <div class="collection-card">
 
-      <span class="collection-number">
-        01
-      </span>
+      <span class="collection-number">01</span>
 
       <h3 id="collection1Title">
         العطور المميزة
@@ -1413,9 +1340,7 @@ footer{
 
     <div class="collection-card">
 
-      <span class="collection-number">
-        02
-      </span>
+      <span class="collection-number">02</span>
 
       <h3 id="collection2Title">
         طقوس الجمال
@@ -1429,9 +1354,7 @@ footer{
 
     <div class="collection-card">
 
-      <span class="collection-number">
-        03
-      </span>
+      <span class="collection-number">03</span>
 
       <h3 id="collection3Title">
         اختيارات خاصة
@@ -1446,8 +1369,6 @@ footer{
   </div>
 
 </section>
-
-<!-- PRODUCTS -->
 
 <section
   class="products-section reveal"
@@ -1479,29 +1400,12 @@ footer{
         id="categoryFilter"
         class="category">
 
-        <option value="all">
-          كل الأقسام
-        </option>
-
-        <option value="perfume">
-          العطور
-        </option>
-
-        <option value="shampoo">
-          الشامبو
-        </option>
-
-        <option value="mask">
-          الماسكات
-        </option>
-
-        <option value="cream">
-          الكريمات
-        </option>
-
-        <option value="other">
-          أخرى
-        </option>
+        <option value="all">كل الأقسام</option>
+        <option value="perfume">العطور</option>
+        <option value="shampoo">الشامبو</option>
+        <option value="mask">الماسكات</option>
+        <option value="cream">الكريمات</option>
+        <option value="other">أخرى</option>
 
       </select>
 
@@ -1511,9 +1415,7 @@ footer{
 
       <div class="search-wrap">
 
-        <span class="search-icon">
-          ⌕
-        </span>
+        <span class="search-icon">⌕</span>
 
         <input
           id="productSearch"
@@ -1550,8 +1452,6 @@ footer{
 
 </section>
 
-<!-- FEATURED -->
-
 <section class="featured reveal">
 
   <div class="container">
@@ -1587,8 +1487,6 @@ footer{
   </div>
 
 </section>
-
-<!-- STORY -->
 
 <section class="story reveal">
 
@@ -1630,8 +1528,6 @@ footer{
   </div>
 
 </section>
-
-<!-- INFO -->
 
 <section class="info-section reveal">
 
@@ -1706,10 +1602,7 @@ footer{
 
 </footer>
 
-<div
-  id="toast"
-  class="toast">
-</div>
+<div id="toast" class="toast"></div>
 
 <script type="module">
 
@@ -1729,6 +1622,7 @@ import {
 from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
 /* ================================
    FIREBASE
 ================================ */
@@ -1746,6 +1640,7 @@ const firebaseConfig={
 const app=initializeApp(firebaseConfig);
 const db=getFirestore(app);
 
+
 /* ================================
    STATE
 ================================ */
@@ -1761,8 +1656,9 @@ const favorites=new Set(
   )
 );
 
+
 /* ================================
-   BUILT-IN PRODUCTS
+   HAZIR 9 ÜRÜN
 ================================ */
 
 const BUILTIN_PRODUCTS=[
@@ -1783,9 +1679,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1804,9 +1698,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1825,9 +1717,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1846,9 +1736,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1867,9 +1755,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1888,9 +1774,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1909,9 +1793,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1930,9 +1812,7 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 },
 
 {
@@ -1951,15 +1831,14 @@ currency:"USD",
 category:"mask",
 stock:1,
 stockQty:3,
-inStock:true,
-isNew:false,
-isBest:false
+inStock:true
 }
 
 ];
 
+
 /* ================================
-   TRANSLATIONS
+   ÇEVİRİLER
 ================================ */
 
 const t={
@@ -2110,8 +1989,9 @@ other:"Other"
 
 };
 
+
 /* ================================
-   HELPERS
+   YARDIMCI
 ================================ */
 
 function esc(s=""){
@@ -2140,8 +2020,9 @@ return lang==="ar"
 :(p.descTr||p.descAr||p.descEn||"");
 }
 
+
 /* ================================
-   LANGUAGE
+   DİL
 ================================ */
 
 function setLang(l){
@@ -2165,7 +2046,6 @@ heroTitle.innerHTML=
 `${x.title}<br><span>${x.title2}</span>`;
 
 heroText.textContent=x.text;
-
 mainWa.textContent=x.wa;
 mainIg.textContent=x.ig;
 
@@ -2175,16 +2055,13 @@ introText.textContent=x.introText;
 
 collection1Title.textContent=x.c1;
 collection1Text.textContent=x.c1t;
-
 collection2Title.textContent=x.c2;
 collection2Text.textContent=x.c2t;
-
 collection3Title.textContent=x.c3;
 collection3Text.textContent=x.c3t;
 
 productsTitle.textContent=x.products;
 productsSub.textContent=x.sub;
-
 productSearch.placeholder=x.search;
 
 favFilter.textContent=
@@ -2200,7 +2077,6 @@ storyBtn.textContent=x.storyBtn;
 
 locationTitle.textContent=x.locationTitle;
 locationText.textContent=x.locationText;
-
 paymentTitle.textContent=x.paymentTitle;
 paymentText.textContent=x.paymentText;
 
@@ -2225,39 +2101,9 @@ render();
 
 }
 
-/* ================================
-   EVENTS
-================================ */
-
-arBtn.onclick=()=>setLang("ar");
-trBtn.onclick=()=>setLang("tr");
-enBtn.onclick=()=>setLang("en");
-
-categoryFilter.onchange=render;
-
-productSearch.oninput=()=>{
-searchTerm=productSearch.value.trim().toLowerCase();
-render();
-};
-
-favFilter.onclick=()=>{
-
-showFavOnly=!showFavOnly;
-
-favFilter.classList.toggle(
-"active",
-showFavOnly
-);
-
-favFilter.textContent=
-(showFavOnly?"♥ ":"♡ ")+t[lang].favorites;
-
-render();
-
-};
 
 /* ================================
-   FAVORITES
+   FAVORİ
 ================================ */
 
 function toggleFav(id){
@@ -2279,56 +2125,9 @@ render();
 
 window.toggleFav=toggleFav;
 
-/* ================================
-   FEATURED
-================================ */
-
-function renderFeatured(list){
-
-const featured=list.slice(0,5);
-
-if(!featured.length){
-
-featuredSlider.innerHTML=
-`<div class="empty">${t[lang].empty}</div>`;
-
-return;
-
-}
-
-featuredSlider.innerHTML=
-featured.map(p=>{
-
-const name=productName(p);
-const desc=productDesc(p);
-
-return `
-<article class="featured-card">
-
-<img
-src="${esc(p.image||"logo.jpeg")}"
-alt="${esc(name)}"
-loading="lazy"
-decoding="async"
-onerror="this.src='logo.jpeg'">
-
-<div class="featured-overlay">
-
-<h3>${esc(name)}</h3>
-
-<p>${esc(desc)}</p>
-
-</div>
-
-</article>
-`;
-
-}).join("");
-
-}
 
 /* ================================
-   PRODUCTS
+   ÜRÜNLERİ GÖSTER
 ================================ */
 
 function render(){
@@ -2384,9 +2183,7 @@ list.map(p=>{
 const name=productName(p);
 const desc=productDesc(p);
 
-const qty=Number(
-p.stockQty??1
-);
+const qty=Number(p.stockQty??1);
 
 const inStock=
 !(
@@ -2397,7 +2194,7 @@ qty<=0
 );
 
 const images=
-p.images?.length
+Array.isArray(p.images)&&p.images.length
 ?p.images
 :(p.image?[p.image]:["logo.jpeg"]);
 
@@ -2410,19 +2207,11 @@ const oldNum=parseFloat(p.oldPrice);
 const newNum=parseFloat(p.price);
 
 const discount=
-(
-oldNum>newNum&&
-newNum>=0
-)
-?
-Math.round(
-(oldNum-newNum)/
-oldNum*100
-)
+oldNum>newNum&&newNum>=0
+?Math.round((oldNum-newNum)/oldNum*100)
 :0;
 
-const msg=
-encodeURIComponent(
+const msg=encodeURIComponent(
 (lang==="ar"
 ?"مرحبًا، أريد طلب: "
 :lang==="en"
@@ -2438,8 +2227,7 @@ return `
 ${
 p.isNew||p.isBest
 ?
-`
-<div class="badge-stack">
+`<div class="badge-stack">
 
 ${p.isNew
 ?`<span class="product-badge new">${t[lang].newBadge}</span>`
@@ -2449,15 +2237,13 @@ ${p.isBest
 ?`<span class="product-badge best">${t[lang].bestBadge}</span>`
 :""}
 
-</div>
-`
+</div>`
 :""
 }
 
 <button
 class="fav-btn ${favorites.has(p.id)?"active":""}"
-onclick="toggleFav('${esc(p.id)}')"
-aria-label="Favorite">
+onclick="toggleFav('${esc(p.id)}')">
 
 ${favorites.has(p.id)?"♥":"♡"}
 
@@ -2509,11 +2295,7 @@ onclick="slideGallery('${esc(p.id)}',1)">
 ${
 p.oldPrice
 ?
-`
-<span class="old-price">
-${esc(p.oldPrice)} ${symbol}
-</span>
-`
+`<span class="old-price">${esc(p.oldPrice)} ${symbol}</span>`
 :""
 }
 
@@ -2524,11 +2306,7 @@ ${p.price?symbol:""}
 ${
 discount
 ?
-`
-<span class="discount-pill">
--%${discount}
-</span>
-`
+`<span class="discount-pill">-%${discount}</span>`
 :""
 }
 
@@ -2547,11 +2325,7 @@ ${t[lang].order}
 </a>
 `
 :
-`
-<span class="stock-badge">
-${t[lang].outStock}
-</span>
-`
+`<span class="stock-badge">${t[lang].outStock}</span>`
 }
 
 </div>
@@ -2559,32 +2333,7 @@ ${t[lang].outStock}
 ${
 inStock
 ?
-`
-<div class="stock-qty">
-${qty} ${t[lang].onlyLeft}
-</div>
-`
-:""
-}
-
-${
-p.videoUrl
-?
-`
-<a
-class="video-btn"
-target="_blank"
-rel="noopener"
-href="${esc(p.videoUrl)}">
-▶ ${
-lang==="ar"
-?"مشاهدة الفيديو":
-lang==="en"
-?"Watch video":
-"Videoyu izle"
-}
-</a>
-`
+`<div class="stock-qty">${qty} ${t[lang].onlyLeft}</div>`
 :""
 }
 
@@ -2598,8 +2347,59 @@ lang==="en"
 
 }
 
+
 /* ================================
-   GALLERY
+   FEATURED
+================================ */
+
+function renderFeatured(list){
+
+const featured=list.slice(0,5);
+
+if(!featured.length){
+
+featuredSlider.innerHTML=
+`<div class="empty">${t[lang].empty}</div>`;
+
+return;
+
+}
+
+featuredSlider.innerHTML=
+featured.map(p=>{
+
+const name=productName(p);
+const desc=productDesc(p);
+
+return `
+
+<article class="featured-card">
+
+<img
+src="${esc(p.image||"logo.jpeg")}"
+alt="${esc(name)}"
+loading="lazy"
+onerror="this.src='logo.jpeg'">
+
+<div class="featured-overlay">
+
+<h3>${esc(name)}</h3>
+
+<p>${esc(desc)}</p>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+
+/* ================================
+   GALERİ
 ================================ */
 
 window.slideGallery=(id,step)=>{
@@ -2610,12 +2410,10 @@ const el=document.querySelector(
 
 if(!el)return;
 
-const p=allProducts.find(
-x=>x.id===id
-);
+const p=allProducts.find(x=>x.id===id);
 
 const imgs=
-p?.images?.length
+Array.isArray(p?.images)&&p.images.length
 ?p.images
 :(p?.image?[p.image]:["logo.jpeg"]);
 
@@ -2624,27 +2422,56 @@ let i=
 Number(el.dataset.index||0)
 +step+
 imgs.length
-)
-%imgs.length;
+)%imgs.length;
 
 el.dataset.index=i;
 
 const img=el.querySelector("img");
 
 if(img){
-
 img.src=imgs[i];
-
 img.onerror=()=>{
 img.src="logo.jpeg";
 };
-
 }
 
 };
 
+
 /* ================================
-   START PRODUCTS
+   EVENTLER
+================================ */
+
+arBtn.onclick=()=>setLang("ar");
+trBtn.onclick=()=>setLang("tr");
+enBtn.onclick=()=>setLang("en");
+
+categoryFilter.onchange=render;
+
+productSearch.oninput=()=>{
+searchTerm=productSearch.value.trim().toLowerCase();
+render();
+};
+
+favFilter.onclick=()=>{
+
+showFavOnly=!showFavOnly;
+
+favFilter.classList.toggle(
+"active",
+showFavOnly
+);
+
+favFilter.textContent=
+(showFavOnly?"♥ ":"♡ ")+t[lang].favorites;
+
+render();
+
+};
+
+
+/* ================================
+   ÜRÜNLERİ HEMEN GÖSTER
 ================================ */
 
 allProducts=[
@@ -2655,8 +2482,9 @@ window.allProducts=allProducts;
 
 setLang(lang);
 
+
 /* ================================
-   FIREBASE PRODUCTS
+   FIREBASE ÜRÜNLERİ
 ================================ */
 
 try{
@@ -2667,18 +2495,35 @@ orderBy("createdAt","desc")
 );
 
 onSnapshot(
+
 q,
 
 snapshot=>{
 
-const firebaseProducts=snapshot.docs.map(d=>({
+const firebaseProducts=
+snapshot.docs.map(d=>({
 id:d.id,
 ...d.data()
 }));
 
+/*
+  Firebase'deki ürünleri hazır ürünlerle
+  birleştiriyoruz. Aynı ID varsa Firebase
+  ürünü kullanılır.
+*/
+
+const map=new Map();
+
+BUILTIN_PRODUCTS.forEach(p=>{
+map.set(p.id,p);
+});
+
+firebaseProducts.forEach(p=>{
+map.set(p.id,p);
+});
+
 allProducts=[
-...BUILTIN_PRODUCTS,
-...firebaseProducts
+...map.values()
 ];
 
 window.allProducts=allProducts;
@@ -2713,15 +2558,10 @@ console.error(
 error
 );
 
-allProducts=[
-...BUILTIN_PRODUCTS
-];
-
-window.allProducts=allProducts;
-
 render();
 
 }
+
 
 /* ================================
    REVEAL
@@ -2734,11 +2574,7 @@ entries=>{
 entries.forEach(entry=>{
 
 if(entry.isIntersecting){
-
-entry.target.classList.add(
-"visible"
-);
-
+entry.target.classList.add("visible");
 }
 
 });
@@ -2755,16 +2591,15 @@ document
 observer.observe(el);
 });
 
+
 /* ================================
-   LOADER
+   AÇILIŞI KAPAT
 ================================ */
 
 function closeLaylLoader(){
 
 const loader=
-document.getElementById(
-"laylLoader"
-);
+document.getElementById("laylLoader");
 
 if(!loader)return;
 
@@ -2772,9 +2607,7 @@ setTimeout(()=>{
 
 loader.classList.add("hide");
 
-document.body.classList.remove(
-"loading"
-);
+document.body.classList.remove("loading");
 
 setTimeout(()=>{
 
@@ -2797,15 +2630,14 @@ closeLaylLoader();
 window.addEventListener(
 "load",
 closeLaylLoader,
-{
-once:true
-}
+{once:true}
 );
 
 }
 
+
 /* ================================
-   IMAGE FALLBACK
+   RESİM HATASI
 ================================ */
 
 document.addEventListener(
