@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f5f0e8">
+<meta name="theme-color" content="#171310">
 <meta name="author" content="احمد سعد الدين">
 <meta name="copyright" content="© 2026 LAYL Kozmetik — احمد سعد الدين">
 <meta name="google-site-verification" content="VXygZpiY69-7y87ufxIBtkbKk7exm8HtMKImU0hg3so">
@@ -12,1654 +12,1806 @@
 
 <style>
 :root{
-  --cream:#f5f0e8;
-  --cream2:#ebe2d4;
-  --espresso:#211a16;
-  --coffee:#6b5545;
-  --champagne:#c8a96b;
-  --champagne2:#e2c994;
-  --dark:#171310;
-  --muted:#776d64;
-  --white:#fffdf9;
-  --line:#d9cdbd;
-  --green:#25d366;
-  --red:#9b3145;
+--cream:#f5f0e8;
+--cream2:#ebe2d4;
+--espresso:#211a16;
+--coffee:#6b5545;
+--champagne:#c8a96b;
+--champagne2:#e2c994;
+--dark:#171310;
+--muted:#776d64;
+--white:#fffdf9;
+--line:#d9cdbd;
+--green:#25d366;
+--red:#9b3145;
 }
 
-*{box-sizing:border-box}
+*{
+box-sizing:border-box;
+}
 
-html{scroll-behavior:smooth}
+html{
+scroll-behavior:smooth;
+}
 
 body{
-  margin:0;
-  background:
-    radial-gradient(circle at 50% -10%,rgba(200,169,107,.12),transparent 32%),
-    var(--cream);
-  color:var(--dark);
-  font-family:Arial,Tahoma,sans-serif;
-  overflow-x:hidden;
+margin:0;
+background:
+radial-gradient(circle at 50% -10%,rgba(200,169,107,.15),transparent 32%),
+var(--cream);
+color:var(--dark);
+font-family:Arial,Tahoma,sans-serif;
+overflow-x:hidden;
 }
 
-body.loading{overflow:hidden}
+body.loading{
+overflow:hidden;
+}
 
-a{text-decoration:none;color:inherit}
+a{
+text-decoration:none;
+color:inherit;
+}
 
-button,input,select{font:inherit}
-button{-webkit-tap-highlight-color:transparent}
+button,
+input,
+select{
+font:inherit;
+}
+
+button{
+-webkit-tap-highlight-color:transparent;
+}
 
 .container{
-  width:min(1180px,calc(100% - 36px));
-  margin:auto;
+width:min(1180px,calc(100% - 36px));
+margin:auto;
 }
 
-/* ================================
-   AÇILIŞ EKRANI
-================================ */
+/* =========================
+LOADER
+========================= */
 
 #laylLoader{
-  position:fixed;
-  inset:0;
-  z-index:99999;
-  background:
-    radial-gradient(circle at 50% 35%,rgba(200,169,107,.14),transparent 32%),
-    #f5f0e8;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  transition:opacity .55s ease,visibility .55s ease;
+position:fixed;
+inset:0;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+background:
+radial-gradient(circle at 50% 35%,rgba(200,169,107,.18),transparent 34%),
+#f5f0e8;
+transition:opacity .6s ease,visibility .6s ease;
 }
 
 #laylLoader.hide{
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
+opacity:0;
+visibility:hidden;
+pointer-events:none;
 }
 
-/* TAM YUVARLAK AÇILIŞ LOGOSU */
 .layl-loader-logo{
-  width:132px !important;
-  height:132px !important;
-  min-width:132px;
-  min-height:132px;
-  max-width:132px;
-  max-height:132px;
-  aspect-ratio:1 / 1;
-  display:block;
-  border-radius:50% !important;
-  object-fit:cover;
-  object-position:center;
-  overflow:hidden;
-  border:2px solid var(--champagne);
-  padding:5px;
-  background:var(--white);
-  box-shadow:
-    0 0 0 9px rgba(200,169,107,.08),
-    0 24px 65px rgba(33,26,22,.18);
-  animation:laylLogoIn .8s cubic-bezier(.2,.8,.2,1) both;
+width:128px!important;
+height:128px!important;
+min-width:128px;
+min-height:128px;
+max-width:128px;
+max-height:128px;
+aspect-ratio:1/1;
+display:block;
+object-fit:cover;
+object-position:center;
+border-radius:50%!important;
+padding:5px;
+background:var(--white);
+border:2px solid var(--champagne);
+box-shadow:
+0 0 0 9px rgba(200,169,107,.08),
+0 25px 70px rgba(33,26,22,.18);
+animation:logoIn .9s cubic-bezier(.2,.8,.2,1) both;
 }
 
 .layl-loader-name{
-  margin-top:22px;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:25px;
-  letter-spacing:4px;
-  color:var(--espresso);
-  animation:laylTextIn 1s ease both;
+margin-top:22px;
+font-family:Georgia,"Times New Roman",serif;
+font-size:24px;
+letter-spacing:4px;
+color:var(--espresso);
+animation:textIn 1s ease both;
 }
 
 .layl-loader-line{
-  width:55px;
-  height:1px;
-  background:var(--champagne);
-  margin-top:14px;
-  animation:laylLineIn 1.2s ease both;
+width:55px;
+height:1px;
+background:var(--champagne);
+margin-top:14px;
+animation:lineIn 1.2s ease both;
 }
 
-@keyframes laylLogoIn{
-  from{opacity:0;transform:scale(.72)}
-  to{opacity:1;transform:scale(1)}
+@keyframes logoIn{
+from{
+opacity:0;
+transform:scale(.72);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
 
-@keyframes laylTextIn{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
+@keyframes textIn{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-@keyframes laylLineIn{
-  from{width:0;opacity:0}
-  to{width:55px;opacity:1}
+@keyframes lineIn{
+from{
+width:0;
+opacity:0;
+}
+to{
+width:55px;
+opacity:1;
+}
 }
 
-/* ================================
-   HEADER
-================================ */
+/* =========================
+HEADER
+========================= */
 
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(245,240,232,.88);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(33,26,22,.08);
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(245,240,232,.88);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(33,26,22,.08);
 }
 
 .nav{
-  min-height:78px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+min-height:78px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-family:Georgia,"Times New Roman",serif;
-  font-weight:bold;
-  font-size:20px;
-  letter-spacing:1px;
+display:flex;
+align-items:center;
+gap:12px;
+font-family:Georgia,"Times New Roman",serif;
+font-weight:bold;
+font-size:20px;
+letter-spacing:1px;
 }
 
 .brand img{
-  width:48px;
-  height:48px;
-  aspect-ratio:1/1;
-  border-radius:50%;
-  object-fit:cover;
-  border:1px solid var(--champagne);
-  background:var(--white);
+width:48px;
+height:48px;
+aspect-ratio:1/1;
+border-radius:50%;
+object-fit:cover;
+border:1px solid var(--champagne);
+background:var(--white);
 }
 
 .actions{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  flex-wrap:wrap;
+display:flex;
+align-items:center;
+gap:7px;
+flex-wrap:wrap;
 }
 
 .pill{
-  border:1px solid #cfc1af;
-  background:rgba(255,253,249,.45);
-  color:var(--espresso);
-  padding:9px 14px;
-  border-radius:30px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:bold;
-  transition:.25s;
+border:1px solid #cfc1af;
+background:rgba(255,253,249,.5);
+color:var(--espresso);
+padding:9px 14px;
+border-radius:30px;
+cursor:pointer;
+font-size:12px;
+font-weight:bold;
+transition:.25s ease;
 }
 
 .pill:hover,
 .pill.active{
-  background:var(--espresso);
-  color:var(--white);
-  border-color:var(--espresso);
+background:var(--espresso);
+color:white;
+border-color:var(--espresso);
 }
 
-/* ================================
-   HERO
-================================ */
-
-.hero{
-  min-height:calc(100vh - 78px);
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  align-items:center;
-  gap:50px;
-  padding:70px 0;
-}
-
-.hero-copy{order:1}
-
-.hero-visual{
-  order:2;
-  display:flex;
-  justify-content:center;
-  position:relative;
-}
-
-.hero-visual:before{
-  content:"";
-  position:absolute;
-  width:390px;
-  height:390px;
-  border-radius:50%;
-  background:rgba(200,169,107,.10);
-  z-index:-1;
-}
-
-.hero-label{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  color:var(--coffee);
-  font-size:12px;
-  font-weight:bold;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:20px;
-}
-
-.hero-label:before{
-  content:"";
-  width:38px;
-  height:1px;
-  background:var(--champagne);
-}
-
-.hero h1{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(52px,7vw,92px);
-  line-height:.95;
-  font-weight:500;
-  margin:0 0 25px;
-  color:var(--espresso);
-  letter-spacing:-3px;
-}
-
-.hero h1 span{
-  color:var(--champagne);
-  font-style:italic;
-}
-
-.hero-text{
-  max-width:590px;
-  color:var(--muted);
-  font-size:18px;
-  line-height:1.9;
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  margin-top:30px;
-  flex-wrap:wrap;
-}
-
-.btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  min-height:48px;
-  padding:0 22px;
-  border-radius:4px;
-  border:1px solid var(--espresso);
-  font-weight:bold;
-  cursor:pointer;
-  transition:.25s;
-}
-
-.btn-dark{
-  background:var(--espresso);
-  color:var(--white);
-  box-shadow:0 10px 25px rgba(33,26,22,.12);
-}
-
-.btn-dark:hover{
-  background:var(--coffee);
-  transform:translateY(-2px);
-}
-
-.btn-light{
-  background:rgba(255,253,249,.35);
-  color:var(--espresso);
-}
-
-.btn-light:hover{
-  background:var(--espresso);
-  color:white;
-}
-
-.hero-photo{
-  width:min(440px,90vw);
-  height:540px;
-  object-fit:cover;
-  border-radius:220px 220px 8px 8px;
-  border:1px solid rgba(200,169,107,.7);
-  box-shadow:
-    30px 30px 0 rgba(200,169,107,.14),
-    0 25px 70px rgba(33,26,22,.12);
-  background:var(--cream2);
-}
-
-/* ================================
-   MARQUEE
-================================ */
+/* =========================
+MARQUEE
+========================= */
 
 .marquee{
-  background:var(--espresso);
-  color:var(--cream);
-  overflow:hidden;
+background:var(--espresso);
+color:var(--cream);
+overflow:hidden;
 }
 
 .marquee-track{
-  width:max-content;
-  display:flex;
-  gap:55px;
-  padding:14px 0;
-  animation:move 24s linear infinite;
-  font-size:11px;
-  letter-spacing:3px;
-  font-weight:bold;
+width:max-content;
+display:flex;
+gap:55px;
+padding:14px 0;
+animation:move 25s linear infinite;
+font-size:10px;
+letter-spacing:3px;
+font-weight:bold;
 }
 
-.marquee-track span{white-space:nowrap}
+.marquee-track span{
+white-space:nowrap;
+}
 
 @keyframes move{
-  to{transform:translateX(-50%)}
+to{
+transform:translateX(-50%);
+}
 }
 
-/* ================================
-   INTRO
-================================ */
+/* =========================
+HERO
+========================= */
+
+.hero{
+min-height:calc(100vh - 110px);
+display:grid;
+grid-template-columns:1.05fr .95fr;
+align-items:center;
+gap:65px;
+padding:75px 0;
+}
+
+.hero-copy{
+order:1;
+}
+
+.hero-visual{
+order:2;
+display:flex;
+justify-content:center;
+position:relative;
+}
+
+.hero-visual:before{
+content:"";
+position:absolute;
+width:410px;
+height:410px;
+border-radius:50%;
+background:rgba(200,169,107,.10);
+z-index:-1;
+}
+
+.hero-label{
+display:inline-flex;
+align-items:center;
+gap:10px;
+color:var(--coffee);
+font-size:11px;
+font-weight:bold;
+letter-spacing:3px;
+margin-bottom:20px;
+}
+
+.hero-label:before{
+content:"";
+width:38px;
+height:1px;
+background:var(--champagne);
+}
+
+.hero h1{
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(52px,7vw,92px);
+line-height:.94;
+font-weight:500;
+margin:0 0 25px;
+color:var(--espresso);
+letter-spacing:-3px;
+}
+
+.hero h1 span{
+color:var(--champagne);
+font-style:italic;
+}
+
+.hero-text{
+max-width:590px;
+color:var(--muted);
+font-size:17px;
+line-height:1.9;
+}
+
+.hero-actions{
+display:flex;
+gap:12px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.btn{
+display:inline-flex;
+justify-content:center;
+align-items:center;
+min-height:48px;
+padding:0 22px;
+border-radius:4px;
+border:1px solid var(--espresso);
+font-weight:bold;
+cursor:pointer;
+transition:.25s;
+}
+
+.btn-dark{
+background:var(--espresso);
+color:white;
+box-shadow:0 10px 25px rgba(33,26,22,.12);
+}
+
+.btn-dark:hover{
+background:var(--coffee);
+transform:translateY(-2px);
+}
+
+.btn-light{
+background:rgba(255,253,249,.35);
+color:var(--espresso);
+}
+
+.btn-light:hover{
+background:var(--espresso);
+color:white;
+}
+
+.hero-photo{
+width:min(430px,90vw);
+height:540px;
+object-fit:cover;
+border-radius:220px 220px 8px 8px;
+border:1px solid rgba(200,169,107,.7);
+box-shadow:
+30px 30px 0 rgba(200,169,107,.14),
+0 25px 70px rgba(33,26,22,.12);
+background:var(--cream2);
+}
+
+/* =========================
+INTRO
+========================= */
 
 .intro{
-  padding:95px 0 65px;
+padding:95px 0 65px;
 }
 
 .intro-grid{
-  display:grid;
-  grid-template-columns:.75fr 1.25fr;
-  gap:60px;
-  align-items:end;
+display:grid;
+grid-template-columns:.75fr 1.25fr;
+gap:60px;
+align-items:end;
 }
 
 .eyebrow{
-  color:var(--coffee);
-  font-size:11px;
-  font-weight:bold;
-  letter-spacing:3px;
-  text-transform:uppercase;
+color:var(--coffee);
+font-size:11px;
+font-weight:bold;
+letter-spacing:3px;
+text-transform:uppercase;
 }
 
 .intro h2{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(38px,5vw,65px);
-  font-weight:500;
-  line-height:1.05;
-  margin:12px 0 0;
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(38px,5vw,65px);
+font-weight:500;
+line-height:1.05;
+margin:12px 0 0;
 }
 
 .intro p{
-  color:var(--muted);
-  line-height:1.9;
-  font-size:16px;
-  max-width:650px;
+color:var(--muted);
+line-height:1.9;
+font-size:16px;
+max-width:650px;
 }
 
-/* ================================
-   COLLECTION
-================================ */
+/* =========================
+COLLECTION
+========================= */
 
 .collection{
-  padding:20px 0 80px;
+padding:20px 0 80px;
 }
 
 .collection-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px;
 }
 
 .collection-card{
-  min-height:250px;
-  padding:28px;
-  background:linear-gradient(145deg,#2b211b,#17120f);
-  color:var(--cream);
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  border:1px solid rgba(200,169,107,.18);
-  transition:.35s ease;
+min-height:250px;
+padding:28px;
+background:
+radial-gradient(circle at 80% 10%,rgba(200,169,107,.18),transparent 30%),
+linear-gradient(145deg,#2b211b,#17120f);
+color:var(--cream);
+position:relative;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+border:1px solid rgba(200,169,107,.18);
+transition:.35s ease;
 }
 
 .collection-card:hover{
-  transform:translateY(-5px);
-  border-color:rgba(200,169,107,.45);
+transform:translateY(-5px);
+border-color:rgba(200,169,107,.45);
 }
 
 .collection-card:nth-child(2){
-  background:linear-gradient(145deg,#795e4b,#4e3a2d);
+background:linear-gradient(145deg,#795e4b,#4e3a2d);
 }
 
 .collection-card:nth-child(3){
-  background:linear-gradient(145deg,#3c2e23,#241b16);
+background:linear-gradient(145deg,#3c2e23,#241b16);
 }
 
 .collection-number{
-  position:absolute;
-  top:20px;
-  right:22px;
-  font-family:Georgia,serif;
-  font-size:70px;
-  color:rgba(255,255,255,.08);
+position:absolute;
+top:20px;
+right:22px;
+font-family:Georgia,serif;
+font-size:70px;
+color:rgba(255,255,255,.08);
 }
 
 .collection-card h3{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:29px;
-  margin:0 0 8px;
-  font-weight:500;
+font-family:Georgia,"Times New Roman",serif;
+font-size:29px;
+margin:0 0 8px;
+font-weight:500;
 }
 
 .collection-card p{
-  color:#d8cfc2;
-  line-height:1.6;
-  margin:0;
+color:#d8cfc2;
+line-height:1.6;
+margin:0;
 }
 
-/* ================================
-   PRODUCTS
-================================ */
+/* =========================
+PRODUCTS
+========================= */
 
 .products-section{
-  padding:85px 0;
-  background:
-    radial-gradient(circle at 10% 20%,rgba(200,169,107,.10),transparent 25%),
-    #eee6da;
+padding:85px 0;
+background:
+radial-gradient(circle at 10% 20%,rgba(200,169,107,.10),transparent 25%),
+#eee6da;
 }
 
 .section-heading{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:20px;
-  margin-bottom:30px;
+display:flex;
+justify-content:space-between;
+align-items:end;
+gap:20px;
+margin-bottom:30px;
 }
 
 .section-heading h2{
-  font-family:Georgia,"Times New Roman",serif;
-  font-weight:500;
-  font-size:clamp(40px,5vw,62px);
-  margin:5px 0 0;
+font-family:Georgia,"Times New Roman",serif;
+font-weight:500;
+font-size:clamp(40px,5vw,62px);
+margin:5px 0 0;
 }
 
 .section-heading p{
-  color:var(--muted);
-  margin:8px 0 0;
+color:var(--muted);
+margin:8px 0 0;
 }
 
 .category{
-  min-width:190px;
-  background:var(--white);
-  border:1px solid var(--line);
-  color:var(--espresso);
-  padding:13px;
-  border-radius:4px;
-  outline:none;
+min-width:190px;
+background:var(--white);
+border:1px solid var(--line);
+color:var(--espresso);
+padding:13px;
+border-radius:4px;
+outline:none;
 }
 
 .shop-tools{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  margin-bottom:25px;
+display:flex;
+gap:10px;
+align-items:center;
+margin-bottom:25px;
 }
 
 .search-wrap{
-  flex:1;
-  position:relative;
+flex:1;
+position:relative;
 }
 
 .search-wrap input{
-  width:100%;
-  background:var(--white);
-  border:1px solid var(--line);
-  padding:14px 18px;
-  border-radius:4px;
-  outline:none;
-  color:var(--dark);
+width:100%;
+background:var(--white);
+border:1px solid var(--line);
+padding:14px 18px;
+border-radius:4px;
+outline:none;
+color:var(--dark);
+}
+
+.search-wrap input:focus{
+border-color:var(--champagne);
 }
 
 .search-icon{
-  position:absolute;
-  left:15px;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--coffee);
-  pointer-events:none;
+position:absolute;
+left:15px;
+top:50%;
+transform:translateY(-50%);
+color:var(--coffee);
+pointer-events:none;
 }
 
 [dir="rtl"] .search-icon{
-  left:auto;
-  right:15px;
+left:auto;
+right:15px;
 }
 
-.fav-filter{white-space:nowrap}
+.fav-filter{
+white-space:nowrap;
+}
 
 .result-count{
-  color:var(--muted);
-  font-size:13px;
-  white-space:nowrap;
+color:var(--muted);
+font-size:13px;
+white-space:nowrap;
 }
 
 .product-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px;
 }
 
 .card{
-  background:rgba(255,253,249,.96);
-  border:1px solid #ddd1c1;
-  position:relative;
-  transition:.3s ease;
-  overflow:hidden;
+background:rgba(255,253,249,.96);
+border:1px solid #ddd1c1;
+position:relative;
+transition:.3s ease;
+overflow:hidden;
 }
 
 .card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 45px rgba(33,26,22,.12);
+transform:translateY(-6px);
+box-shadow:0 20px 45px rgba(33,26,22,.12);
 }
 
 .gallery{
-  height:330px;
-  position:relative;
-  overflow:hidden;
-  background:#e9e0d4;
+height:330px;
+position:relative;
+overflow:hidden;
+background:#e9e0d4;
 }
 
 .gallery img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .5s;
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+transition:transform .5s;
 }
 
 .card:hover .gallery img{
-  transform:scale(1.035);
+transform:scale(1.035);
 }
 
 .fav-btn{
-  position:absolute;
-  top:14px;
-  left:14px;
-  z-index:5;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  border:1px solid rgba(33,26,22,.2);
-  background:rgba(255,253,249,.92);
-  color:var(--espresso);
-  cursor:pointer;
-  font-size:21px;
+position:absolute;
+top:14px;
+left:14px;
+z-index:5;
+width:40px;
+height:40px;
+border-radius:50%;
+border:1px solid rgba(33,26,22,.2);
+background:rgba(255,253,249,.92);
+color:var(--espresso);
+cursor:pointer;
+font-size:21px;
 }
 
 [dir="rtl"] .fav-btn{
-  left:auto;
-  right:14px;
+left:auto;
+right:14px;
 }
 
 .fav-btn.active{
-  background:var(--red);
-  color:white;
-  border-color:var(--red);
+background:var(--red);
+color:white;
+border-color:var(--red);
 }
 
 .badge-stack{
-  position:absolute;
-  top:14px;
-  right:14px;
-  z-index:5;
-  display:flex;
-  gap:5px;
+position:absolute;
+top:14px;
+right:14px;
+z-index:5;
+display:flex;
+gap:5px;
 }
 
 [dir="rtl"] .badge-stack{
-  right:auto;
-  left:14px;
+right:auto;
+left:14px;
 }
 
 .product-badge{
-  padding:6px 9px;
-  background:var(--champagne);
-  color:var(--espresso);
-  font-size:10px;
-  font-weight:bold;
+padding:6px 9px;
+background:var(--champagne);
+color:var(--espresso);
+font-size:10px;
+font-weight:bold;
 }
 
 .product-badge.new{
-  background:#c77d8d;
-  color:white;
+background:#c77d8d;
+color:white;
 }
 
 .product-badge.best{
-  background:var(--espresso);
-  color:white;
+background:var(--espresso);
+color:white;
 }
 
 .gallery-btn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  border:0;
-  background:rgba(33,26,22,.75);
-  color:white;
-  cursor:pointer;
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:36px;
+height:36px;
+border-radius:50%;
+border:0;
+background:rgba(33,26,22,.75);
+color:white;
+cursor:pointer;
 }
 
-.gallery-btn.prev{left:10px}
-.gallery-btn.next{right:10px}
+.gallery-btn.prev{
+left:10px;
+}
+
+.gallery-btn.next{
+right:10px;
+}
 
 .product-body{
-  padding:20px;
+padding:20px;
 }
 
 .product-body h3{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:22px;
-  font-weight:500;
-  margin:0 0 10px;
+font-family:Georgia,"Times New Roman",serif;
+font-size:22px;
+font-weight:500;
+margin:0 0 10px;
 }
 
 .product-body p{
-  color:var(--muted);
-  line-height:1.7;
-  font-size:14px;
-  min-height:70px;
-  margin:0 0 18px;
+color:var(--muted);
+line-height:1.7;
+font-size:14px;
+min-height:70px;
+margin:0 0 18px;
 }
 
 .row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
 }
 
 .price{
-  color:var(--espresso);
-  font-weight:bold;
-  font-size:20px;
+color:var(--espresso);
+font-weight:bold;
+font-size:20px;
 }
 
 .old-price{
-  color:#9c9187;
-  text-decoration:line-through;
-  font-size:13px;
+color:#9c9187;
+text-decoration:line-through;
+font-size:13px;
 }
 
 .discount-pill{
-  background:var(--red);
-  color:white;
-  padding:4px 7px;
-  border-radius:20px;
-  font-size:10px;
+background:var(--red);
+color:white;
+padding:4px 7px;
+border-radius:20px;
+font-size:10px;
 }
 
 .small-wa{
-  background:var(--espresso);
-  color:white;
-  padding:10px 13px;
-  font-size:12px;
-  font-weight:bold;
-  border-radius:3px;
+background:var(--espresso);
+color:white;
+padding:10px 13px;
+font-size:12px;
+font-weight:bold;
+border-radius:3px;
 }
 
 .stock-qty{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:9px;
+color:var(--muted);
+font-size:11px;
+margin-top:9px;
 }
 
 .stock-badge{
-  background:var(--red);
-  color:white;
-  padding:9px 12px;
-  font-size:11px;
+background:var(--red);
+color:white;
+padding:9px 12px;
+font-size:11px;
 }
 
-.video-btn{
-  display:inline-block;
-  margin-top:12px;
-  color:var(--coffee);
-  font-weight:bold;
-  font-size:12px;
-}
-
-/* ================================
-   FEATURED
-================================ */
+/* =========================
+FEATURED
+========================= */
 
 .featured{
-  padding:90px 0;
+padding:90px 0;
 }
 
 .featured-head{
-  text-align:center;
-  margin-bottom:35px;
+text-align:center;
+margin-bottom:35px;
 }
 
 .featured-head h2{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(38px,5vw,60px);
-  font-weight:500;
-  margin:8px 0;
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(38px,5vw,60px);
+font-weight:500;
+margin:8px 0;
 }
 
-.featured-head p{color:var(--muted)}
+.featured-head p{
+color:var(--muted);
+}
 
 .featured-slider{
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:minmax(300px,35%);
-  gap:18px;
-  overflow-x:auto;
-  scrollbar-width:none;
-  padding:5px 3px 18px;
+display:grid;
+grid-auto-flow:column;
+grid-auto-columns:minmax(300px,35%);
+gap:18px;
+overflow-x:auto;
+scrollbar-width:none;
+padding:5px 3px 18px;
 }
 
-.featured-slider::-webkit-scrollbar{display:none}
+.featured-slider::-webkit-scrollbar{
+display:none;
+}
 
 .featured-card{
-  position:relative;
-  height:400px;
-  overflow:hidden;
-  background:#ddd;
-  border:1px solid rgba(200,169,107,.3);
+position:relative;
+height:400px;
+overflow:hidden;
+background:#ddd;
+border:1px solid rgba(200,169,107,.3);
 }
 
 .featured-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 .featured-overlay{
-  position:absolute;
-  inset:auto 0 0;
-  padding:80px 22px 22px;
-  color:white;
-  background:linear-gradient(transparent,rgba(0,0,0,.8));
+position:absolute;
+inset:auto 0 0;
+padding:80px 22px 22px;
+color:white;
+background:linear-gradient(transparent,rgba(0,0,0,.8));
 }
 
 .featured-overlay h3{
-  font-family:Georgia,serif;
-  font-size:25px;
-  margin:0 0 5px;
+font-family:Georgia,serif;
+font-size:25px;
+margin:0 0 5px;
 }
 
 .featured-overlay p{
-  margin:0;
-  font-size:13px;
-  color:#e9e0d4;
+margin:0;
+font-size:13px;
+color:#e9e0d4;
 }
 
-/* ================================
-   STORY
-================================ */
+/* =========================
+STORY
+========================= */
 
 .story{
-  background:
-    radial-gradient(circle at 80% 20%,rgba(200,169,107,.12),transparent 28%),
-    var(--espresso);
-  color:var(--cream);
-  padding:95px 0;
+background:
+radial-gradient(circle at 80% 20%,rgba(200,169,107,.12),transparent 28%),
+var(--espresso);
+color:var(--cream);
+padding:95px 0;
 }
 
 .story-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  align-items:center;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
 }
 
 .story h2{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(40px,5vw,68px);
-  font-weight:500;
-  line-height:1;
-  margin:10px 0 20px;
+font-family:Georgia,"Times New Roman",serif;
+font-size:clamp(40px,5vw,68px);
+font-weight:500;
+line-height:1;
+margin:10px 0 20px;
 }
 
 .story p{
-  color:#cfc4b5;
-  line-height:1.9;
-  max-width:570px;
+color:#cfc4b5;
+line-height:1.9;
+max-width:570px;
 }
 
 .story-mark{
-  min-height:430px;
-  border:1px solid rgba(226,201,148,.35);
-  display:grid;
-  place-items:center;
-  position:relative;
-  overflow:hidden;
+min-height:430px;
+border:1px solid rgba(226,201,148,.35);
+display:grid;
+place-items:center;
+position:relative;
+overflow:hidden;
 }
 
 .story-mark:before{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:280px;
-  border-radius:50%;
-  border:1px solid rgba(226,201,148,.22);
+content:"";
+position:absolute;
+width:280px;
+height:280px;
+border-radius:50%;
+border:1px solid rgba(226,201,148,.22);
 }
 
 .story-mark span{
-  font-family:Georgia,serif;
-  font-size:190px;
-  color:var(--champagne);
-  opacity:.8;
+font-family:Georgia,serif;
+font-size:190px;
+color:var(--champagne);
+opacity:.8;
 }
 
-/* ================================
-   INFO
-================================ */
+/* =========================
+INFO
+========================= */
 
 .info-section{
-  padding:80px 0;
+padding:80px 0;
 }
 
 .info-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
 .info-panel{
-  padding:32px;
-  background:var(--white);
-  border:1px solid var(--line);
+padding:32px;
+background:var(--white);
+border:1px solid var(--line);
 }
 
 .info-panel h2{
-  font-family:Georgia,serif;
-  font-size:32px;
-  font-weight:500;
-  margin-top:0;
+font-family:Georgia,serif;
+font-size:32px;
+font-weight:500;
+margin-top:0;
 }
 
 .info-panel p{
-  color:var(--muted);
-  line-height:1.8;
+color:var(--muted);
+line-height:1.8;
 }
 
 .payment-icons{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
 }
 
 .payment-icons span{
-  border:1px solid var(--line);
-  padding:9px 13px;
-  background:var(--cream);
-  font-size:12px;
-  font-weight:bold;
+border:1px solid var(--line);
+padding:9px 13px;
+background:var(--cream);
+font-size:12px;
+font-weight:bold;
 }
 
-/* ================================
-   FOOTER
-================================ */
+/* =========================
+FOOTER
+========================= */
 
 footer{
-  background:#130f0c;
-  color:#bfb3a4;
+background:#130f0c;
+color:#bfb3a4;
 }
 
 .footer{
-  padding:35px 0;
-  text-align:center;
-  font-size:12px;
+padding:35px 0;
+text-align:center;
+font-size:12px;
 }
 
-/* ================================
-   WHATSAPP
-================================ */
+/* =========================
+WHATSAPP
+========================= */
 
 .floating-wa{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  z-index:90;
-  width:58px;
-  height:58px;
-  display:grid;
-  place-items:center;
-  background:var(--green);
-  color:#07150b;
-  border-radius:50%;
-  font-size:27px;
-  box-shadow:0 10px 30px rgba(37,211,102,.25);
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:90;
+width:58px;
+height:58px;
+display:grid;
+place-items:center;
+background:var(--green);
+color:#07150b;
+border-radius:50%;
+font-size:27px;
+box-shadow:0 10px 30px rgba(37,211,102,.25);
+transition:.25s ease;
 }
 
-/* ================================
-   EMPTY / TOAST
-================================ */
+.floating-wa:hover{
+transform:scale(1.08);
+}
+
+/* =========================
+EMPTY / TOAST / REVEAL
+========================= */
 
 .empty{
-  grid-column:1/-1;
-  padding:55px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed #cbbda9;
-  background:rgba(255,255,255,.35);
+grid-column:1/-1;
+padding:55px;
+text-align:center;
+color:var(--muted);
+border:1px dashed #cbbda9;
+background:rgba(255,255,255,.35);
 }
 
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:90px;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  background:var(--espresso);
-  color:white;
-  padding:12px 18px;
-  border-radius:3px;
-  z-index:200;
-  transition:.25s;
-  font-size:13px;
+position:fixed;
+left:50%;
+bottom:90px;
+transform:translate(-50%,20px);
+opacity:0;
+pointer-events:none;
+background:var(--espresso);
+color:white;
+padding:12px 18px;
+border-radius:3px;
+z-index:200;
+transition:.25s;
+font-size:13px;
 }
 
 .toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
+opacity:1;
+transform:translate(-50%,0);
 }
 
 .reveal{
-  opacity:0;
-  transform:translateY(25px);
-  transition:.7s ease;
+opacity:0;
+transform:translateY(25px);
+transition:.7s ease;
 }
 
 .reveal.visible{
-  opacity:1;
-  transform:none;
+opacity:1;
+transform:none;
 }
 
-/* ================================
-   MOBILE
-================================ */
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:900px){
 
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
-    padding:55px 0;
-  }
+.hero{
+grid-template-columns:1fr;
+text-align:center;
+padding:55px 0;
+}
 
-  .hero-copy{order:2}
-  .hero-visual{order:1}
+.hero-copy{
+order:2;
+}
 
-  .hero-label{
-    justify-content:center;
-  }
+.hero-visual{
+order:1;
+}
 
-  .hero-text{
-    margin:auto;
-  }
+.hero-label{
+justify-content:center;
+}
 
-  .hero-actions{
-    justify-content:center;
-  }
+.hero-text{
+margin:auto;
+}
 
-  .hero-photo{
-    width:280px;
-    height:380px;
-  }
+.hero-actions{
+justify-content:center;
+}
 
-  .intro-grid,
-  .story-grid{
-    grid-template-columns:1fr;
-    gap:25px;
-  }
+.hero-photo{
+width:280px;
+height:380px;
+}
 
-  .collection-grid{
-    grid-template-columns:1fr;
-  }
+.intro-grid,
+.story-grid{
+grid-template-columns:1fr;
+gap:25px;
+}
 
-  .product-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+.collection-grid{
+grid-template-columns:1fr;
+}
 
-  .info-grid{
-    grid-template-columns:1fr;
-  }
+.product-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.info-grid{
+grid-template-columns:1fr;
+}
+
 }
 
 @media(max-width:600px){
 
-  .container{
-    width:min(100% - 24px,1180px);
-  }
+.container{
+width:min(100% - 24px,1180px);
+}
 
-  .nav{
-    min-height:70px;
-  }
+.nav{
+min-height:70px;
+}
 
-  .brand span{
-    display:none;
-  }
+.brand span{
+display:none;
+}
 
-  .actions{
-    gap:4px;
-  }
+.actions{
+gap:4px;
+}
 
-  .pill{
-    padding:8px 10px;
-    font-size:11px;
-  }
+.pill{
+padding:8px 10px;
+font-size:10px;
+}
 
-  .hero{
-    min-height:auto;
-    padding:45px 0 65px;
-  }
+.hero{
+min-height:auto;
+padding:45px 0 65px;
+}
 
-  .hero h1{
-    font-size:48px;
-    letter-spacing:-2px;
-  }
+.hero h1{
+font-size:48px;
+letter-spacing:-2px;
+}
 
-  .hero-photo{
-    width:220px;
-    height:310px;
-  }
+.hero-photo{
+width:220px;
+height:310px;
+}
 
-  .intro{
-    padding:65px 0 40px;
-  }
+.intro{
+padding:65px 0 40px;
+}
 
-  .intro h2{
-    font-size:42px;
-  }
+.intro h2{
+font-size:42px;
+}
 
-  .products-section{
-    padding:60px 0;
-  }
+.products-section{
+padding:60px 0;
+}
 
-  .section-heading{
-    flex-direction:column;
-    align-items:stretch;
-  }
+.section-heading{
+flex-direction:column;
+align-items:stretch;
+}
 
-  .category{
-    width:100%;
-  }
+.category{
+width:100%;
+}
 
-  .shop-tools{
-    flex-wrap:wrap;
-  }
+.shop-tools{
+flex-wrap:wrap;
+}
 
-  .result-count{
-    width:100%;
-  }
+.result-count{
+width:100%;
+}
 
-  .product-grid{
-    grid-template-columns:1fr;
-  }
+.product-grid{
+grid-template-columns:1fr;
+}
 
-  .gallery{
-    height:350px;
-  }
+.gallery{
+height:350px;
+}
 
-  .featured{
-    padding:65px 0;
-  }
+.featured{
+padding:65px 0;
+}
 
-  .featured-slider{
-    grid-auto-columns:82%;
-  }
+.featured-slider{
+grid-auto-columns:82%;
+}
 
-  .story{
-    padding:65px 0;
-  }
+.story{
+padding:65px 0;
+}
 
-  .story-mark{
-    min-height:300px;
-  }
+.story-mark{
+min-height:300px;
+}
 
-  .story-mark span{
-    font-size:130px;
-  }
+.story-mark span{
+font-size:130px;
+}
 
-  .info-section{
-    padding:60px 0;
-  }
+.info-section{
+padding:60px 0;
+}
 
-  .floating-wa{
-    width:55px;
-    height:55px;
-    right:15px;
-    bottom:15px;
-  }
+.floating-wa{
+width:55px;
+height:55px;
+right:15px;
+bottom:15px;
+}
 
-  /* MOBİLDE DE TAM YUVARLAK LOGO */
-  .layl-loader-logo{
-    width:105px !important;
-    height:105px !important;
-    min-width:105px;
-    min-height:105px;
-    max-width:105px;
-    max-height:105px;
-    aspect-ratio:1 / 1;
-    border-radius:50% !important;
-  }
+.layl-loader-logo{
+width:105px!important;
+height:105px!important;
+min-width:105px;
+min-height:105px;
+max-width:105px;
+max-height:105px;
+}
 
-  .layl-loader-name{
-    font-size:20px;
-  }
+.layl-loader-name{
+font-size:20px;
+}
+
 }
 </style>
 </head>
 
 <body class="loading">
 
-<!-- AÇILIŞ -->
+<!-- =========================
+LOADER
+========================= -->
 
 <div id="laylLoader">
 
-  <img
-    class="layl-loader-logo"
-    src="logo.jpeg"
-    alt="LAYL"
-    loading="eager"
-    decoding="async">
+<img
+class="layl-loader-logo"
+src="logo.jpeg"
+alt="LAYL"
+loading="eager"
+decoding="async">
 
-  <div class="layl-loader-name">
-    LAYL KOZMETİK
-  </div>
+<div class="layl-loader-name">
+LAYL KOZMETİK
+</div>
 
-  <div class="layl-loader-line"></div>
+<div class="layl-loader-line"></div>
 
 </div>
 
-<!-- HEADER -->
+<!-- =========================
+HEADER
+========================= -->
 
 <header class="topbar">
 
-  <div class="container nav">
+<div class="container nav">
 
-    <a class="brand" href="#">
+<a class="brand" href="#">
+<img
+src="logo.jpeg"
+alt="LAYL"
+loading="eager"
+decoding="async">
+<span>LAYL KOZMETİK</span>
+</a>
 
-      <img
-        src="logo.jpeg"
-        alt="LAYL"
-        loading="eager"
-        decoding="async">
+<div class="actions">
 
-      <span>LAYL KOZMETİK</span>
+<button id="arBtn" class="pill active">
+العربية
+</button>
 
-    </a>
+<button id="trBtn" class="pill">
+Türkçe
+</button>
 
-    <div class="actions">
+<button id="enBtn" class="pill">
+English
+</button>
 
-      <button id="arBtn" class="pill active">
-        العربية
-      </button>
+<a class="pill" href="admin.html">
+Admin
+</a>
 
-      <button id="trBtn" class="pill">
-        Türkçe
-      </button>
+</div>
 
-      <button id="enBtn" class="pill">
-        English
-      </button>
-
-      <a class="pill" href="admin.html">
-        Admin
-      </a>
-
-    </div>
-
-  </div>
+</div>
 
 </header>
 
+<!-- =========================
+MARQUEE
+========================= -->
+
 <div class="marquee">
 
-  <div class="marquee-track">
+<div class="marquee-track">
 
-    <span>LAYL PARFUM</span>
-    <span>PRIVATE BEAUTY</span>
-    <span>FRAGRANCE • CARE • BEAUTY</span>
-    <span>LAYL PARFUM</span>
-    <span>PRIVATE BEAUTY</span>
-    <span>FRAGRANCE • CARE • BEAUTY</span>
+<span>LAYL PARFUM</span>
+<span>PRIVATE BEAUTY</span>
+<span>FRAGRANCE • CARE • BEAUTY</span>
+<span>LAYL PARFUM</span>
+<span>PRIVATE BEAUTY</span>
+<span>FRAGRANCE • CARE • BEAUTY</span>
 
-  </div>
+</div>
 
 </div>
 
 <main>
 
+<!-- =========================
+HERO
+========================= -->
+
 <section class="hero">
 
-  <div class="container hero" style="display:contents">
+<div class="container hero" style="display:contents">
 
-    <div class="hero-copy">
+<div class="hero-copy">
 
-      <div class="hero-label" id="heroBadge">
-        ✦ مجموعة LAYL الخاصة
-      </div>
+<div class="hero-label" id="heroBadge">
+✦ مجموعة LAYL الخاصة
+</div>
 
-      <h1 id="heroTitle">
-        ليل<br>
-        <span>لمستحضرات التجميل</span>
-      </h1>
+<h1 id="heroTitle">
+ليل<br>
+<span>لمستحضرات التجميل</span>
+</h1>
 
-      <p class="hero-text" id="heroText">
-        منتجات عناية وجمال مختارة بعناية.
-        اكتشف مجموعة LAYL واطلب بسهولة عبر واتساب.
-      </p>
+<p class="hero-text" id="heroText">
+منتجات عناية وجمال مختارة بعناية.
+اكتشف مجموعة LAYL واطلب بسهولة عبر واتساب.
+</p>
 
-      <div class="hero-actions">
+<div class="hero-actions">
 
-        <a
-          class="btn btn-dark"
-          href="https://wa.me/963991890234"
-          target="_blank"
-          id="mainWa">
-          اطلب عبر واتساب
-        </a>
+<a
+class="btn btn-dark"
+href="https://wa.me/963991890234"
+target="_blank"
+rel="noopener"
+id="mainWa">
+اطلب عبر واتساب
+</a>
 
-        <a
-          class="btn btn-light"
-          href="https://instagram.com/LAYL_kozmetik"
-          target="_blank"
-          id="mainIg">
-          إنستغرام
-        </a>
+<a
+class="btn btn-light"
+href="https://instagram.com/LAYL_kozmetik"
+target="_blank"
+rel="noopener"
+id="mainIg">
+إنستغرام
+</a>
 
-      </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="hero-visual">
+<div class="hero-visual">
 
-      <img
-        class="hero-photo"
-        src="logo.jpeg"
-        alt="LAYL Kozmetik"
-        loading="eager"
-        decoding="async">
+<img
+class="hero-photo"
+src="logo.jpeg"
+alt="LAYL Kozmetik"
+loading="eager"
+decoding="async">
 
-    </div>
+</div>
 
-  </div>
+</div>
 
 </section>
+
+<!-- =========================
+INTRO
+========================= -->
 
 <section class="intro reveal">
 
-  <div class="container intro-grid">
+<div class="container intro-grid">
 
-    <div>
+<div>
 
-      <div class="eyebrow" id="introEyebrow">
-        توقيع LAYL
-      </div>
+<div class="eyebrow" id="introEyebrow">
+توقيع LAYL
+</div>
 
-      <h2 id="introTitle">
-        أناقة العطر تبدأ من التفاصيل.
-      </h2>
+<h2 id="introTitle">
+أناقة العطر تبدأ من التفاصيل.
+</h2>
 
-    </div>
+</div>
 
-    <div>
+<div>
 
-      <p id="introText">
-        تجمع LAYL بين العطور والعناية والجمال في تجربة
-        هادئة وأنيقة، مع منتجات مختارة بعناية لكل من يحب التفاصيل.
-      </p>
+<p id="introText">
+تجمع LAYL بين العطور والعناية والجمال في تجربة هادئة وأنيقة، مع منتجات مختارة بعناية لكل من يحب التفاصيل.
+</p>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
 </section>
+
+<!-- =========================
+COLLECTION
+========================= -->
 
 <section class="collection reveal">
 
-  <div class="container collection-grid">
+<div class="container collection-grid">
 
-    <div class="collection-card">
+<div class="collection-card">
 
-      <span class="collection-number">01</span>
+<span class="collection-number">
+01
+</span>
 
-      <h3 id="collection1Title">
-        العطور المميزة
-      </h3>
+<h3 id="collection1Title">
+العطور المميزة
+</h3>
 
-      <p id="collection1Text">
-        روائح ذات شخصية وحضور خاص.
-      </p>
+<p id="collection1Text">
+روائح ذات شخصية وحضور خاص.
+</p>
 
-    </div>
+</div>
 
-    <div class="collection-card">
+<div class="collection-card">
 
-      <span class="collection-number">02</span>
+<span class="collection-number">
+02
+</span>
 
-      <h3 id="collection2Title">
-        طقوس الجمال
-      </h3>
+<h3 id="collection2Title">
+طقوس الجمال
+</h3>
 
-      <p id="collection2Text">
-        منتجات تضيف لمسة أجمل إلى روتينك اليومي.
-      </p>
+<p id="collection2Text">
+منتجات تضيف لمسة أجمل إلى روتينك اليومي.
+</p>
 
-    </div>
+</div>
 
-    <div class="collection-card">
+<div class="collection-card">
 
-      <span class="collection-number">03</span>
+<span class="collection-number">
+03
+</span>
 
-      <h3 id="collection3Title">
-        اختيارات خاصة
-      </h3>
+<h3 id="collection3Title">
+اختيارات خاصة
+</h3>
 
-      <p id="collection3Text">
-        مجموعة منتقاة بعناية من LAYL.
-      </p>
+<p id="collection3Text">
+مجموعة منتقاة بعناية من LAYL.
+</p>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
 </section>
+
+<!-- =========================
+PRODUCTS
+========================= -->
 
 <section
-  class="products-section reveal"
-  id="products">
+class="products-section reveal"
+id="products">
 
-  <div class="container">
+<div class="container">
 
-    <div class="section-heading">
+<div class="section-heading">
 
-      <div>
+<div>
 
-        <div
-          class="eyebrow"
-          id="productsEyebrow">
-          THE COLLECTION
-        </div>
+<div class="eyebrow" id="productsEyebrow">
+THE COLLECTION
+</div>
 
-        <h2 id="productsTitle">
-          منتجاتنا
-        </h2>
+<h2 id="productsTitle">
+منتجاتنا
+</h2>
 
-        <p id="productsSub">
-          اكتشف مجموعتنا من منتجات الجمال والعناية.
-        </p>
+<p id="productsSub">
+اكتشف مجموعتنا من منتجات الجمال والعناية.
+</p>
 
-      </div>
+</div>
 
-      <select
-        id="categoryFilter"
-        class="category">
+<select
+id="categoryFilter"
+class="category">
 
-        <option value="all">كل الأقسام</option>
-        <option value="perfume">العطور</option>
-        <option value="shampoo">الشامبو</option>
-        <option value="mask">الماسكات</option>
-        <option value="cream">الكريمات</option>
-        <option value="other">أخرى</option>
+<option value="all">
+كل الأقسام
+</option>
 
-      </select>
+<option value="perfume">
+العطور
+</option>
 
-    </div>
+<option value="shampoo">
+الشامبو
+</option>
 
-    <div class="shop-tools">
+<option value="mask">
+الماسكات
+</option>
 
-      <div class="search-wrap">
+<option value="cream">
+الكريمات
+</option>
 
-        <span class="search-icon">⌕</span>
+<option value="other">
+أخرى
+</option>
 
-        <input
-          id="productSearch"
-          type="search"
-          placeholder="ابحث عن منتج..."
-          autocomplete="off">
+</select>
 
-      </div>
+</div>
 
-      <button
-        id="favFilter"
-        class="pill fav-filter">
-        ♡ المفضلة
-      </button>
+<div class="shop-tools">
 
-      <span
-        id="resultCount"
-        class="result-count">
-      </span>
+<div class="search-wrap">
 
-    </div>
+<span class="search-icon">
+⌕
+</span>
 
-    <div
-      id="productGrid"
-      class="product-grid">
+<input
+id="productSearch"
+type="search"
+placeholder="ابحث عن منتج..."
+autocomplete="off">
 
-      <div class="empty">
-        جاري تحميل المنتجات...
-      </div>
+</div>
 
-    </div>
+<button
+id="favFilter"
+class="pill fav-filter">
 
-  </div>
+♡ المفضلة
+
+</button>
+
+<span
+id="resultCount"
+class="result-count">
+</span>
+
+</div>
+
+<div
+id="productGrid"
+class="product-grid">
+
+<div class="empty">
+جاري تحميل المنتجات...
+</div>
+
+</div>
+
+</div>
 
 </section>
+
+<!-- =========================
+FEATURED
+========================= -->
 
 <section class="featured reveal">
 
-  <div class="container">
+<div class="container">
 
-    <div class="featured-head">
+<div class="featured-head">
 
-      <div
-        class="eyebrow"
-        id="featuredEyebrow">
-        LAYL SELECTION
-      </div>
+<div class="eyebrow" id="featuredEyebrow">
+LAYL SELECTION
+</div>
 
-      <h2 id="featuredTitle">
-        اختيار LAYL
-      </h2>
+<h2 id="featuredTitle">
+اختيار LAYL
+</h2>
 
-      <p id="featuredSub">
-        منتجات مختارة من المجموعة.
-      </p>
+<p id="featuredSub">
+منتجات مختارة من المجموعة.
+</p>
 
-    </div>
+</div>
 
-    <div
-      id="featuredSlider"
-      class="featured-slider">
+<div
+id="featuredSlider"
+class="featured-slider">
 
-      <div class="empty">
-        جاري تحميل المنتجات...
-      </div>
+<div class="empty">
+جاري تحميل المنتجات...
+</div>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
 </section>
+
+<!-- =========================
+STORY
+========================= -->
 
 <section class="story reveal">
 
-  <div class="container story-grid">
+<div class="container story-grid">
 
-    <div>
+<div>
 
-      <div
-        class="eyebrow"
-        style="color:#c8a96b"
-        id="storyEyebrow">
-        عن LAYL
-      </div>
+<div
+class="eyebrow"
+style="color:#c8a96b"
+id="storyEyebrow">
+عن LAYL
+</div>
 
-      <h2 id="storyTitle">
-        فخامة هادئة.<br>
-        حضور يُذكر.
-      </h2>
+<h2 id="storyTitle">
+فخامة هادئة.<br>
+حضور يُذكر.
+</h2>
 
-      <p id="storyText">
-        تؤمن LAYL بأن الفخامة لا تحتاج إلى ضجيج.
-        كل منتج يتم اختياره ليمنحك تجربة جميلة وبسيطة ومميزة.
-      </p>
+<p id="storyText">
+تؤمن LAYL بأن الفخامة لا تحتاج إلى ضجيج.
+كل منتج يتم اختياره ليمنحك تجربة جميلة وبسيطة ومميزة.
+</p>
 
-      <a
-        href="#products"
-        class="btn"
-        style="border-color:#c8a96b;color:#f5f0e8;margin-top:15px"
-        id="storyBtn">
-        اكتشف المجموعة
-      </a>
+<a
+href="#products"
+class="btn"
+style="border-color:#c8a96b;color:#f5f0e8;margin-top:15px"
+id="storyBtn">
+اكتشف المجموعة
+</a>
 
-    </div>
+</div>
 
-    <div class="story-mark">
-      <span>L</span>
-    </div>
+<div class="story-mark">
 
-  </div>
+<span>
+L
+</span>
+
+</div>
+
+</div>
 
 </section>
 
+<!-- =========================
+INFO
+========================= -->
+
 <section class="info-section reveal">
 
-  <div class="container info-grid">
+<div class="container info-grid">
 
-    <div class="info-panel">
+<div class="info-panel">
 
-      <h2 id="locationTitle">
-        المتجر والموقع
-      </h2>
+<h2 id="locationTitle">
+المتجر والموقع
+</h2>
 
-      <p id="locationText">
-        يمكنك إضافة رابط موقع المتجر هنا.
-      </p>
+<p id="locationText">
+يمكنك إضافة رابط موقع المتجر هنا.
+</p>
 
-      <a
-        id="mapBtn"
-        class="btn btn-dark"
-        target="_blank"
-        href="https://maps.google.com">
-        Google Maps
-      </a>
+<a
+id="mapBtn"
+class="btn btn-dark"
+target="_blank"
+rel="noopener"
+href="https://maps.google.com">
+Google Maps
+</a>
 
-    </div>
+</div>
 
-    <div class="info-panel">
+<div class="info-panel">
 
-      <h2 id="paymentTitle">
-        خيارات الدفع
-      </h2>
+<h2 id="paymentTitle">
+خيارات الدفع
+</h2>
 
-      <p id="paymentText">
-        اعرض طرق الدفع المتاحة لعملائك.
-      </p>
+<p id="paymentText">
+اعرض طرق الدفع المتاحة لعملائك.
+</p>
 
-      <div class="payment-icons">
+<div class="payment-icons">
 
-        <span>Cash</span>
-        <span>USD</span>
-        <span>EUR</span>
-        <span>TRY</span>
-        <span>SYP</span>
+<span>
+Cash
+</span>
 
-      </div>
+<span>
+USD
+</span>
 
-    </div>
+<span>
+EUR
+</span>
 
-  </div>
+<span>
+TRY
+</span>
+
+<span>
+SYP
+</span>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 </main>
 
+<!-- =========================
+WHATSAPP
+========================= -->
+
 <a
-  class="floating-wa"
-  href="https://wa.me/963991890234"
-  target="_blank"
-  aria-label="WhatsApp">
-  ✆
+class="floating-wa"
+href="https://wa.me/963991890234"
+target="_blank"
+rel="noopener"
+aria-label="WhatsApp">
+✆
 </a>
+
+<!-- =========================
+FOOTER
+========================= -->
 
 <footer>
 
-  <div
-    class="container footer"
-    id="siteSignature">
+<div
+class="container footer"
+id="siteSignature">
 
-    © 2026 LAYL لمستحضرات التجميل
-    • المؤسس ومالك الموقع: احمد سعد الدين
+© 2026 LAYL لمستحضرات التجميل
+• المؤسس ومالك الموقع: احمد سعد الدين
 
-  </div>
+</div>
 
 </footer>
 
-<div id="toast" class="toast"></div>
+<div
+id="toast"
+class="toast">
+</div>
+
+<!-- =========================
+FIREBASE + APP
+========================= -->
 
 <script type="module">
 
-import {
-  initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{
+initializeApp
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import {
-  getFirestore,
-  collection,
-  onSnapshot,
-  query,
-  orderBy
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import{
+getFirestore,
+collection,
+onSnapshot,
+query,
+orderBy
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-
-/* ================================
-   FIREBASE
-================================ */
 
 const firebaseConfig={
-  apiKey:"AIzaSyA3KR8qNbuNtPXGfz4hKm7fRfaRftuIZvE",
-  authDomain:"layl-kozmetik.firebaseapp.com",
-  projectId:"layl-kozmetik",
-  storageBucket:"layl-kozmetik.firebasestorage.app",
-  messagingSenderId:"865670235900",
-  appId:"1:865670235900:web:de1030480e1f0199dcf979",
-  measurementId:"G-W5GBE7WRFF"
+
+apiKey:"AIzaSyA3KR8qNbuNtPXGfz4hKm7fRfaRftuIZvE",
+
+authDomain:"layl-kozmetik.firebaseapp.com",
+
+projectId:"layl-kozmetik",
+
+storageBucket:"layl-kozmetik.firebasestorage.app",
+
+messagingSenderId:"865670235900",
+
+appId:"1:865670235900:web:de1030480e1f0199dcf979",
+
+measurementId:"G-W5GBE7WRFF"
+
 };
 
+
 const app=initializeApp(firebaseConfig);
+
 const db=getFirestore(app);
 
 
-/* ================================
-   STATE
-================================ */
+let lang=
+localStorage.getItem("laylLang")||"ar";
 
-let lang=localStorage.getItem("laylLang")||"ar";
 let allProducts=[];
+
 let showFavOnly=false;
+
 let searchTerm="";
 
+
 const favorites=new Set(
-  JSON.parse(
-    localStorage.getItem("laylFavorites")||"[]"
-  )
+
+JSON.parse(
+localStorage.getItem("laylFavorites")||"[]"
+)
+
 );
 
 
-/* ================================
-   HAZIR 9 ÜRÜN
-================================ */
+/* =========================
+BUILT-IN PRODUCTS
+========================= */
 
 const BUILTIN_PRODUCTS=[
 
@@ -1837,9 +1989,9 @@ inStock:true
 ];
 
 
-/* ================================
-   ÇEVİRİLER
-================================ */
+/* =========================
+LANGUAGES
+========================= */
 
 const t={
 
@@ -1990,9 +2142,9 @@ other:"Other"
 };
 
 
-/* ================================
-   YARDIMCI
-================================ */
+/* =========================
+HELPERS
+========================= */
 
 function esc(s=""){
 return String(s).replace(/[&<>"']/g,m=>({
@@ -2005,25 +2157,29 @@ return String(s).replace(/[&<>"']/g,m=>({
 }
 
 function productName(p){
+
 return lang==="ar"
 ?(p.nameAr||p.nameTr||p.nameEn)
 :lang==="en"
 ?(p.nameEn||p.nameTr||p.nameAr)
 :(p.nameTr||p.nameAr||p.nameEn);
+
 }
 
 function productDesc(p){
+
 return lang==="ar"
 ?(p.descAr||p.descTr||p.descEn||"")
 :lang==="en"
 ?(p.descEn||p.descTr||p.descAr||"")
 :(p.descTr||p.descAr||p.descEn||"");
+
 }
 
 
-/* ================================
-   DİL
-================================ */
+/* =========================
+LANGUAGE
+========================= */
 
 function setLang(l){
 
@@ -2032,9 +2188,12 @@ lang=l;
 const x=t[l];
 
 document.documentElement.lang=l;
+
 document.documentElement.dir=x.dir;
 
-heroBadge.textContent="✦ "+(
+heroBadge.textContent=
+"✦ "+
+(
 l==="ar"
 ?"مجموعة LAYL الخاصة":
 l==="en"
@@ -2046,38 +2205,56 @@ heroTitle.innerHTML=
 `${x.title}<br><span>${x.title2}</span>`;
 
 heroText.textContent=x.text;
+
 mainWa.textContent=x.wa;
+
 mainIg.textContent=x.ig;
 
 introEyebrow.textContent=x.introEyebrow;
+
 introTitle.textContent=x.introTitle;
+
 introText.textContent=x.introText;
 
 collection1Title.textContent=x.c1;
+
 collection1Text.textContent=x.c1t;
+
 collection2Title.textContent=x.c2;
+
 collection2Text.textContent=x.c2t;
+
 collection3Title.textContent=x.c3;
+
 collection3Text.textContent=x.c3t;
 
 productsTitle.textContent=x.products;
+
 productsSub.textContent=x.sub;
+
 productSearch.placeholder=x.search;
 
 favFilter.textContent=
 (showFavOnly?"♥ ":"♡ ")+x.favorites;
 
 featuredTitle.textContent=x.featured;
+
 featuredSub.textContent=x.featuredSub;
 
 storyEyebrow.textContent=x.storyEyebrow;
+
 storyTitle.textContent=x.storyTitle;
+
 storyText.textContent=x.storyText;
+
 storyBtn.textContent=x.storyBtn;
 
 locationTitle.textContent=x.locationTitle;
+
 locationText.textContent=x.locationText;
+
 paymentTitle.textContent=x.paymentTitle;
+
 paymentText.textContent=x.paymentText;
 
 [...categoryFilter.options].forEach(o=>{
@@ -2085,7 +2262,9 @@ o.textContent=x.cats[o.value];
 });
 
 arBtn.classList.toggle("active",l==="ar");
+
 trBtn.classList.toggle("active",l==="tr");
+
 enBtn.classList.toggle("active",l==="en");
 
 siteSignature.textContent=
@@ -2102,9 +2281,9 @@ render();
 }
 
 
-/* ================================
-   FAVORİ
-================================ */
+/* =========================
+FAVORITES
+========================= */
 
 function toggleFav(id){
 
@@ -2126,9 +2305,9 @@ render();
 window.toggleFav=toggleFav;
 
 
-/* ================================
-   ÜRÜNLERİ GÖSTER
-================================ */
+/* =========================
+PRODUCT RENDER
+========================= */
 
 function render(){
 
@@ -2158,9 +2337,11 @@ return text.includes(searchTerm);
 }
 
 if(showFavOnly){
+
 list=list.filter(
 p=>favorites.has(p.id)
 );
+
 }
 
 resultCount.textContent=
@@ -2178,9 +2359,11 @@ return;
 }
 
 productGrid.innerHTML=
+
 list.map(p=>{
 
 const name=productName(p);
+
 const desc=productDesc(p);
 
 const qty=Number(p.stockQty??1);
@@ -2204,6 +2387,7 @@ p.currency==="TRY"?"₺":
 p.currency==="SYP"?"£S":"$";
 
 const oldNum=parseFloat(p.oldPrice);
+
 const newNum=parseFloat(p.price);
 
 const discount=
@@ -2265,6 +2449,7 @@ ${
 images.length>1
 ?
 `
+
 <button
 class="gallery-btn prev"
 onclick="slideGallery('${esc(p.id)}',-1)">
@@ -2276,6 +2461,7 @@ class="gallery-btn next"
 onclick="slideGallery('${esc(p.id)}',1)">
 ›
 </button>
+
 `
 :""
 }
@@ -2284,9 +2470,13 @@ onclick="slideGallery('${esc(p.id)}',1)">
 
 <div class="product-body">
 
-<h3>${esc(name)}</h3>
+<h3>
+${esc(name)}
+</h3>
 
-<p>${esc(desc)}</p>
+<p>
+${esc(desc)}
+</p>
 
 <div class="row">
 
@@ -2316,13 +2506,17 @@ ${
 inStock
 ?
 `
+
 <a
 class="small-wa"
 target="_blank"
 rel="noopener"
 href="https://wa.me/963991890234?text=${msg}">
+
 ${t[lang].order}
+
 </a>
+
 `
 :
 `<span class="stock-badge">${t[lang].outStock}</span>`
@@ -2348,9 +2542,9 @@ inStock
 }
 
 
-/* ================================
-   FEATURED
-================================ */
+/* =========================
+FEATURED
+========================= */
 
 function renderFeatured(list){
 
@@ -2366,9 +2560,11 @@ return;
 }
 
 featuredSlider.innerHTML=
+
 featured.map(p=>{
 
 const name=productName(p);
+
 const desc=productDesc(p);
 
 return `
@@ -2383,9 +2579,13 @@ onerror="this.src='logo.jpeg'">
 
 <div class="featured-overlay">
 
-<h3>${esc(name)}</h3>
+<h3>
+${esc(name)}
+</h3>
 
-<p>${esc(desc)}</p>
+<p>
+${esc(desc)}
+</p>
 
 </div>
 
@@ -2398,9 +2598,9 @@ onerror="this.src='logo.jpeg'">
 }
 
 
-/* ================================
-   GALERİ
-================================ */
+/* =========================
+GALLERY
+========================= */
 
 window.slideGallery=(id,step)=>{
 
@@ -2410,7 +2610,9 @@ const el=document.querySelector(
 
 if(!el)return;
 
-const p=allProducts.find(x=>x.id===id);
+const p=allProducts.find(
+x=>x.id===id
+);
 
 const imgs=
 Array.isArray(p?.images)&&p.images.length
@@ -2429,28 +2631,47 @@ el.dataset.index=i;
 const img=el.querySelector("img");
 
 if(img){
+
 img.src=imgs[i];
+
 img.onerror=()=>{
 img.src="logo.jpeg";
 };
+
 }
 
 };
 
 
-/* ================================
-   EVENTLER
-================================ */
+/* =========================
+BUTTONS
+========================= */
 
-arBtn.onclick=()=>setLang("ar");
-trBtn.onclick=()=>setLang("tr");
-enBtn.onclick=()=>setLang("en");
+arBtn.onclick=()=>{
+setLang("ar");
+};
 
-categoryFilter.onchange=render;
+trBtn.onclick=()=>{
+setLang("tr");
+};
+
+enBtn.onclick=()=>{
+setLang("en");
+};
+
+categoryFilter.onchange=()=>{
+render();
+};
 
 productSearch.oninput=()=>{
-searchTerm=productSearch.value.trim().toLowerCase();
+
+searchTerm=
+productSearch.value
+.trim()
+.toLowerCase();
+
 render();
+
 };
 
 favFilter.onclick=()=>{
@@ -2463,16 +2684,17 @@ showFavOnly
 );
 
 favFilter.textContent=
-(showFavOnly?"♥ ":"♡ ")+t[lang].favorites;
+(showFavOnly?"♥ ":"♡ ")+
+t[lang].favorites;
 
 render();
 
 };
 
 
-/* ================================
-   ÜRÜNLERİ HEMEN GÖSTER
-================================ */
+/* =========================
+INITIAL PRODUCTS
+========================= */
 
 allProducts=[
 ...BUILTIN_PRODUCTS
@@ -2483,9 +2705,9 @@ window.allProducts=allProducts;
 setLang(lang);
 
 
-/* ================================
-   FIREBASE ÜRÜNLERİ
-================================ */
+/* =========================
+FIREBASE PRODUCTS
+========================= */
 
 try{
 
@@ -2505,12 +2727,6 @@ snapshot.docs.map(d=>({
 id:d.id,
 ...d.data()
 }));
-
-/*
-  Firebase'deki ürünleri hazır ürünlerle
-  birleştiriyoruz. Aynı ID varsa Firebase
-  ürünü kullanılır.
-*/
 
 const map=new Map();
 
@@ -2558,31 +2774,42 @@ console.error(
 error
 );
 
+allProducts=[
+...BUILTIN_PRODUCTS
+];
+
+window.allProducts=allProducts;
+
 render();
 
 }
 
 
-/* ================================
-   REVEAL
-================================ */
+/* =========================
+SCROLL ANIMATION
+========================= */
 
 const observer=
 new IntersectionObserver(
+
 entries=>{
 
 entries.forEach(entry=>{
 
 if(entry.isIntersecting){
+
 entry.target.classList.add("visible");
+
 }
 
 });
 
 },
+
 {
 threshold:.12
 }
+
 );
 
 document
@@ -2592,9 +2819,9 @@ observer.observe(el);
 });
 
 
-/* ================================
-   AÇILIŞI KAPAT
-================================ */
+/* =========================
+LOADER
+========================= */
 
 function closeLaylLoader(){
 
@@ -2615,7 +2842,7 @@ if(loader.parentNode){
 loader.remove();
 }
 
-},600);
+},650);
 
 },850);
 
@@ -2636,9 +2863,9 @@ closeLaylLoader,
 }
 
 
-/* ================================
-   RESİM HATASI
-================================ */
+/* =========================
+IMAGE FALLBACK
+========================= */
 
 document.addEventListener(
 "error",
