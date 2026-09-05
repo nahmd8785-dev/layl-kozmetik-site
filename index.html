@@ -26,13 +26,9 @@
 --red:#9b3145;
 }
 
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
-html{
-scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth;}
 
 body{
 margin:0;
@@ -44,24 +40,13 @@ font-family:Arial,Tahoma,sans-serif;
 overflow-x:hidden;
 }
 
-body.loading{
-overflow:hidden;
-}
+body.loading{overflow:hidden;}
 
-a{
-text-decoration:none;
-color:inherit;
-}
+a{text-decoration:none;color:inherit;}
 
-button,
-input,
-select{
-font:inherit;
-}
+button,input,select{font:inherit;}
 
-button{
--webkit-tap-highlight-color:transparent;
-}
+button{-webkit-tap-highlight-color:transparent;}
 
 .container{
 width:min(1180px,calc(100% - 36px));
@@ -131,36 +116,18 @@ animation:lineIn 1.2s ease both;
 }
 
 @keyframes logoIn{
-from{
-opacity:0;
-transform:scale(.72);
-}
-to{
-opacity:1;
-transform:scale(1);
-}
+from{opacity:0;transform:scale(.72);}
+to{opacity:1;transform:scale(1);}
 }
 
 @keyframes textIn{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 @keyframes lineIn{
-from{
-width:0;
-opacity:0;
-}
-to{
-width:55px;
-opacity:1;
-}
+from{width:0;opacity:0;}
+to{width:55px;opacity:1;}
 }
 
 /* =========================
@@ -252,14 +219,10 @@ letter-spacing:3px;
 font-weight:bold;
 }
 
-.marquee-track span{
-white-space:nowrap;
-}
+.marquee-track span{white-space:nowrap;}
 
 @keyframes move{
-to{
-transform:translateX(-50%);
-}
+to{transform:translateX(-50%);}
 }
 
 /* =========================
@@ -275,9 +238,7 @@ gap:65px;
 padding:75px 0;
 }
 
-.hero-copy{
-order:1;
-}
+.hero-copy{order:1;}
 
 .hero-visual{
 order:2;
@@ -573,9 +534,7 @@ left:auto;
 right:15px;
 }
 
-.fav-filter{
-white-space:nowrap;
-}
+.fav-filter{white-space:nowrap;}
 
 .result-count{
 color:var(--muted);
@@ -692,17 +651,11 @@ color:white;
 cursor:pointer;
 }
 
-.gallery-btn.prev{
-left:10px;
-}
+.gallery-btn.prev{left:10px;}
 
-.gallery-btn.next{
-right:10px;
-}
+.gallery-btn.next{right:10px;}
 
-.product-body{
-padding:20px;
-}
+.product-body{padding:20px;}
 
 .product-body h3{
 font-family:Georgia,"Times New Roman",serif;
@@ -788,9 +741,7 @@ font-weight:500;
 margin:8px 0;
 }
 
-.featured-head p{
-color:var(--muted);
-}
+.featured-head p{color:var(--muted);}
 
 .featured-slider{
 display:grid;
@@ -802,9 +753,7 @@ scrollbar-width:none;
 padding:5px 3px 18px;
 }
 
-.featured-slider::-webkit-scrollbar{
-display:none;
-}
+.featured-slider::-webkit-scrollbar{display:none;}
 
 .featured-card{
 position:relative;
@@ -902,9 +851,7 @@ opacity:.8;
 INFO
 ========================= */
 
-.info-section{
-padding:80px 0;
-}
+.info-section{padding:80px 0;}
 
 .info-grid{
 display:grid;
@@ -980,9 +927,7 @@ box-shadow:0 10px 30px rgba(37,211,102,.25);
 transition:.25s ease;
 }
 
-.floating-wa:hover{
-transform:scale(1.08);
-}
+.floating-wa:hover{transform:scale(1.08);}
 
 /* =========================
 EMPTY / TOAST / REVEAL
@@ -1041,25 +986,15 @@ text-align:center;
 padding:55px 0;
 }
 
-.hero-copy{
-order:2;
-}
+.hero-copy{order:2;}
 
-.hero-visual{
-order:1;
-}
+.hero-visual{order:1;}
 
-.hero-label{
-justify-content:center;
-}
+.hero-label{justify-content:center;}
 
-.hero-text{
-margin:auto;
-}
+.hero-text{margin:auto;}
 
-.hero-actions{
-justify-content:center;
-}
+.hero-actions{justify-content:center;}
 
 .hero-photo{
 width:280px;
@@ -1072,17 +1007,11 @@ grid-template-columns:1fr;
 gap:25px;
 }
 
-.collection-grid{
-grid-template-columns:1fr;
-}
+.collection-grid{grid-template-columns:1fr;}
 
-.product-grid{
-grid-template-columns:repeat(2,1fr);
-}
+.product-grid{grid-template-columns:repeat(2,1fr);}
 
-.info-grid{
-grid-template-columns:1fr;
-}
+.info-grid{grid-template-columns:1fr;}
 
 }
 
@@ -1092,17 +1021,11 @@ grid-template-columns:1fr;
 width:min(100% - 24px,1180px);
 }
 
-.nav{
-min-height:70px;
-}
+.nav{min-height:70px;}
 
-.brand span{
-display:none;
-}
+.brand span{display:none;}
 
-.actions{
-gap:4px;
-}
+.actions{gap:4px;}
 
 .pill{
 padding:8px 10px;
@@ -1128,62 +1051,38 @@ height:310px;
 padding:65px 0 40px;
 }
 
-.intro h2{
-font-size:42px;
-}
+.intro h2{font-size:42px;}
 
-.products-section{
-padding:60px 0;
-}
+.products-section{padding:60px 0;}
 
 .section-heading{
 flex-direction:column;
 align-items:stretch;
 }
 
-.category{
-width:100%;
-}
+.category{width:100%;}
 
-.shop-tools{
-flex-wrap:wrap;
-}
+.shop-tools{flex-wrap:wrap;}
 
 .result-count{
 width:100%;
 }
 
-.product-grid{
-grid-template-columns:1fr;
-}
+.product-grid{grid-template-columns:1fr;}
 
-.gallery{
-height:350px;
-}
+.gallery{height:350px;}
 
-.featured{
-padding:65px 0;
-}
+.featured{padding:65px 0;}
 
-.featured-slider{
-grid-auto-columns:82%;
-}
+.featured-slider{grid-auto-columns:82%;}
 
-.story{
-padding:65px 0;
-}
+.story{padding:65px 0;}
 
-.story-mark{
-min-height:300px;
-}
+.story-mark{min-height:300px;}
 
-.story-mark span{
-font-size:130px;
-}
+.story-mark span{font-size:130px;}
 
-.info-section{
-padding:60px 0;
-}
+.info-section{padding:60px 0;}
 
 .floating-wa{
 width:55px;
@@ -1201,9 +1100,7 @@ max-width:105px;
 max-height:105px;
 }
 
-.layl-loader-name{
-font-size:20px;
-}
+.layl-loader-name{font-size:20px;}
 
 }
 </style>
@@ -1211,15 +1108,11 @@ font-size:20px;
 
 <body class="loading">
 
-<!-- =========================
-LOADER
-========================= -->
-
 <div id="laylLoader">
 
 <img
 class="layl-loader-logo"
-src="logo.jpeg"
+src="logo.JPG"
 alt="LAYL"
 loading="eager"
 decoding="async">
@@ -1232,17 +1125,13 @@ LAYL KOZMETİK
 
 </div>
 
-<!-- =========================
-HEADER
-========================= -->
-
 <header class="topbar">
 
 <div class="container nav">
 
 <a class="brand" href="#">
 <img
-src="logo.jpeg"
+src="logo.JPG"
 alt="LAYL"
 loading="eager"
 decoding="async">
@@ -1273,10 +1162,6 @@ Admin
 
 </header>
 
-<!-- =========================
-MARQUEE
-========================= -->
-
 <div class="marquee">
 
 <div class="marquee-track">
@@ -1293,10 +1178,6 @@ MARQUEE
 </div>
 
 <main>
-
-<!-- =========================
-HERO
-========================= -->
 
 <section class="hero">
 
@@ -1346,7 +1227,7 @@ id="mainIg">
 
 <img
 class="hero-photo"
-src="logo.jpeg"
+src="logo.JPG"
 alt="LAYL Kozmetik"
 loading="eager"
 decoding="async">
@@ -1356,10 +1237,6 @@ decoding="async">
 </div>
 
 </section>
-
-<!-- =========================
-INTRO
-========================= -->
 
 <section class="intro reveal">
 
@@ -1388,10 +1265,6 @@ INTRO
 </div>
 
 </section>
-
-<!-- =========================
-COLLECTION
-========================= -->
 
 <section class="collection reveal">
 
@@ -1448,10 +1321,6 @@ COLLECTION
 </div>
 
 </section>
-
-<!-- =========================
-PRODUCTS
-========================= -->
 
 <section
 class="products-section reveal"
@@ -1554,10 +1423,6 @@ class="product-grid">
 
 </section>
 
-<!-- =========================
-FEATURED
-========================= -->
-
 <section class="featured reveal">
 
 <div class="container">
@@ -1591,10 +1456,6 @@ class="featured-slider">
 </div>
 
 </section>
-
-<!-- =========================
-STORY
-========================= -->
 
 <section class="story reveal">
 
@@ -1641,10 +1502,6 @@ L
 
 </section>
 
-<!-- =========================
-INFO
-========================= -->
-
 <section class="info-section reveal">
 
 <div class="container info-grid">
@@ -1682,25 +1539,11 @@ Google Maps
 
 <div class="payment-icons">
 
-<span>
-Cash
-</span>
-
-<span>
-USD
-</span>
-
-<span>
-EUR
-</span>
-
-<span>
-TRY
-</span>
-
-<span>
-SYP
-</span>
+<span>Cash</span>
+<span>USD</span>
+<span>EUR</span>
+<span>TRY</span>
+<span>SYP</span>
 
 </div>
 
@@ -1712,10 +1555,6 @@ SYP
 
 </main>
 
-<!-- =========================
-WHATSAPP
-========================= -->
-
 <a
 class="floating-wa"
 href="https://wa.me/963991890234"
@@ -1724,10 +1563,6 @@ rel="noopener"
 aria-label="WhatsApp">
 ✆
 </a>
-
-<!-- =========================
-FOOTER
-========================= -->
 
 <footer>
 
@@ -1746,10 +1581,6 @@ id="siteSignature">
 id="toast"
 class="toast">
 </div>
-
-<!-- =========================
-FIREBASE + APP
-========================= -->
 
 <script type="module">
 
@@ -2369,7 +2200,7 @@ qty<=0
 const images=
 Array.isArray(p.images)&&p.images.length
 ?p.images
-:(p.image?[p.image]:["logo.jpeg"]);
+:(p.image?[p.image]:["logo.JPG"]);
 
 const symbol=
 p.currency==="EUR"?"€":
@@ -2433,7 +2264,7 @@ src="${esc(images[0])}"
 alt="${esc(name)}"
 loading="lazy"
 decoding="async"
-onerror="this.src='logo.jpeg'">
+onerror="this.src='logo.JPG'">
 
 ${
 images.length>1
@@ -2561,10 +2392,10 @@ return `
 <article class="featured-card">
 
 <img
-src="${esc(p.image||"logo.jpeg")}"
+src="${esc(p.image||"logo.JPG")}"
 alt="${esc(name)}"
 loading="lazy"
-onerror="this.src='logo.jpeg'">
+onerror="this.src='logo.JPG'">
 
 <div class="featured-overlay">
 
@@ -2605,7 +2436,7 @@ x=>x.id===id
 const imgs=
 Array.isArray(p?.images)&&p.images.length
 ?p.images
-:(p?.image?[p.image]:["logo.jpeg"]);
+:(p?.image?[p.image]:["logo.JPG"]);
 
 let i=
 (
@@ -2623,7 +2454,7 @@ if(img){
 img.src=imgs[i];
 
 img.onerror=()=>{
-img.src="logo.jpeg";
+img.src="logo.JPG";
 };
 
 }
@@ -2859,10 +2690,10 @@ if(
 img &&
 img.tagName==="IMG" &&
 img.src &&
-!img.src.endsWith("/logo.jpeg")
+!img.src.endsWith("/logo.JPG")
 ){
 
-img.src="logo.jpeg";
+img.src="logo.JPG";
 
 }
 
