@@ -83,7 +83,7 @@ html{scroll-behavior:smooth}
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import{getFirestore,collection,onSnapshot}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-const firebaseConfig={apiKey:"AIzaSyA3KR8qNbuNtPXGfz4hKm7fRfaRftuIZvE",authDomain:"layl-parfume.firebaseapp.com",projectId:"layl-parfume",storageBucket:"layl-parfume.firebasestorage.app",messagingSenderId:"865670235900",appId:"1:865670235900:web:de1030480e1f0199dcf979",measurementId:"G-W5GBE7WRFF"};
+const firebaseConfig={apiKey:"AIzaSyA3KR8qNbuNtPXGfz4hKm7fRfaRftuIZvE",authDomain:"layl-kozmetik.firebaseapp.com",projectId:"layl-kozmetik",storageBucket:"layl-kozmetik.firebasestorage.app",messagingSenderId:"865670235900",appId:"1:865670235900:web:de1030480e1f0199dcf979",measurementId:"G-W5GBE7WRFF"};
 const $=id=>document.getElementById(id);const app=initializeApp(firebaseConfig);const db=getFirestore(app);
 let lang=localStorage.getItem("laylLang")||"ar";if(!["ar","tr","en"].includes(lang))lang="ar";let allProducts=[],showFavOnly=false,searchTerm="",currentSort="default",favorites=new Set();
 try{const saved=JSON.parse(localStorage.getItem("laylFavorites")||"[]");if(Array.isArray(saved))favorites=new Set(saved.map(String))}catch(e){console.warn("Favorites could not be loaded",e)}
