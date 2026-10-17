@@ -124,5 +124,158 @@ function editProduct(id){const p=productsCache.find(x=>x.id===id);if(!p)return;
 }
 imageFiles.onchange=()=>{imagePreview.innerHTML=[...imageFiles.files].slice(0,4).map(f=>`<img src="${URL.createObjectURL(f)}" alt="">`).join("")};
 async function removeProduct(id){if(confirm(adminT[adminLang].confirm))await deleteDoc(doc(db,"products",id));}
+// LAYL TOPLU ÜRÜN EKLEME
+const bulkPanel = document.createElement("section");
+bulkPanel.className = "panel";
+
+bulkPanel.innerHTML = `
+  <h2>📦 Toplu Ürün Ekle</h2>
+  <p>Her satıra bir ürün yaz.</p>
+
+  <textarea
+    id="bulkInput"
+    style="width:100%;min-height:180px;background:#0c0c0c;color:white;padding:12px;border-radius:12px"
+    placeholder="ALTHAÏR | ألتاير | ALTHAÏR | 1300 | SYP | perfume | 10"
+  ></textarea>
+
+  <button
+    type="button"
+    id="bulkButton"
+    class="btn gold full"
+    style="margin-top:12px"
+  >
+    Ürünleri Toplu Ekle
+  </button>
+
+  <div id="bulkMessage" class="notice hidden"></div>
+`;
+
+document.getElementById("adminBox").appendChild(bulkPanel);
+
+document.getElementById("bulkButton").onclick = async () => {
+  const input = document.getElementById("bulkInput");
+  const message = document.getElementById("bulkMessage");
+  const button = document.getElementById("bulkButton");
+
+  if (!auth.currentUser) {
+    message.textContent = "Önce yönetici girişi yap.";
+    message.classList.remove("hidden");
+    return;
+  }
+
+  const lines = input.value
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean);
+
+  if (lines.length === 0) {
+    message.textContent = "Önce ürün listesini yaz.";
+    message.classList.remove("hidden");
+    return;
+  }
+
+  button.disabled = true;
+
+  let added = 0;
+  let skipped = 0;
+  let errors = 0;
+
+  const existingNames = new Set(
+    productsCache.map(product =>
+      (product.nameTr || "").trim().toLowerCase()
+    )
+  );
+
+  try {
+    for (const line of lines) {
+      const parts = line.split("|").map(part => part.trim());
+
+      if (parts.length !== 7) {
+        errors++;
+        continue;
+      }
+
+      const [
+        nameTr,
+        nameAr,
+        nameEn,
+        price,
+        currencyCode,
+        categoryCode,
+        qtyText
+      ] = parts;
+
+      const qty = Number(qtyText);
+
+      if (
+        !nameTr ||
+        !nameAr ||
+        !nameEn ||
+        !price ||
+        !Number.isFinite(Number(price)) ||
+        Number(price) < 0 ||
+        !["USD", "EUR", "TRY", "SYP"].includes(currencyCode) ||
+        !["perfume", "shampoo", "mask", "cream", "other"].includes(categoryCode) ||
+        !Number.isInteger(qty) ||
+        qty < 0
+      ) {
+        errors++;
+        continue;
+      }
+
+      const nameKey = nameTr.toLowerCase();
+
+      if (existingNames.has(nameKey)) {
+        skipped++;
+        continue;
+      }
+
+      await addDoc(collection(db, "products"), {
+        nameTr: nameTr,
+        nameAr: nameAr,
+        nameEn: nameEn,
+        price: price,
+        oldPrice: "",
+        currency: currencyCode,
+        category: categoryCode,
+        stock: qty > 0 ? 1 : 0,
+        stockQty: qty,
+        inStock: qty > 0,
+        pfGender: "",
+        pfStyle: "",
+        pfSeason: "",
+        pfOccasion: "",
+        pfStrength: "",
+        descTr: "",
+        descAr: "",
+        descEn: "",
+        images: [],
+        image: "",
+        videoUrl: "",
+        isNew: false,
+        isBest: false,
+        createdAt: serverTimestamp()
+      });
+
+      existingNames.add(nameKey);
+      added++;
+    }
+
+    message.textContent =
+      "İşlem tamamlandı! Eklenen: " + added +
+      " | Zaten bulunan: " + skipped +
+      " | Hatalı satır: " + errors;
+
+    message.classList.remove("hidden");
+
+    input.value = "";
+
+  } catch (error) {
+    message.textContent = "Hata: " + error.message;
+    message.classList.remove("hidden");
+  } finally {
+    button.disabled = false;
+  }
+};
 </script>
 </body></html>
